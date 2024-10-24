@@ -105,7 +105,7 @@ const Footer = () => {
                             <FaPinterestP />
                         </Link>
                         <div className="flex gap-3 flex-wrap mt-3 sm:mt-0">
-                            <span>Privacy Policy</span>
+                            <span><Link href="/privacy">Privacy Policy</Link></span>
                             <span>Data Request</span>
                             <span>Accessibility</span>
                             <span>Cookie Preferences</span>
