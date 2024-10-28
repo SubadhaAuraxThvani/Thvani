@@ -3,12 +3,12 @@ export default function Home3() {
         <div className="flex flex-col justify-between mb-[100px]">
             <div className="flex flex-col w-full text-center bg-color5 pb-10">
                 <div className="flex flex-col py-12 w-full text-center gap-5">
-                    <p className="text-2xl md:text-4xl">What we do</p>
+                    <p className="text-2xl md:text-4xl ">What we do</p>
                     <p className="mx-5 md:mx-40 lg:mx-[200px] xl:mx-[500px] text-sm md:text-base">
                         We believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                     </p>
                 </div>
-                <div className="flex flex-wrap justify-center gap-5 md:gap-20 px-5">
+                <div className="flex flex-wrap justify-around gap-5 md:gap-20 px-5">
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
                         <h1 className="text-lg md:text-xl font-bold">Our Mission :</h1>
                         <p className="text-sm md:text-base">
