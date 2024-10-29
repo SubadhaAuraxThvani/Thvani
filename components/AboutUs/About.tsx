@@ -16,7 +16,6 @@ import {
 export default function About() {
     return (
         <div className="flex flex-col">
-            {/* Main Section */}
             <div className="flex flex-col md:flex-row w-full h-auto md:h-[85vh]">
                 <div className="flex w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
                     <p className="text-lg md:text-xl">WE ARE THVANI</p>
