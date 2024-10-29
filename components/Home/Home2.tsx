@@ -23,7 +23,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                            <span className="text-sm">Organic Fience Oversized Sweatshirt</span>
+                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -46,7 +46,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                            <span className="text-sm">Organic Fleece Relaxed Pocket</span>
+                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fleece Relaxed Pocket</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -69,7 +69,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                            <span className="text-sm">Organic Cotton Classic Tee</span>
+                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Cotton Classic Tee</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -92,7 +92,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                            <span className="text-sm">Organic Fience Oversized Sweatshirt</span>
+                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
                         </div>
                         <div>
                             <p>$10</p>

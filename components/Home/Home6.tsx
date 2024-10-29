@@ -15,11 +15,11 @@ import Image from "next/image";
 export function Home6() {
     return (
         <div className="w-full p-5">
-            <div className="relative max-w-5xl mx-auto">
+            <div className="relative max-w-5xl h-[60vh] mx-auto">
                 <Carousel className="w-full">
-                    <CarouselContent>
+                    <CarouselContent className="h-full">
                         {Array.from({ length: 5 }).map((_, index) => (
-                            <CarouselItem key={index}>
+                            <CarouselItem key={index} className="h-full">
                                 <div className="flex flex-col md:flex-row w-full p-5">
                                     <div className="flex flex-1 items-center justify-center p-5">
                                         <div className="flex flex-col gap-5 font-bold text-center md:text-left">

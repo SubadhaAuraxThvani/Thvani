@@ -12,9 +12,9 @@ export default function Home4() {
                 <div className="w-full sm:w-auto">
                     <Image src={img1} alt="img" className="object-cover w-full sm:w-auto" />
                 </div>
-                <div className="absolute bottom-5 right-5 text-right flex flex-col gap-3">
-                    <p className="text-white font-bold text-lg sm:text-xl">ARCHIVE SALE</p>
-                    <button className="text-center w-[40vw] sm:w-[25vw] md:w-[10vw] bg-white rounded-lg text-black px-4 py-2 font-bold flex items-center gap-2">
+                <div className="absolute bottom-5 left-5 text-right gap-3">
+                    <p className="text-white font-bold mb-4 text-lg sm:text-xl">ARCHIVE SALE</p>
+                    <button className="min-w-0 bg-white rounded text-black text-sm px-3 py-[10px] font-medium flex items-center gap-2">
                         SHOP <FaArrowRight />
                     </button>
                 </div>

@@ -85,7 +85,7 @@ export default function Home() {
             
             <div className="flex h-[50px] bg-color1 text-white items-center overflow-hidden">
                 <div ref={textRef} className="whitespace-nowrap">
-                    <p className="text-xs sm:text-sm inline-block mr-[500px]">
+                    <p className="text-xl sm:text-2xl inline-block pl-2 mr-[500px]">
                         ZERO WASTE
                     </p>
                     <p className="text-xl sm:text-2xl inline-block">ORGANIC FUTURISM AESTHETICS</p>

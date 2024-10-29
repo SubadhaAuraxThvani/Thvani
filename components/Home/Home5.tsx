@@ -5,7 +5,7 @@ import img11 from "@/images/Home/img11.png";
 
 export default function Home5() {
     return (
-        <div className="flex flex-col h-auto py-[50px] bg-color5">
+        <div className="flex mt-6 flex-col h-auto py-[50px] bg-color5">
             <div className="flex text-color4 font-bold text-4xl justify-center text-center w-full pb-10">
                 <span>WHERE WE LEAD</span>
             </div>
