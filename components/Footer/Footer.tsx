@@ -106,8 +106,6 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-
-          {/* Circle Section */}
           <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto">
             <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
               {" "}
