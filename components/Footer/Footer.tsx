@@ -35,7 +35,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-4">
                   <Link href="/blog" className="hover:underline">
-                    Journal
+                    Journals
                   </Link>
                 </li>
                 <li className="mb-4">
