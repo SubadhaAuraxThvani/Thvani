@@ -27,7 +27,7 @@ export default function Navbar() {
 
                 {/* Menu Items - hidden on mobile */}
                 <ul className="hidden lg:flex lg:gap-8 text-lg">
-                    <li><Link href="/collection">Women</Link></li>
+                    <li><Link href="/women">Women</Link></li>
                     <li><Link href="/men">Men</Link></li>
                     <li><Link href="/kids">Kids</Link></li>
                     <li><Link href="/accessories">Accessories</Link></li>
