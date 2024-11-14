@@ -119,7 +119,7 @@ export default function About() {
             {/* CTA Section */}
             <div className="flex flex-col p-6 md:p-[100px] gap-5 justify-center text-center items-center">
                 <p className="text-lg md:text-3xl">
-                    Join us in making a difference. Trust in our journey, believe in our purpose, and together, lets inspire change. With CUE, youre not just investing in fashion; youre investing in a legacy of sustainable beauty.
+                    Join us in making a difference. Trust in our journey, believe in our purpose, and together, lets inspire change. With Thvani, youre not just investing in fashion; youre investing in a legacy of sustainable beauty.
                 </p>
                 <button className="inline-block border-2 p-3 border-color1 text-md px-[100px]">
                     JOIN US NOW
