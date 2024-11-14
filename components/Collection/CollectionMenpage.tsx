@@ -29,18 +29,18 @@ export default function MenCollectionpage() {
                     <p>Home / Mens</p>
                     <p className="text-2xl md:text-3xl font-bold">Mens Clothing</p>
                     <p className="text-base md:text-lg">
-                        Thoughtfully crafted and sustainably made men's attire. Discover everyday essentials.
+                        Thoughtfully crafted and sustainably made men&apos;s attire. Discover everyday essentials.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-[50px]">
                     {/* Product 1 */}
                     <div className="flex flex-col gap-2 p-2 rounded-lg">
                         <Image
-                            alt="Men's Sale"
+                            alt="Men&apos;s Sale"
                             src={img1}
                             className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
                         />
-                        <p className="font-bold text-lg lg:text-left text-center">Men's Sale</p>
+                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Sale</p>
                         <div className="flex justify-center lg:justify-start">
                             <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
                                 Shop
@@ -51,11 +51,11 @@ export default function MenCollectionpage() {
                     {/* Product 2 */}
                     <div className="flex flex-col gap-2 p-2 rounded-lg">
                         <Image
-                            alt="Men's New Arrival"
+                            alt="Men&apos;s New Arrival"
                             src={img2}
                             className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
                         />
-                        <p className="font-bold text-lg lg:text-left text-center">Men's New Arrival</p>
+                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s New Arrival</p>
                         <div className="flex justify-center lg:justify-start">
                             <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
                                 Shop
@@ -66,11 +66,11 @@ export default function MenCollectionpage() {
                     {/* Product 3 */}
                     <div className="flex flex-col gap-2 p-2 rounded-lg">
                         <Image
-                            alt="Men's Dress"
+                            alt="Men&apos;s Dress"
                             src={img3}
                             className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
                         />
-                        <p className="font-bold text-lg lg:text-left text-center">Men's Dress</p>
+                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Dress</p>
                         <div className="flex justify-center lg:justify-start">
                             <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
                                 Shop
@@ -81,11 +81,11 @@ export default function MenCollectionpage() {
                     {/* Product 4 */}
                     <div className="flex flex-col gap-2 p-2 rounded-lg">
                         <Image
-                            alt="Men's Ethnic Wear"
+                            alt="Men&apos;s Ethnic Wear"
                             src={img4}
                             className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
                         />
-                        <p className="font-bold text-lg lg:text-left text-center">Men's Ethnic Wear</p>
+                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Ethnic Wear</p>
                         <div className="flex justify-center lg:justify-start">
                             <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
                                 Shop
