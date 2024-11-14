@@ -94,7 +94,7 @@ export default function About() {
                         <Image src={img3} alt="Crafting Image" className="h-full w-full object-cover rounded-lg shadow-lg" />
                     </div>
                     <div className="flex flex-col justify-center items-center w-full md:w-1/2 px-6 md:px-10 text-center gap-4">
-                        <p className="text-2xl md:text-4xl font-bold text-gray-800">Crafting the Future of Fashion</p>
+                        <p className="text-2xl md:text-4xl font-bold text-gray-800">Future of Fashion</p>
                         <p className="text-md md:text-lg text-gray-600 leading-relaxed">
                             Our process begins with selecting organic and regenerative materials like bamboo, banana, and orange fibers—fabrics that not only feel luxurious but also tread lightly on the planet. From fabric to finish, each step is driven by innovation. Each design is illustrated by hand, and zero-waste patterns ensure that every garment embodies our commitment to sustainability and style.
                         </p>
