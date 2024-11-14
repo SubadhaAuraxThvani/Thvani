@@ -1,9 +1,9 @@
-import Collectionpage from "@/components/Collection/Collectionpage";
+import WomenCollectionpage from "@/components/Collection/CollectionWomenpage";
 
 export default function Collection() {
     return (
         <div>
-            <Collectionpage/>
+            <WomenCollectionpage/>
         </div>
     )
 }

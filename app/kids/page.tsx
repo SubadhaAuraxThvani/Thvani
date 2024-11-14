@@ -1,9 +1,9 @@
-import Collectionpage from "@/components/Collection/Collectionpage";
+import CollectionPageKids from "@/components/Collection/CollectionKid";
 
 export default function page() {
     return (
         <div>
-            <Collectionpage/>
+            <CollectionPageKids/>
         </div>
     )
 }
