@@ -24,7 +24,7 @@ export default function Navbar() {
             {/* Main Navbar */}
             <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-white shadow-md">
                 {/* Logo */}
-                <div className="text-2xl font-bold"><Link href="/"><Image src={logo} width={140} height={80} className=" object-cover h-12" alt="logo" ></Image></Link></div>
+                <div className="text-2xl font-bold"><Link href="/"><Image src={logo} width={140} height={80} className="object-cover h-8 w-20 lg:w-32 lg:h-12" alt="logo" ></Image></Link></div>
 
                 {/* Menu Items - hidden on mobile */}
                 <ul className="hidden lg:flex lg:gap-8 text-lg">
