@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
-
+import logo from "../../images/logo.png"
 const Footer = () => {
   return (
     <footer className="bg-color1 relative">
@@ -10,9 +11,7 @@ const Footer = () => {
           {/* Logo  */}
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
-              <span className="self-center text-4xl font-semibold whitespace-nowrap text-white">
-                Logo
-              </span>
+            <Image src={logo} width={140} height={80} className="invert object-cover brightness-200 h-12" alt="logo" ></Image>
             </Link>
           </div>
 

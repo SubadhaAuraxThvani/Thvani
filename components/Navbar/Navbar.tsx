@@ -5,7 +5,8 @@ import { CiHeart } from "react-icons/ci";
 import { CiSliderHorizontal } from "react-icons/ci";
 import { useState } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
+import logo from "../../images/logo.png"
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +24,7 @@ export default function Navbar() {
             {/* Main Navbar */}
             <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-white shadow-md">
                 {/* Logo */}
-                <div className="text-2xl font-bold"><Link href="/">Logo</Link></div>
+                <div className="text-2xl font-bold"><Link href="/"><Image src={logo} width={140} height={80} className=" object-cover h-12" alt="logo" ></Image></Link></div>
 
                 {/* Menu Items - hidden on mobile */}
                 <ul className="hidden lg:flex lg:gap-8 text-lg">

@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div>
       <Home/>
-      <Home2 props={"Crafting Fashion with Natures Essence"}/>
+      <Home2 props={"Fashion with Natures Essence"}/>
       <Home3/>
       <Home4/>
       <Home2 props={""}/>

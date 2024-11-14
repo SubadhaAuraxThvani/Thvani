@@ -20,7 +20,7 @@ export default function About() {
                 <div className="flex w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
                     <p className="text-lg md:text-xl">WE ARE THVANI</p>
                     <h1 className="text-3xl md:text-5xl font-bold text-color1">
-                        Crafting Unique Essence Through Sustainable Fashion.
+                        Thvani Sustainable Fashion.
                     </h1>
                     <p className="text-sm md:text-base">
                         Where innovation meets nature, creating a fusion of style,
