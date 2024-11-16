@@ -4,6 +4,7 @@ import bg1 from "@/images/Home/bg1.png";
 import bg5 from "@/images/Home/bg5.png";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import Link from "next/link";
 
 export default function Home() {
     const textRef = useRef<HTMLDivElement>(null);
@@ -11,17 +12,17 @@ export default function Home() {
     useEffect(() => {
         const textElement = textRef.current;
         if (textElement) {
-            const containerWidth = textElement.offsetWidth; 
+            const containerWidth = textElement.offsetWidth;
 
-            
+
             gsap.fromTo(
                 textElement,
-                { x: `-${containerWidth}px` }, 
+                { x: `-${containerWidth}px` },
                 {
-                    x: "100vw", 
-                    duration: 15, 
-                    ease: "linear", 
-                    repeat: -1, 
+                    x: "100vw",
+                    duration: 15,
+                    ease: "linear",
+                    repeat: -1,
                 }
             );
         }
@@ -34,7 +35,7 @@ export default function Home() {
                     className="flex flex-col md:flex-row w-full"
                     style={{ height: "calc(100vh - 154px)" }}
                 >
-                    
+
                     <div className="hidden md:block w-1/2 h-full relative">
                         <Image
                             src={bg1}
@@ -43,9 +44,9 @@ export default function Home() {
                         />
                     </div>
 
-                   
+
                     <div className="w-full md:w-1/2 h-full relative">
-                        
+
                         <Image
                             src={bg5}
                             alt="Background Image"
@@ -73,16 +74,17 @@ export default function Home() {
                                 Upgrade to Organic Futurism Aesthetics
                             </p>
 
-                            {/* Shop Now Button */}
-                            <button className="mt-4 sm:mt-6 px-4 sm:px-4 py-2 border border-white text-white bg-transparent hover:bg-white hover:text-black transition duration-300 rounded text-xs sm:text-sm md:text-base">
-                                Shop Now
-                            </button>
+                            <Link href="/women">
+                                <button className="mt-4 sm:mt-6 px-4 sm:px-4 py-2 border border-white text-white bg-transparent hover:bg-white hover:text-black transition duration-300 rounded text-xs sm:text-sm md:text-base">
+                                    Shop Now
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
             <div className="flex h-[50px] bg-color1 text-white items-center overflow-hidden">
                 <div ref={textRef} className="whitespace-nowrap">
                     <p className="text-xl sm:text-2xl inline-block pl-2 mr-[500px]">

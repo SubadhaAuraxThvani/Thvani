@@ -12,6 +12,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import Link from "next/link";
 
 export default function About() {
     return (
@@ -30,9 +31,11 @@ export default function About() {
                         into garments that transcend trends and redefine style.
                     </p>
                     <div className="self-start">
-                        <button className="inline-block border-2 p-3 border-color1 text-sm">
-                            SEE OUR COLLECTIONS
-                        </button>
+                        <Link href="/women">
+                            <button className="inline-block border-2 p-3 border-color1 text-sm">
+                                SEE OUR COLLECTIONS
+                            </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="flex w-full md:w-1/2">
@@ -121,9 +124,11 @@ export default function About() {
                 <p className="text-lg md:text-3xl">
                     Join us in making a difference. Trust in our journey, believe in our purpose, and together, lets inspire change. With Thvani, youre not just investing in fashion; youre investing in a legacy of sustainable beauty.
                 </p>
-                <button className="inline-block border-2 p-3 border-color1 text-md px-[100px]">
-                    JOIN US NOW
-                </button>
+                <Link href="/login">
+                    <button className="inline-block border-2 p-3 border-color1 text-md px-[100px]">
+                        JOIN US NOW
+                    </button>
+                </Link>
             </div>
 
             {/* Process Section */}
@@ -133,9 +138,12 @@ export default function About() {
                     <p className="font-bold text-xl md:text-2xl">OUR PROCESS IS,</p>
                     <p className="font-bold text-3xl md:text-4xl">100% TRACEABLE.</p>
                     <p className="font-bold text-3xl md:text-4xl">KNOW YOUR SOURCE.</p>
-                    <button className="bg-white text-black inline-block border-2 p-3 border-color1 text-md md:px-10 px-6">
-                        TRACE MY PRODUCT
-                    </button>
+                    <Link href="/product/where">
+                        <button className="bg-white text-black inline-block border-2 p-3 border-color1 text-md md:px-10 px-6">
+                            TRACE MY PRODUCT
+                        </button>
+                    </Link>
+                    
                 </div>
             </div>
 

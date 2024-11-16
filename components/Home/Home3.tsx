@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home3() {
     return (
         <div className="flex mt-4 flex-col justify-between mb-[100px]">
@@ -14,21 +16,28 @@ export default function Home3() {
                         <p className="text-sm md:text-base">
                             Thvani was founded with the commitment to create clothing that not only reflects your unique essence but also nurtures the earth.
                         </p>
-                        <span className="underline">Learn More</span>
+                        <Link href="/sustainable">
+                            <span className="underline">Learn More</span>
+                        </Link>
+
                     </div>
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
                         <h1 className="text-lg md:text-xl font-bold">About Us :</h1>
                         <p className="text-sm md:text-base">
                             Craft Unique Essence, we believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                         </p>
-                        <span className="underline">Learn More</span>
+                        <Link href="/about">
+                            <span className="underline">Learn More</span>
+                        </Link>
                     </div>
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
                         <h1 className="text-lg md:text-xl font-bold">Innovation Meets Tradition :</h1>
                         <p className="text-sm md:text-base">
                             We challenge conventional fashion with our fusion of time-honored craftsmanship and modern techniques.
                         </p>
-                        <span className="underline">Learn More</span>
+                        <Link href="/product/how">
+                            <span className="underline">Learn More</span>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -38,7 +47,9 @@ export default function Home3() {
                 </p>
                 <div className="flex justify-center lg:justify-start lg:w-1/4 mt-5">
                     <div className="border-2 border-color1 rounded-2xl p-2">
-                        <span className="text-lg">LEARN MORE</span>
+                        <Link href="/calculator">
+                            <span className="text-lg">LEARN MORE</span>
+                        </Link>
                     </div>
                 </div>
             </div>

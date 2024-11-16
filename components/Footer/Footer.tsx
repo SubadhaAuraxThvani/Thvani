@@ -29,17 +29,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-4">
                   <Link href="/sustainable" className="hover:underline">
-                    Detox Your Closet
-                  </Link>
-                </li>
-                <li className="mb-4">
-                  <Link href="/blog" className="hover:underline">
-                    Journals
-                  </Link>
-                </li>
-                <li className="mb-4">
-                  <Link href="/" className="hover:underline">
-                    FAQ
+                    Contact
                   </Link>
                 </li>
                 <li className="mb-4">
@@ -50,28 +40,24 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase">Contact</h2>
+              <h2 className="mb-6 text-sm font-semibold uppercase">Nature</h2>
               <ul className="font-medium">
                 <li className="mb-4">
-                  <Link href="/contactus" className="hover:underline">
-                    Get in Touch
+                  <Link href="/product/how" className="hover:underline">
+                    Material Sourcing
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
-                    Return and Exchange
+                  <Link href="/sustainable" className="hover:underline">
+                    Sustainability
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
-                    Affiliates
+                  <Link href="/calculator" className="hover:underline">
+                    Footprint Calculator
                   </Link>
                 </li>
-                <li className="mb-4">
-                  <Link href="/help" className="hover:underline">
-                    Help
-                  </Link>
-                </li>
+                
               </ul>
             </div>
             <div>
@@ -83,23 +69,18 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
+                  <Link href="/whislist" className="hover:underline">
                     Wishlist
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
-                    Gift Card Balance
+                  <Link href="/orderexchange" className="hover:underline">
+                    Orders
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/trackOrder" className="hover:underline">
                     Track Order
-                  </Link>
-                </li>
-                <li className="mb-4">
-                  <Link href="/orderexchange" className="hover:underline">
-                    Order Exchange
                   </Link>
                 </li>
               </ul>
@@ -143,9 +124,9 @@ const Footer = () => {
               <span>
                 <Link href="/privacy">Privacy Policy</Link>
               </span>
-              <span>Data Request</span>
-              <span>Accessibility</span>
-              <span>Cookie Preferences</span>
+              <span>
+                <Link href="/term">Terms and Conditions</Link>
+              </span>
             </div>
           </div>
           <span className="text-sm text-white sm:text-center mt-4 sm:mt-0">

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar/Navbar";
-import {Playfair_Display } from "next/font/google"
+import { Playfair_Display } from "next/font/google"
 import "./globals.css";
 import Footer from "@/components/Footer/Footer";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Thvani",
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 const font = Playfair_Display({
-  subsets:['latin'],
-  weight:['400','700']
+  subsets: ['latin'],
+  weight: ['400', '700']
 })
 
 export default function RootLayout({
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <StoreProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );
