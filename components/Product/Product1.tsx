@@ -8,6 +8,9 @@ import { addItem } from "@/store/features/cart/cartSlice";
 import { useAppDispatch } from "@/store/hooks";
 import { productData } from "@/dummyData";
 import { addToWishlist } from "@/store/features/whislist/whislistSlice";
+import img5 from "@/images/Product/Frame.png"
+import img6 from "@/images/Product/Frame2.png"
+import img7 from "@/images/Product/Frame3.png"
 
 export default function Product1() {
     const productData1 = productData.product1;
@@ -38,105 +41,124 @@ export default function Product1() {
 
 
     return (
-        <div className="flex flex-col lg:flex-row h-auto lg:h-full py-5 w-full px-5 md:px-8 lg:px-10 gap-5">
-            <div className="flex lg:flex-col gap-2 lg:gap-6 justify-center lg:justify-start">
-                {productData1.images.map((img, index) => (
-                    <div
-                        key={index}
-                        className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 cursor-pointer"
-                        onClick={() => setSelectedImage(img)}
-                    >
-                        <Image src={img} alt={`Thumbnail ${index + 1}`} className="object-cover w-full h-full" />
-                    </div>
-                ))}
-            </div>
-            <div className="flex flex-col md:flex-row w-full gap-5">
-                <div className="w-full md:w-3/5 lg:w-2/4 h-[40vh] md:h-[60vh] lg:h-[75vh]">
-                    <Image src={selectedImage} alt="Main Product Image" className="object-cover w-full h-full" />
+        <>
+            <div className="flex flex-col lg:flex-row h-auto lg:h-full py-5 w-full px-5 md:px-8 lg:px-10 gap-5">
+                <div className="flex lg:flex-col gap-2 lg:gap-6 justify-center lg:justify-start">
+                    {productData1.images.map((img, index) => (
+                        <div
+                            key={index}
+                            className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 cursor-pointer"
+                            onClick={() => setSelectedImage(img)}
+                        >
+                            <Image src={img} alt={`Thumbnail ${index + 1}`} className="object-cover w-full h-full" />
+                        </div>
+                    ))}
                 </div>
-                <div className="flex flex-col gap-5 w-full md:w-2/5 lg:w-2/4">
-                    <div className="flex flex-col gap-5">
-                        <p className="text-sm lg:text-base">Home/Best Seller/Women Selection</p>
-                        <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1.name}</p>
-                        <p className="text-md md:text-xl lg:text-2xl">{productData1.price}</p>
-                        <div className="flex items-center gap-1">
-                            {Array(4)
-                                .fill(0)
-                                .map((_, i) => (
-                                    <FaStar key={i} />
-                                ))}
-                            <div className="flex gap-2">
-                                <p className="text-sm md:text-base">{productData1.rating}</p>
-                                <p>|</p>
-                                <p className="text-sm md:text-base">{productData1.reviewsCount} Reviews</p>
+                <div className="flex flex-col md:flex-row w-full gap-5">
+                    <div className="w-full md:w-3/5 lg:w-2/4 h-[40vh] md:h-[60vh] lg:h-[75vh]">
+                        <Image src={selectedImage} alt="Main Product Image" className="object-cover w-full h-full" />
+                    </div>
+                    <div className="flex flex-col gap-5 w-full md:w-2/5 lg:w-2/4">
+                        <div className="flex flex-col gap-5">
+                            <p className="text-sm lg:text-base">Home/Best Seller/Women Selection</p>
+                            <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1.name}</p>
+                            <p className="text-md md:text-xl lg:text-2xl">{productData1.price}</p>
+                            <div className="flex items-center gap-1">
+                                {Array(4)
+                                    .fill(0)
+                                    .map((_, i) => (
+                                        <FaStar key={i} />
+                                    ))}
+                                <div className="flex gap-2">
+                                    <p className="text-sm md:text-base">{productData1.rating}</p>
+                                    <p>|</p>
+                                    <p className="text-sm md:text-base">{productData1.reviewsCount} Reviews</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <p>Colors</p>
-                            <div className="flex space-x-2">
-                                {productData1.colors.map((color, i) => (
-                                    <div
-                                        key={i}
-                                        className={`rounded-full w-8 h-8 cursor-pointer ${selectedColor === color ? 'border-4 border-color1' : ''} bg-${color.toLowerCase()}`}
-                                        onClick={() => setSelectedColor(color)}
-                                    ></div>
-                                ))}
+                            <div className="flex flex-col gap-2">
+                                <p>Colors</p>
+                                <div className="flex space-x-2">
+                                    {productData1.colors.map((color, i) => (
+                                        <div
+                                            key={i}
+                                            className={`rounded-full w-8 h-8 cursor-pointer ${selectedColor === color ? 'border-4 border-color1' : ''} bg-${color.toLowerCase()}`}
+                                            onClick={() => setSelectedColor(color)}
+                                        ></div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <p>Select Size:</p>
-                            <div className="flex space-x-2 font-bold">
-                                {productData1.sizes.map((size) => (
-                                    <div
-                                        key={size}
-                                        className={`w-12 h-12 border rounded-md flex items-center justify-center cursor-pointer ${selectedSize === size ? 'bg-gray-300' : ''}`}
-                                        onClick={() => setSelectedSize(size)}
-                                    >
-                                        <span className="text-lg">{size}</span>
-                                    </div>
-                                ))}
+                            <div className="flex flex-col gap-2">
+                                <p>Select Size:</p>
+                                <div className="flex space-x-2 font-bold">
+                                    {productData1.sizes.map((size) => (
+                                        <div
+                                            key={size}
+                                            className={`w-12 h-12 border rounded-md flex items-center justify-center cursor-pointer ${selectedSize === size ? 'bg-gray-300' : ''}`}
+                                            onClick={() => setSelectedSize(size)}
+                                        >
+                                            <span className="text-lg">{size}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p>Model 1 is 6 feet and wears size S</p>
                             </div>
-                            <p>Model 1 is 6 feet and wears size S</p>
-                        </div>
-                        <hr className="w-full border" />
-                        <div className="flex justify-center items-center gap-4">
-                            <button
-                                onClick={() => handleAddtoCart(productData1.id)}
-                                className={`bg-color1 text-white py-3 px-6 rounded-3xl w-full md:w-auto text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                disabled={!selectedColor || !selectedSize}
-                            >
-                                Add to Cart
-                            </button>
-                            <div
-                                onClick={() => handleAddToWishlist(productData1)}
-                                className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition cursor-pointer"
-                            >
-                                <FaRegHeart className="text-lg text-gray-600" />
-                            </div>
+                            <hr className="w-full border" />
+                            <div className="flex justify-center items-center gap-4">
+                                <button
+                                    onClick={() => handleAddtoCart(productData1.id)}
+                                    className={`bg-color1 text-white py-3 px-6 rounded-3xl w-full md:w-auto text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    disabled={!selectedColor || !selectedSize}
+                                >
+                                    Add to Cart
+                                </button>
+                                <div
+                                    onClick={() => handleAddToWishlist(productData1)}
+                                    className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition cursor-pointer"
+                                >
+                                    <FaRegHeart className="text-lg text-gray-600" />
+                                </div>
 
+                            </div>
+                            <div className="flex bg-color5 p-3 text-center justify-center items-center gap-10 text-sm md:text-base">
+                                <p>Free Shipping on Orders $150+</p>
+                                <p>Easy 30-Day Return & Exchanges</p>
+                            </div>
+                            <div className="flex flex-wrap w-full justify-evenly gap-4 md:gap-6 lg:gap-8">
+                                <div className="flex flex-col items-center text-center">
+                                    <Image src={img5} alt="Less Water" className="w-16 md:w-20 lg:w-24" />
+                                    <p className="text-sm md:text-base lg:text-lg font-semibold">88.6% Less Water</p>
+                                </div>
+                                <div className="flex flex-col items-center text-center">
+                                    <Image src={img6} alt="Less Carbon" className="w-16 md:w-20 lg:w-24" />
+                                    <p className="text-sm md:text-base lg:text-lg font-semibold">29.4% Less Carbon</p>
+                                </div>
+                                <div className="flex flex-col items-center text-center">
+                                    <Image src={img7} alt="No Pesticides No Plastic" className="w-16 md:w-20 lg:w-24" />
+                                    <p className="text-sm md:text-base lg:text-lg font-semibold">No Pesticides No Plastic</p>
+                                </div>
+                            </div>
+                            <Accordion type="single" collapsible className="w-full">
+                                {["Details", "Fabric Care", "Fit", "Cost", "Shipping"].map((section, i) => (
+                                    <AccordionItem key={i} value={`item-${i}`} className="border-b border-gray-300">
+                                        <AccordionTrigger
+                                            onClick={() => setActiveItem(activeItem === `item-${i}` ? null : `item-${i}`)}
+                                            className={`py-3 px-4 text-lg md:text-xl lg:text-xl font-semibold focus:outline-none ${activeItem === `item-${i}` ? "text-color4" : "text-black"}`}
+                                        >
+                                            {section}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
+                                            {`Details for ${section}`}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
                         </div>
-                        <div className="flex bg-color5 p-3 text-center justify-center items-center gap-10 text-sm md:text-base">
-                            <p>Free Shipping on Orders $150+</p>
-                            <p>Easy 30-Day Return & Exchanges</p>
-                        </div>
-                        <Accordion type="single" collapsible className="w-full">
-                            {["Details", "Fabric Care", "Fit", "Cost", "Shipping"].map((section, i) => (
-                                <AccordionItem key={i} value={`item-${i}`} className="border-b border-gray-300">
-                                    <AccordionTrigger
-                                        onClick={() => setActiveItem(activeItem === `item-${i}` ? null : `item-${i}`)}
-                                        className={`py-3 px-4 text-lg md:text-xl lg:text-xl font-semibold focus:outline-none ${activeItem === `item-${i}` ? "text-color4" : "text-black"}`}
-                                    >
-                                        {section}
-                                    </AccordionTrigger>
-                                    <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
-                                        {`Details for ${section}`}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            ))}
-                        </Accordion>
                     </div>
                 </div>
             </div>
-        </div>
+            <div className="flex px-[10vw]">
+                <p className="flex text-3xl text-color1 font-bold">You May Also Like This</p>
+            </div>
+        </>
     );
 }

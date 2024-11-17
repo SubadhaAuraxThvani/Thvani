@@ -86,7 +86,7 @@ export default function SustainablePage() {
                     </p>
                 </div>
 
-                <div className="flex flex-col w-full py-[30px] md:py-[50px] lg:py-[100px]">
+                <div className="flex sm:flex-col w-full py-[30px] md:py-[50px] lg:py-[100px]">
                     <div className="relative flex flex-col">
                         <div className="w-full h-[40vh] md:h-[60vh] lg:h-[80vh]">
                             <Image src={img3} alt="" className="w-full h-full object-cover" />

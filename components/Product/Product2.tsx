@@ -22,8 +22,7 @@ export default function Product2() {
                         className="border-b border-gray-300"
                     >
                         <AccordionTrigger className="py-3 px-4 text-lg md:text-xl lg:text-xl font-semibold focus:outline-none">
-                            How do I subscribe to a service on Craft Unique
-                            Essence?
+                            How do I subscribe to a service on Thvani?
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
                             Every woman needs her crew and ours is one you can
@@ -38,12 +37,10 @@ export default function Product2() {
                         className="border-b border-gray-300"
                     >
                         <AccordionTrigger className="py-3 px-4 text-lg md:text-xl lg:text-xl font-semibold focus:outline-none">
-                            What is Craft Unique Essence?
+                            What is Thvani?
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
-                            OneTapay is a platform that provides
-                            subscription-based services, offering seamless
-                            access to flexible payment options.
+                            Where innovation meets nature, creating a fusion of style, sustainability, and modern craftsmanship. we are reimagining fashion through a lens of responsibility and creativity. 
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem
@@ -54,8 +51,7 @@ export default function Product2() {
                             Can I get the real fabric & Natural Products?
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
-                            Yes. Its animated by default, but you can disable
-                            it if you prefer.
+                            Yes, Thvani offers authentic fabrics and natural products sourced sustainably. Their materials include bamboo and banana fiber, ensuring minimal environmental impact while supporting local communities. Each product reflects eco-conscious practices and traditional craftsmanship.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem
@@ -66,8 +62,7 @@ export default function Product2() {
                             What payment methods are accepted?
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
-                            Yes. Its animated by default, but you can disable
-                            it if you prefer.
+                            Thvani accepts payments via credit/debit cards, online wallets like PayPal, and net banking. UPI and digital payment methods are also supported for convenience. Cash on Delivery COD is available for select regions/orders.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem
@@ -78,8 +73,7 @@ export default function Product2() {
                             Is customer support available 24/7?
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
-                            Yes. Its animated by default, but you can disable
-                            it if you prefer.
+                            Yes, Thvani provides 24/7 customer support to assist with inquiries, orders, and issues. You can reach out anytime via email, chat, or phone for prompt assistance.
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>

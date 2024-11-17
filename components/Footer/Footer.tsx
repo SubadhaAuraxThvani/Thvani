@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
 import logo from "../../images/logo.png"
 const Footer = () => {
   return (
-    <footer className="bg-color1 relative">
+    <footer className="bg-color1 relative mt-[20vh]">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="relative flex flex-col-reverse md:flex-row md:justify-between md:space-x-8 px-4 py-8 text-white">
           {/* Logo  */}
@@ -86,7 +86,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto">
+          <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
             <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
               {" "}
               <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">

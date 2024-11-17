@@ -20,15 +20,11 @@ export default function About() {
             <div className="flex flex-col md:flex-row w-full h-auto md:h-[85vh]">
                 <div className="flex w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
                     <p className="text-lg md:text-xl">WE ARE THVANI</p>
-                    <h1 className="text-3xl md:text-5xl font-bold text-color1">
-                        Thvani Sustainable Fashion.
+                    <h1 className="text-3xl sm:pr-[20vw] pr-0 md:text-5xl font-bold text-color1">
+                        Art Through Sustainable Fashion.
                     </h1>
-                    <p className="text-sm md:text-base">
-                        Where innovation meets nature, creating a fusion of style,
-                        sustainability, and modern craftsmanship. We are reimagining fashion
-                        through a lens of responsibility and creativity. Our journey is
-                        fueled by a passion for turning natures most unexpected resources
-                        into garments that transcend trends and redefine style.
+                    <p className="text-sm md:text-xl">
+                        Where innovation meets nature, creating a fusion of style, sustainability, and modern craftsmanship. we are reimagining fashion through a lens of responsibility and creativity. Our journey is fueled by a passion for turning nature’s most unexpected resources into garments that transcend trends and redefine style.
                     </p>
                     <div className="self-start">
                         <Link href="/women">
@@ -51,14 +47,12 @@ export default function About() {
                             <CarouselItem key={index}>
                                 <div className="p-2">
                                     <Card className="h-full">
-                                        <CardContent className="flex flex-col gap-3 items-center justify-center px-4 py-4">
-                                            <span className="text-lg md:text-xl font-bold text-center">
+                                        <CardContent className="flex flex-col gap-3 items-center justify-center px-4 mx-10 py-4">
+                                            <span className="text-lg py-5  md:text-xl font-bold text-center">
                                                 BELIEVE IN POSSIBLE
                                             </span>
-                                            <span className="text-base md:text-lg lg:text-2xl font-medium text-center">
-                                                At Thvani, we dont just create clothing; we craft a movement.
-                                                Every stitch, every fabric, every design is a testament to
-                                                our unwavering commitment to sustainability and innovation.
+                                            <span className="text-base py-5  md:text-lg lg:text-2xl font-medium text-center">
+                                                At THVANI, we don t just create clothing; we Art a movement. Every stitch, every fabric, every design is a testament to our unwavering commitment to sustainability and innovation. By believing in us, you re not just choosing a brand; you re embracing a vision for a better, greener world.
                                             </span>
                                         </CardContent>
                                     </Card>

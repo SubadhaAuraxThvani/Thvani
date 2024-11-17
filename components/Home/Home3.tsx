@@ -12,7 +12,7 @@ export default function Home3() {
                 </div>
                 <div className="flex flex-wrap justify-around gap-5 md:gap-20 px-5">
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
-                        <h1 className="text-lg md:text-xl font-bold">Our Mission :</h1>
+                        <h1 className="text-lg md:text-2xl font-bold">Our Mission :</h1>
                         <p className="text-sm md:text-base">
                             Thvani was founded with the commitment to create clothing that not only reflects your unique essence but also nurtures the earth.
                         </p>
@@ -22,7 +22,7 @@ export default function Home3() {
 
                     </div>
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
-                        <h1 className="text-lg md:text-xl font-bold">About Us :</h1>
+                        <h1 className="text-lg md:text-2xl font-bold">About Us :</h1>
                         <p className="text-sm md:text-base">
                             Craft Unique Essence, we believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                         </p>
@@ -31,7 +31,7 @@ export default function Home3() {
                         </Link>
                     </div>
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
-                        <h1 className="text-lg md:text-xl font-bold">Innovation Meets Tradition :</h1>
+                        <h1 className="text-lg md:text-2xl font-bold">Innovation Meets Tradition :</h1>
                         <p className="text-sm md:text-base">
                             We challenge conventional fashion with our fusion of time-honored craftsmanship and modern techniques.
                         </p>

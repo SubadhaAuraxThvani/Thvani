@@ -22,6 +22,7 @@ import { motion } from 'framer-motion';
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import Link from "next/link";
 
 export default function Blogpage() {
     const textRef = useRef<HTMLDivElement>(null);
@@ -312,7 +313,9 @@ export default function Blogpage() {
                     <p>Fashion</p>
                     <p className="text-2xl lg:text-4xl">The Role of Certifications in Sustainable Fashion</p>
                     <p className="text-lg lg:text-xl font-medium">Certifications like Fair Trade, GOTS, and B Corp are more than just labels. Learn what these certifications mean, how they’re earned, and why they’re important markers of true sustainability in fashion.</p>
-                    <button className="bg-black justify-center items-center text-white w-[40vw] lg:w-[10vw] h-10">READ MORE</button>
+                    <Link href="/sustainable">
+                        <button className="bg-black justify-center items-center text-white w-[40vw] lg:w-[10vw] h-10">READ MORE</button>
+                    </Link>
                 </div>
                 <div className="flex justify-center mt-5 lg:mt-0">
                     <Image src={img12} alt="" className="w-full lg:w-auto" />
