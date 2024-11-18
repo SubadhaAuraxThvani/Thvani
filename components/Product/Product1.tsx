@@ -14,6 +14,25 @@ import img7 from "@/images/Product/Frame3.png"
 import { Button } from "../ui/button";
 import { toast } from "@/hooks/use-toast";
 
+
+// const [productData1, setProductData1] = useState<any | null>(null);
+
+// useEffect(() => {
+//     async function fetchProduct() {
+//         try {
+//             const response = await fetch(`https://api.thvaniearthcraft.com/api/v1/product/products/${id}`);
+//             if (!response.ok) {
+//                 throw new Error("Product not found");
+//             }
+//             const data = await response.json();
+//             setProductData1(data);
+//         } catch (error) {
+//             console.error("Error fetching product:", error);
+//         }
+//     }
+//     fetchProduct();
+// }, [id]);
+
 export default function Product1() {
     const productData1 = productData.product1;
     const [selectedImage, setSelectedImage] = useState(productData1.images[0]);
