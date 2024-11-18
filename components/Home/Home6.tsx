@@ -15,7 +15,7 @@ import Image from "next/image";
 export function Home6() {
     return (
         <div className="w-full p-5">
-            <div className="relative max-w-5xl lg:mb-8 mb-32 h-[60vh] mx-auto">
+            <div className="relative max-w-5xl lg:mb-8 mb-32  mx-auto">
                 <Carousel className="w-full">
                     <CarouselContent className="h-full">
                         {Array.from({ length: 5 }).map((_, index) => (

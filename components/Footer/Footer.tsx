@@ -28,7 +28,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="/sustainable" className="hover:underline">
+                  <Link href="/contactus" className="hover:underline">
                     Contact
                   </Link>
                 </li>

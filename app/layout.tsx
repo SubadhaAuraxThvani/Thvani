@@ -4,6 +4,7 @@ import { Playfair_Display } from "next/font/google"
 import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import StoreProvider from "./StoreProvider";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Thvani",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <StoreProvider>
           <Navbar />
           {children}
+          <Toaster />
           <Footer />
         </StoreProvider>
       </body>

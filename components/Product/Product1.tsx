@@ -11,6 +11,8 @@ import { addToWishlist } from "@/store/features/whislist/whislistSlice";
 import img5 from "@/images/Product/Frame.png"
 import img6 from "@/images/Product/Frame2.png"
 import img7 from "@/images/Product/Frame3.png"
+import { Button } from "../ui/button";
+import { toast } from "@/hooks/use-toast";
 
 export default function Product1() {
     const productData1 = productData.product1;
@@ -104,19 +106,37 @@ export default function Product1() {
                             </div>
                             <hr className="w-full border" />
                             <div className="flex justify-center items-center gap-4">
-                                <button
-                                    onClick={() => handleAddtoCart(productData1.id)}
-                                    className={`bg-color1 text-white py-3 px-6 rounded-3xl w-full md:w-auto text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                <Button
+                                    variant="outline"
+                                    onClick={() => {
+                                        if (!selectedColor || !selectedSize) return; // Prevent action if color or size is not selected
+                                        toast({
+                                            variant: "newVariant",
+                                            title: "Item added to Cart",
+                                        });
+                                        handleAddtoCart(productData1.id);
+                                    }}
+                                    className={`bg-color1 text-white py-6 px-12 rounded-3xl w-full md:w-auto text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''
+                                        }`}
                                     disabled={!selectedColor || !selectedSize}
                                 >
                                     Add to Cart
-                                </button>
+                                </Button>
+
+
                                 <div
-                                    onClick={() => handleAddToWishlist(productData1)}
+                                    onClick={() => {
+                                        handleAddToWishlist(productData1);
+                                        toast({
+                                            variant: "newVariant",
+                                            title: "Item added to Wishlist",
+                                        });
+                                    }}
                                     className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition cursor-pointer"
                                 >
                                     <FaRegHeart className="text-lg text-gray-600" />
                                 </div>
+
 
                             </div>
                             <div className="flex bg-color5 p-3 text-center justify-center items-center gap-10 text-sm md:text-base">

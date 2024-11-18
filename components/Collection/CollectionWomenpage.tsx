@@ -20,6 +20,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import Link from "next/link"
 
 export default function WomenCollectionpage() {
     return (
@@ -42,9 +43,11 @@ export default function WomenCollectionpage() {
                         />
                         <p className="font-bold text-lg lg:text-left text-center">Womens Sale</p>
                         <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
+                            <Link href="/product">
+                                <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
+                                    Shop
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -57,9 +60,11 @@ export default function WomenCollectionpage() {
                         />
                         <p className="font-bold text-lg lg:text-left text-center">Womens New Arrival</p>
                         <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
+                            <Link href="/product">
+                                <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
+                                    Shop
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -72,9 +77,11 @@ export default function WomenCollectionpage() {
                         />
                         <p className="font-bold text-lg lg:text-left text-center">Womens Dress</p>
                         <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
+                            <Link href="/product">
+                                <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
+                                    Shop
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -87,9 +94,11 @@ export default function WomenCollectionpage() {
                         />
                         <p className="font-bold text-lg lg:text-left text-center">Womens Ethnic Wear</p>
                         <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
+                            <Link href="/product">
+                                <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
+                                    Shop
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

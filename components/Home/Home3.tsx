@@ -24,7 +24,7 @@ export default function Home3() {
                     <div className="flex flex-col text-left w-full md:w-[300px] gap-3">
                         <h1 className="text-lg md:text-2xl font-bold">About Us :</h1>
                         <p className="text-sm md:text-base">
-                            Craft Unique Essence, we believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
+                            Thvani, we believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                         </p>
                         <Link href="/about">
                             <span className="underline">Learn More</span>

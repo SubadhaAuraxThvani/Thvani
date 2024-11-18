@@ -44,7 +44,8 @@ export default function LoginPage() {
                 <p className="text-sm sm:text-base">
                     At THVANI, we believe that fashion should do more than just look good—it should feel good, too. By signing up, you’re becoming part of a community that values sustainability, innovation, and timeless style.
                 </p>
-                <p className="underline text-sm sm:text-base">Start Shopping Now</p>
+                <Link href="/women"><p className="underline text-sm sm:text-base">Start Shopping Now</p></Link>
+
             </div>
         </div>
     );
