@@ -12,10 +12,10 @@ export default function Home2({props}:{props:string}) {
             <div className="flex pt-[50px] pb-[50px] text-center justify-center w-full text-4xl font-bold">
                 <p>{props}</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-5 lg:px-20 justify-items-center">
-                <div className="sm:w-[300px] bg-white border border-gray-200 rounded-lg shadow">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-9 xl:gap-10 px-5 lg:px-18 xl:px-28 justify-items-center">
+                <div className="sm:w-[300px]  xl:text-[1vw]  lg:w-full bg-white border border-gray-200 rounded-lg shadow">
                     <Link href="/product">
-                        <Image className="rounded-t-lg" objectFit="contain" src={img1} alt="" />
+                        <Image className="rounded-t-lg w-full" objectFit="contain" src={img1} alt="" />
                     </Link>
                     <div className="flex flex-col p-5 ">
                         <div className="flex items-center">
@@ -23,7 +23,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
+                        <span className="text-sm xl:text-[1vw] overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -36,9 +36,9 @@ export default function Home2({props}:{props:string}) {
                         </div>
                     </div>
                 </div>
-                <div className=" sm:w-[300px] bg-white border border-gray-200 rounded-lg shadow">
+                <div className=" sm:w-[300px]  xl:text-[1vw]  lg:w-full  bg-white border border-gray-200 rounded-lg shadow">
                     <Link href="/product">
-                        <Image className="rounded-t-lg" objectFit="cover" src={img2} alt="" />
+                        <Image className="rounded-t-lg lg:w-full" objectFit="cover" src={img2} alt="" />
                     </Link>
                     <div className="flex flex-col p-5">
                         <div className="flex items-center">
@@ -46,7 +46,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fleece Relaxed Pocket</span>
+                        <span className="text-sm  xl:text-[1vw] overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fleece Relaxed Pocket</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -59,9 +59,9 @@ export default function Home2({props}:{props:string}) {
                         </div>
                     </div>
                 </div>
-                <div className=" sm:w-[300px] bg-white border border-gray-200 rounded-lg shadow">
-                    <Link href="/product">
-                        <Image className="rounded-t-lg" objectFit="cover" src={img3} alt="" />
+                <div className=" sm:w-[300px] xl:w-full  xl:text-[1vw] bg-white border border-gray-200 rounded-lg shadow">
+                    <Link className="w-full" href="/product">
+                        <Image className="rounded-t-lg w-full" objectFit="cover" src={img3} alt="" />
                     </Link>
                     <div className="flex flex-col p-5">
                         <div className="flex items-center">
@@ -69,7 +69,7 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Cotton Classic Tee</span>
+                        <span className="text-sm  xl:text-[1vw]  overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Cotton Classic Tee</span>
                         </div>
                         <div>
                             <p>$10</p>
@@ -82,9 +82,9 @@ export default function Home2({props}:{props:string}) {
                         </div>
                     </div>
                 </div>
-                <div className=" sm:w-[300px] bg-white border border-gray-200 rounded-lg shadow">
+                <div className=" sm:w-[300px] lg:w-full xl:text-[1vw] bg-white border border-gray-200 rounded-lg shadow">
                     <Link href="/product">
-                        <Image className="rounded-t-lg" objectFit="cover" src={img4} alt="" />
+                        <Image className="rounded-t-lg w-full" objectFit="cover" src={img4} alt="" />
                     </Link>
                     <div className="flex flex-col p-5">
                         <div className="flex items-center">
@@ -92,10 +92,10 @@ export default function Home2({props}:{props:string}) {
                             <span className="pl-2">256</span>
                         </div>
                         <div>
-                        <span className="text-sm overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
+                        <span className="text-sm  xl:text-[1vw]  overflow-ellipsis overflow-hidden whitespace-nowrap">Organic Fience Oversized Sweatshirt</span>
                         </div>
                         <div>
-                            <p>$10</p>
+                            <p className="lg:text-lg">$10</p>
                         </div>
                         <div className="flex gap-2">
                             <div className="w-4 h-4 bg-color1 rounded-full"></div>

@@ -1,26 +1,26 @@
 "use client";
 import { IoIosSearch } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
-import { CiHeart } from "react-icons/ci";
-import { CiSliderHorizontal } from "react-icons/ci";
+//import { CiHeart } from "react-icons/ci";
+//import { CiSliderHorizontal } from "react-icons/ci";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../images/logo.png";
 import { useAppSelector } from "@/store/hooks";
-
+import {AlignJustify, Heart, X} from "lucide-react"
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => {
         setIsOpen((prevState) => !prevState);
     };
     const items = useAppSelector((state) => state.cart.items);
-
+    const [isBannerOpen, setIsBannerOpen]=useState(true);
     return (
         <div className="relative">
-            <div className="bg-color1 text-white text-center py-2 text-sm md:text-base">
+            {isBannerOpen&&<div className="relative bg-color1 text-white text-center py-2 text-sm md:text-base">
                 <p>Shop Sale up to 25% Off - FREE SHIPPING on orders Over 500</p>
-            </div>
+                <X onClick={()=>setIsBannerOpen(false)} className="cursor-pointer absolute top-2 right-3"/></div>}
 
             <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-white shadow-md">
                 <div className="text-2xl font-bold">
@@ -55,11 +55,11 @@ export default function Navbar() {
                         )}
                     </Link>
                     <Link href="/whislist" className="relative">
-                        <CiHeart size={25} />
+                        <Heart className=" font-extralight" size={25} />
                     </Link>
-                    <div className="lg:hidden">
+                    <div className="">
                         <button onClick={toggleMenu}>
-                            <CiSliderHorizontal size={30} />
+                            <AlignJustify size={25} />
                         </button>
                     </div>
                 </div>
