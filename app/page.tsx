@@ -12,7 +12,6 @@ export default function App() {
       <Home2 props={"Fashion with Natures Essence"}/>
       <Home3/>
       <Home4/>
-      <Home2 props={""}/>
       <Home5/>
       <Home6/>
       <Home7/>
