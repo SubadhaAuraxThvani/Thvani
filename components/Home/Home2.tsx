@@ -1,6 +1,6 @@
-"use client";
+"use client"
 import img1 from "@/images/Home/img1.png";
-import img2 from "@/images//other/image3.png";
+import img2 from "@/images/other/image3.png";
 import img3 from "@/images/Home/img3.png";
 import img4 from "@/images/Home/img4.png";
 import Image from "next/image";
@@ -17,7 +17,7 @@ export default function Home2({ props }: { props: string }) {
 
     const bestSellerItems = (
         <>
-            {["img1", "img2", "img3", "img4"].map((img, index) => (
+            {[img1, img2, img3, img4].map((img, index) => (
                 <div
                     key={index}
                     className="w-full max-w-xs lg:max-w-sm xl:max-w-md bg-white border border-gray-200"
@@ -26,7 +26,7 @@ export default function Home2({ props }: { props: string }) {
                         <div className="relative pb-[100%] w-full">
                             <Image
                                 className="object-cover absolute top-0 left-0 w-full h-full"
-                                src={require(`@/images/Home/${img}.png`)}
+                                src={img}  // Use imported image
                                 alt={`Best Seller Item ${index + 1}`}
                             />
                         </div>
@@ -51,7 +51,7 @@ export default function Home2({ props }: { props: string }) {
 
     const newArrivalItems = (
         <>
-            {["img4", "img3", "img2", "img1"].map((img, index) => (
+            {[img4, img3, img2, img1].map((img, index) => (
                 <div
                     key={index}
                     className="w-full max-w-xs lg:max-w-sm xl:max-w-md bg-white border border-gray-200"
@@ -60,7 +60,7 @@ export default function Home2({ props }: { props: string }) {
                         <div className="relative pb-[100%] w-full">
                             <Image
                                 className="object-cover absolute top-0 left-0 w-full h-full"
-                                src={require(`@/images/Home/${img}.png`)}
+                                src={img}  // Use imported image
                                 alt={`New Arrival Item ${index + 1}`}
                             />
                         </div>
