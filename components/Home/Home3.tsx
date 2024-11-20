@@ -5,8 +5,8 @@ export default function Home3() {
         <div className="flex mt-4 flex-col justify-between mb-[100px]">
             <div className="flex flex-col w-full text-center bg-color5 pb-10">
                 <div className="flex flex-col py-12 w-full text-center gap-5">
-                    <p className="text-2xl md:text-4xl ">What we do</p>
-                    <p className="mx-5 md:mx-40 lg:mx-[200px] xl:mx-[500px] text-sm md:text-base">
+                    <p className="text-2xl md:text-4xl font-bold text-color1">What we do</p>
+                    <p className="mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[500px] text-sm md:text-base">
                         We believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                     </p>
                 </div>

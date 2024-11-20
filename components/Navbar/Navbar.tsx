@@ -36,12 +36,12 @@ export default function Navbar() {
                 </div>
 
                 <ul className="hidden lg:flex lg:gap-8 text-lg">
-                    <li><Link href="/women">Women</Link></li>
-                    <li><Link href="/men">Men</Link></li>
-                    <li><Link href="/kids">Kids</Link></li>
-                    <li><Link href="/women">Accessories</Link></li>
+                    <li><Link href="/women">WOMEN</Link></li>
+                    <li><Link href="/men">MEN</Link></li>
+                    <li><Link href="/kids">KIDS</Link></li>
+                    <li><Link href="/women">ACCESSORIES</Link></li>
                     {/* <li><Link href="/climate">Climate+</Link></li> */}
-                    <li><Link href="/calculator">Impact</Link></li>
+                    <li><Link href="/calculator">IMPACT</Link></li>
                 </ul>
 
                 <div className="flex gap-6 relative">
@@ -69,22 +69,22 @@ export default function Navbar() {
                 <div className="lg:hidden absolute left-0 w-full bg-color1 text-white py-4 flex flex-col items-center gap-2 z-50">
                     <ul className="list-none w-full flex flex-col items-center">
                         <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/women">Women</Link>
+                            <Link href="/women">WOMEN</Link>
                         </li>
                         <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/men">Men</Link>
+                            <Link href="/men">MEN</Link>
                         </li>
                         <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/kids">Kids</Link>
+                            <Link href="/kids">KIDS</Link>
                         </li>
                         <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/women">Accessories</Link>
+                            <Link href="/women">ACCESSORIES</Link>
                         </li>
                         {/* <li className="w-full text-center hover:bg-gray-700 rounded">
                             <Link href="/climate">Climate+</Link>
                         </li> */}
                         <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/calculator">Impact</Link>
+                            <Link href="/calculator">IMPACT</Link>
                         </li>
                     </ul>
                 </div>
