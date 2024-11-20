@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 
 export function Home6() {
-    const testimonials = Array.from({ length: 5 }); // Total number of testimonials
+    const testimonials = Array.from({ length: 5 });
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -15,11 +15,11 @@ export function Home6() {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
         }, 4000);
 
-        // Cleanup interval on component unmount
+
         return () => clearInterval(interval);
     }, [testimonials.length]);
 
-    // Handle previous and next button click
+
     const handlePrevious = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
     };
@@ -33,7 +33,7 @@ export function Home6() {
             <div className="relative max-w-5xl lg:mb-8 mb-32 mx-auto">
                 <div className="w-full h-full overflow-hidden relative">
                     <div
-                        className="h-full sm:mx-12 mx-10 flex transition-transform duration-500 ease-in-out"
+                        className="h-full sm:mx-9 mx-10 flex transition-transform duration-500 ease-in-out"
                         style={{
                             transform: `translateX(-${(currentIndex % testimonials.length) * 100}%)`,
                         }}
@@ -70,23 +70,34 @@ export function Home6() {
                         ))}
                     </div>
 
-                    {/* Custom Previous Button */}
+
                     <button
                         onClick={handlePrevious}
-                        className="absolute top-1/2 left-0 transform -translate-y-1/2 p-3 text-black sm:text-5xl rounded-full  z-10 cursor-pointer"
-                        style={{ left: '20px' }} // Add a bit more space from the edge
+                        className="absolute top-1/2 left-0 transform -translate-y-1/2 p-3 text-black sm:text-5xl rounded-full z-10 cursor-pointer"
+                        style={{ left: "20px" }}
                     >
                         <IoIosArrowBack />
                     </button>
 
-                    {/* Custom Next Button */}
+
                     <button
                         onClick={handleNext}
-                        className="absolute top-1/2 right-0 transform -translate-y-1/2 p-3 text-black sm:text-5xl rounded-full  z-10 cursor-pointer"
-                        style={{ right: '20px' }} // Add a bit more space from the edge
+                        className="absolute top-1/2 right-0 transform -translate-y-1/2 p-3 text-black sm:text-5xl rounded-full z-10 cursor-pointer"
+                        style={{ right: "20px" }}
                     >
                         <IoIosArrowForward />
                     </button>
+
+
+                    <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-2">
+                        {testimonials.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`w-2 h-2 rounded-full transition-all ${currentIndex === index ? "bg-black scale-125" : "bg-gray-300"
+                                    }`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,24 +3,25 @@ import { IoIosSearch } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
 //import { CiHeart } from "react-icons/ci";
 //import { CiSliderHorizontal } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../images/logo.png";
 import { useAppSelector } from "@/store/hooks";
-import {AlignJustify, Heart, X} from "lucide-react"
+import { AlignJustify, Heart, X } from "lucide-react"
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => {
         setIsOpen((prevState) => !prevState);
     };
     const items = useAppSelector((state) => state.cart.items);
-    const [isBannerOpen, setIsBannerOpen]=useState(true);
+    const [isBannerOpen, setIsBannerOpen] = useState(true);
     return (
         <div className="relative">
-            {isBannerOpen&&<div className="relative bg-color1 text-white text-center py-2 text-sm md:text-base">
+            {isBannerOpen && <div className="relative bg-color1 text-white text-center py-2 text-sm md:text-base">
                 <p>Shop Sale up to 25% Off - FREE SHIPPING on orders Over 500</p>
-                <X onClick={()=>setIsBannerOpen(false)} className="cursor-pointer absolute top-2 right-3"/></div>}
+                <X onClick={() => setIsBannerOpen(false)} className="cursor-pointer absolute top-2 right-3" /></div>}
 
             <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-white shadow-md">
                 <div className="text-2xl font-bold">
@@ -57,7 +58,15 @@ export default function Navbar() {
                     <Link href="/whislist" className="relative">
                         <Heart className=" font-extralight" size={25} />
                     </Link>
-                    <div className="">
+                    <Link href="/login">
+                        <CgProfile size={25} />
+                    </Link>
+                    {/* <div className="">
+                        <button onClick={toggleMenu}>
+                            
+                        </button>
+                    </div> */}
+                    <div className="lg:hidden">
                         <button onClick={toggleMenu}>
                             <AlignJustify size={25} />
                         </button>
