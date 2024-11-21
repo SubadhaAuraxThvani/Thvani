@@ -19,11 +19,11 @@ export default function Navbar() {
     const [isBannerOpen, setIsBannerOpen] = useState(true);
     return (
         <div className="relative">
-            {isBannerOpen && <div className="relative bg-color1 text-white text-center py-2 text-sm md:text-base">
+            {isBannerOpen && <div className="relative bg-color1 text-white text-center py-2 text-[10px] md:text-base">
                 <p>Shop Sale up to 25% Off - FREE SHIPPING on orders Over 500</p>
-                <X onClick={() => setIsBannerOpen(false)} className="cursor-pointer absolute top-2 right-3" /></div>}
+                <X onClick={() => setIsBannerOpen(false)} className="cursor-pointer absolute top-1 md:top-2 right-3" /></div>}
 
-            <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-white shadow-md">
+            <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-[#EEEEE9] shadow-md">
                 <div className="text-2xl font-bold">
                     <Link href="/">
                         <Image

@@ -30,8 +30,8 @@ export function Home6() {
 
     return (
         <div className="w-full p-5">
-            <div className="relative max-w-5xl lg:mb-8 mb-32 mx-auto">
-                <div className="w-full h-full overflow-hidden relative">
+            <div className="relative lg:mb-8 mb-32 mx-auto">
+                <div className="lg:w-[90%] mx-auto h-full overflow-hidden relative">
                     <div
                         className="h-full sm:mx-9 mx-10 flex transition-transform duration-500 ease-in-out"
                         style={{
@@ -50,7 +50,7 @@ export function Home6() {
                                                 <FaStar />
                                                 <FaStar />
                                             </div>
-                                            <p className="text-sm md:text-base underline font-medium lg:text-[1.1vw]">
+                                            <p className="text-sm md:text-base underline font-medium leading-snug lg:text-[1vw]">
                                                 I bought a top from Thvani, and I m so happy with it! The fabric is super soft, and I love that its eco-friendly. Plus, the print is so unique—its cool to know that no one else has the exact same one!
                                             </p>
                                             <p className="text-sm md:text-base">- Shameena Shaik, Bengaluru</p>
