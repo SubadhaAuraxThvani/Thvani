@@ -9,48 +9,39 @@ import img7 from "@/images/Sustainable/sus7.png"
 import img8 from "@/images/Sustainable/sus8.png"
 import img9 from "@/images/Sustainable/sus9.png"
 import img10 from "@/images/Sustainable/sus10.png"
-import img11 from "@/images/Sustainable/sus11.png"
-import img12 from "@/images/Sustainable/sus12.png"
-import img13 from "@/images/Sustainable/sus13.png"
 import img14 from "@/images/Sustainable/sus14.png"
-
-import { Card, CardContent } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-
-const items = [
-    { image: img11, text: "Rose" },
-    { image: img12, text: "Sugar Cane" },
-    { image: img13, text: "Lotus" },
-    { image: img11, text: "Rose" },
-    { image: img12, text: "Sugar Cane" },
-    { image: img13, text: "Lotus" },
-];
-
+import { Material } from "./Material"
 const MakingADifference = () => {
     return (
         <div className="flex flex-col bg-color5 p-[20px] md:p-[50px] lg:p-[100px]">
             <div className="flex flex-col md:flex-row w-full pb-[50px] md:pb-[100px]">
                 <p className="text-3xl md:text-5xl w-full md:w-1/2 mb-4 md:mb-0">Making a Difference</p>
                 <p className="w-full md:w-1/2 text-sm md:text-base">
-                    At Thvani, Making a Difference isnt just a mantra—its our mission. Every decision we make, from sourcing sustainable materials to pioneering eco-friendly manufacturing techniques, is driven by our commitment to positively impact the planet. We believe that fashion should be a force for good, which is why we strive to create garments that not only look beautiful but also honor and preserve the natural world.
+                    At THVANI, Making a Difference isn t just a mantra—its our mission. Every decision we make, from sourcing sustainable materials to pioneering eco-friendly manufacturing techniques, is driven by our commitment to positively impact the planet. We believe that fashion should be a force for good, which is why we strive to create garments that not only look beautiful but also honor and preserve the natural world.
                 </p>
             </div>
-            <div className="flex flex-col md:flex-row w-full justify-evenly gap-5">
+            <div className="flex w-full justify-between items-center mt-2">
+                <div className="w-[45%] border-t-2 border-color1"></div>
+                <div className="sm:w-[50%] w-[55%] border-t-2 border-color1"></div>
+            </div>
+            <div className="flex flex-col md:flex-row w-full justify-evenly gap-5 mt-10">
                 <div className="flex flex-col w-full md:w-1/2 gap-5">
-                    <Image src={img9} alt="" className="object-cover w-full h-auto" />
+                    <Image
+                        src={img9}
+                        alt="A Greener Path Forward"
+                        className="object-cover w-full h-auto max-w-full"
+                    />
                     <p className="text-2xl md:text-3xl font-bold">A Greener Path Forward</p>
                     <p className="text-sm md:text-base pr-[5vw] md:pr-[10vw]">
                         Each garment we create is a testament to our dedication to sustainability. From the choice of eco-friendly fabrics to the innovative processes that reduce waste, these images capture the essence of our mission.
                     </p>
                 </div>
                 <div className="flex flex-col w-full md:w-1/2 gap-5">
-                    <Image src={img10} alt="" className="object-cover w-full h-auto" />
+                    <Image
+                        src={img10}
+                        alt="Sustainability in Every Stitch"
+                        className="object-cover w-full h-auto max-w-full"
+                    />
                     <p className="text-2xl md:text-3xl font-bold">Sustainability in Every Stitch</p>
                     <p className="text-sm md:text-base pr-[5vw] md:pr-[10vw]">
                         These images illustrate our journey towards creating fashion that respects and honors the Earth. Each thread, each fabric choice is made with care, ensuring that our designs are not only beautiful but also sustainable.
@@ -60,6 +51,8 @@ const MakingADifference = () => {
         </div>
     )
 }
+
+
 
 export default function SustainablePage() {
     return (
@@ -80,7 +73,7 @@ export default function SustainablePage() {
             </div>
             <div className="flex p-[20px] md:p-[50px] lg:p-[100px] flex-col gap-10">
                 <div className="flex flex-col gap-10 justify-center items-center text-center px-[5vw] md:px-[10vw] lg:px-[20vw]">
-                    <p className="text-xl md:text-2xl lg:text-4xl text-color1">CONFRONTING CLIMATE CHANGE</p>
+                    <p className="text-xl md:text-2xl font-bold lg:text-4xl text-color1">CONFRONTING CLIMATE CHANGE</p>
                     <p className="text-sm md:text-base lg:text-lg">
                         Theres no denying that the fashion industry plays a part in todays climate crisis. Its essential that we adopt new industry practices that stress the planet less, from reducing energy use, emissions, and waste, to taking a smarter, more responsible approach to water use and conservation. Not only do we tackle these issues head-on, we share our innovations with the entire industry. Lets take a look at how were changing the game for good.
                     </p>
@@ -100,71 +93,32 @@ export default function SustainablePage() {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap justify-center md:justify-between w-full gap-10">
-                    <div className="flex flex-col text-center gap-6 md:gap-10 w-[40%] md:w-auto">
-                        <Image src={img4} alt="" className="w-full h-auto md:w-auto md:h-auto object-cover" />
-                        <p className="text-xl md:text-2xl font-bold">Embracing</p>
+                <div className="flex flex-wrap justify-center md:justify-between w-full gap-4">
+                    <div className="flex flex-col text-center gap-4 w-full sm:w-[18%] md:w-[18%]">
+                        <Image src={img4} alt="" className="w-full h-auto object-cover" />
+                        <p className="text-xl font-bold">Embracing</p>
                     </div>
-                    <div className="flex flex-col text-center gap-6 md:gap-10 w-[40%] md:w-auto">
-                        <p className="text-xl md:text-2xl font-bold">Earth,</p>
-                        <Image src={img5} alt="" className="w-full h-auto md:w-auto md:h-auto object-cover" />
+                    <div className="flex flex-col text-center gap-4 w-full sm:w-[18%] md:w-[18%]">
+                        <p className="text-xl font-bold">Earth,</p>
+                        <Image src={img5} alt="" className="w-full h-auto object-cover" />
                     </div>
-                    <div className="flex flex-col text-center gap-6 md:gap-10 w-[40%] md:w-auto">
-                        <Image src={img6} alt="" className="w-full h-auto md:w-auto md:h-auto object-cover" />
-                        <p className="text-xl md:text-2xl font-bold">Fashioning</p>
+                    <div className="flex flex-col text-center gap-4 w-full sm:w-[18%] md:w-[18%]">
+                        <Image src={img6} alt="" className="w-full h-auto object-cover" />
+                        <p className="text-xl font-bold">Fashioning</p>
                     </div>
-                    <div className="flex flex-col text-center gap-6 md:gap-10 w-[40%] md:w-auto">
-                        <p className="text-xl md:text-2xl font-bold">The</p>
-                        <Image src={img7} alt="" className="w-full h-auto md:w-auto md:h-auto object-cover" />
+                    <div className="flex flex-col text-center gap-4 w-full sm:w-[18%] md:w-[18%]">
+                        <p className="text-xl font-bold">The</p>
+                        <Image src={img7} alt="" className="w-full h-auto object-cover" />
                     </div>
-                    <div className="flex flex-col text-center gap-6 md:gap-10 w-[40%] md:w-auto">
-                        <Image src={img8} alt="" className="w-full h-auto md:w-auto md:h-auto object-cover" />
-                        <p className="text-xl md:text-2xl font-bold">Future.</p>
+                    <div className="flex flex-col text-center gap-4 w-full sm:w-[18%] md:w-[18%]">
+                        <Image src={img8} alt="" className="w-full h-auto object-cover" />
+                        <p className="text-xl font-bold">Future.</p>
                     </div>
                 </div>
-            </div>
-            <MakingADifference/>
-            <div className="flex flex-col p-[20px] md:p-[50px] lg:p-[100px] gap-10">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                    <p>Our materials</p>
-                </div>
-                <div className="w-full relative">
-                    <Carousel opts={{ align: "start" }} className="w-full">
-                        <CarouselContent className="flex">
-                            {items.map((item, index) => (
-                                <CarouselItem
-                                    key={index}
-                                    className="w-full sm:basis-3/4 md:basis-1/2 lg:basis-1/4"
-                                >
-                                    <div className="p-1">
-                                        <Card className="shadow-lg w-full">
-                                            <CardContent className="flex flex-col items-center justify-center p-0 w-full">
-                                                <div className="w-full">
-                                                    <Image
-                                                        src={item.image}
-                                                        alt={item.text}
-                                                        className="object-cover w-full h-auto"
-                                                    />
-                                                </div>
-                                                <p className="p-2 text-left text-xl sm:text-2xl md:text-3xl font-bold">
-                                                    {item.text}
-                                                </p>
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
 
-                        <CarouselPrevious
-                            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 md:text-4xl"
-                        />
-                        <CarouselNext
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-white text-3xl bg-black/50 p-2 rounded-full hover:bg-black/70 md:text-4xl"
-                        />
-                    </Carousel>
-                </div>
             </div>
+            <MakingADifference />
+            <Material/>
 
             <div className="flex flex-col justify-center items-center py-[30px] md:py-[50px] gap-6 md:gap-10">
                 <Image src={img14} alt="" className="max-w-[80%] md:max-w-[60%] lg:max-w-[40%] h-auto" />

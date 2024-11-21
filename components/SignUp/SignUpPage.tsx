@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import img1 from "@/images/other/image2.png";
 import Link from "next/link";
@@ -151,7 +151,13 @@ export default function SignUpPage() {
                     signing up, you’re becoming part of a community that values sustainability, innovation, and timeless
                     style.
                 </p>
-                <p className="underline text-sm sm:text-base">Start Shopping Now</p>
+                <Link href="/women">
+                    <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
+                        Start Shopping Now
+                        <FaChevronRight size={15} className="ml-1" />
+                        <FaChevronRight size={15} />
+                    </p>
+                </Link>
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+import { color } from "framer-motion";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -19,6 +20,7 @@ const config: Config = {
         color5: "#D6CBBF",
         color6: "#EEEEE9",
         color7: "#EAEAEA",
+        color8: "#D3DDD2",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

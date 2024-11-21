@@ -5,6 +5,7 @@ import { FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import img1 from "@/images/other/image2.png";
 import Link from "next/link";
+import { FaChevronRight } from "react-icons/fa";
 
 export const FaceBookLogin = async () => {
   try {
@@ -162,7 +163,7 @@ export default function LoginPage() {
             className="w-full max-w-[90vw] sm:max-w-[60vw] md:max-w-[40vw] h-[30vh] object-contain"
           />
         </div>
-        <p className="font-normal text-lg sm:text-xl">
+        <p className="font-semibold text-lg sm:text-xl">
           Experience Fashion with Purpose.
         </p>
         <p className="text-sm sm:text-base">
@@ -172,8 +173,14 @@ export default function LoginPage() {
           style.
         </p>
         <Link href="/women">
-          <p className="underline text-sm sm:text-base">Start Shopping Now</p>
+          <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
+            Start Shopping Now
+            <FaChevronRight size={15} className="ml-1" />
+            <FaChevronRight size={15} />
+          </p>
         </Link>
+
+
       </div>
     </div>
   );
