@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Home3() {
     return (
-        <div className="flex mt-4 flex-col justify-between mb-[100px]">
+        <div className="flex mt-4 flex-col justify-between mb-[60px]">
             <div className="flex leading-loose flex-col w-full text-center bg-color5 pb-10">
                 <div className="flex flex-col py-12 w-full text-center gap-5">
                     <p className="text-2xl md:text-4xl lg:text-[2.6vw] font-bold text-color1">What we do</p>
-                    <p className="mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[300px] text-sm lg:text-xl lg:font-semibold">
+                    <p className="mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[300px] text-sm ">
                         We believe that fashion should be a harmonious blend of individuality, creativity, and a deep respect for our planet.
                     </p>
                 </div>
@@ -42,11 +42,11 @@ export default function Home3() {
                 </div>
             </div>
             <div className="flex flex-col justify-center items-center text-center lg:px-[100px] sm:text-center  sm:px-[20px] lg:items-start lg:text-left">
-                <p className="text-color1 font-bold text-3xl lg:pr-[200px] lg:text-[3.2vw] lg:w-3/4 lg:text-left lg:pt-10 tracking-wide leading-relaxed">
+                <p className="text-color1 mt-10 font-medium text-3xl lg:pr-[200px] lg:text-[3.2vw] lg:w-3/4 lg:text-left lg:pt-10 tracking-wide leading-relaxed">
                     REDEFINING FASHION WITH SUSTAINABLE INNOVATION AND TIMELESS CRAFTSMANSHIP.
                 </p>
                 <div className="flex justify-center lg:justify-start lg:w-1/4 mt-5">
-                    <div className="border-2 border-color1 rounded-2xl p-2">
+                    <div className="border-2 border-color1 rounded-3xl p-2 py-1">
                         <Link href="/calculator">
                             <span className="text-lg lg:text-[1vw]">LEARN MORE</span>
                         </Link>

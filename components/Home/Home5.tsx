@@ -17,7 +17,7 @@ export default function Home5() {
                         alt="Material Innovation"
                         width={300}
                         height={300}
-                        className="mx-auto w-full aspect-[1/1] object-cover rounded-md"
+                        className="mx-auto w-full aspect-[1/1] object-cover"
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">MATERIAL INNOVATION</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
@@ -31,7 +31,7 @@ export default function Home5() {
                         alt="Circularity"
                         width={300}
                         height={300}
-                        className="mx-auto w-full aspect-[1/1] object-cover rounded-md"
+                        className="mx-auto w-full aspect-[1/1] object-cover"
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">CIRCULARITY</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
@@ -45,7 +45,7 @@ export default function Home5() {
                         alt="Collective Activism"
                         width={300}
                         height={300}
-                        className="mx-auto w-full aspect-[1/1] object-cover rounded-md"
+                        className="mx-auto w-full aspect-[1/1] object-cover"
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">COLLECTIVE ACTIVISM</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">

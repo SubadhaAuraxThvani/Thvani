@@ -35,7 +35,7 @@ export default function About() {
                     </div>
                 </div>
                 <div className="flex w-full md:w-1/2">
-                    <Image src={img1} alt="About Image" className="h-full w-full object-cover" />
+                    <Image src={img1} alt="About Image" className=" w-full object-cover" />
                 </div>
             </div>
 
