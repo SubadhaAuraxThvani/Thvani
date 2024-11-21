@@ -24,10 +24,10 @@ import Link from "next/link";
 
 export default function KidsCollectionPage() {
     const products = [
-        { img: img1, text: "Kids&apos; Sale", href: "/product" },
-        { img: img2, text: "Kids&apos; New Arrival", href: "/product" },
-        { img: img3, text: "Kids&apos; Casual Wear", href: "/product" },
-        { img: img4, text: "Kids&apos; Party Wear", href: "/product" },
+        { img: img1, text: "Kid's Sale", href: "/product" },
+        { img: img2, text: "Kid's New Arrival", href: "/product" },
+        { img: img3, text: "Kid's Casual Wear", href: "/product" },
+        { img: img4, text: "Kid's Party Wear", href: "/product" },
     ];
 
     const collectionProducts = [

@@ -24,10 +24,10 @@ import Link from "next/link";
 
 export default function MenCollectionPage() {
     const products = [
-        { img: img1, text: "Men&apos;s Sale", href: "/product" },
-        { img: img2, text: "Men&apos;s New Arrival", href: "/product" },
-        { img: img3, text: "Men&apos;s Casual Wear", href: "/product" },
-        { img: img4, text: "Men&apos;s Ethnic Wear", href: "/product" },
+        { img: img1, text: "Men's Sale", href: "/product" },
+        { img: img2, text: "Men's New Arrival", href: "/product" },
+        { img: img3, text: "Men's Casual Wear", href: "/product" },
+        { img: img4, text: "Men's Ethnic Wear", href: "/product" },
     ];
 
     const collectionProducts = [

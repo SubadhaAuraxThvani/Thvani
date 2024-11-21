@@ -24,10 +24,10 @@ import Link from "next/link";
 
 export default function WomenCollectionPage() {
     const products = [
-        { img: img1, text: "Women&apos;s Sale", href: "/product" },
-        { img: img2, text: "Women&apos;s New Arrival", href: "/product" },
-        { img: img3, text: "Women&apos;s Dress", href: "/product" },
-        { img: img4, text: "Women&apos;s Ethnic Wear", href: "/product" },
+        { img: img1, text: "Women's Sale", href: "/product" },
+        { img: img2, text: "Women's New Arrival", href: "/product" },
+        { img: img3, text: "Women's Dress", href: "/product" },
+        { img: img4, text: "Women's Ethnic Wear", href: "/product" },
     ];
 
     const collectionProducts = [
