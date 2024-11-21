@@ -77,11 +77,11 @@ export default function Product1() {
                 </div>
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="w-full md:w-3/5 lg:w-2/4 h-[40vh] md:h-[60vh] lg:h-[75vh]">
-                        <Image src={selectedImage} alt="Main Product Image" className="object-cover w-full h-full" />
+                        <Image width={600} height={700} src={selectedImage} alt="Main Product Image" className="object-cover w-full h-full" />
                     </div>
                     <div className="flex flex-col gap-5 w-full md:w-2/5 lg:w-2/4">
                         <div className="flex flex-col gap-5">
-                            <p className="text-sm lg:text-base">Home/Best Seller/Women Selection</p>
+                            <p className="text-sm lg:text-base">Home/BestSeller&apos;s/Women&apos;s Selection</p>
                             <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1.name}</p>
                             <p className="text-md md:text-xl lg:text-2xl">{productData1.price}</p>
                             <div className="flex items-center gap-1">
@@ -117,11 +117,11 @@ export default function Product1() {
                                             className={`w-12 h-12 border rounded-md flex items-center justify-center cursor-pointer ${selectedSize === size ? 'bg-gray-300' : ''}`}
                                             onClick={() => setSelectedSize(size)}
                                         >
-                                            <span className="text-lg">{size}</span>
+                                            <span className="text-sm">{size}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <p>Model 1 is 6 feet and wears size S</p>
+                                <p className="text-sm">Model 1 is 6 feet and wears size S</p>
                             </div>
                             <hr className="w-full border" />
                             <div className="flex justify-center items-center gap-4">
@@ -135,7 +135,7 @@ export default function Product1() {
                                         });
                                         handleAddtoCart(productData1.id);
                                     }}
-                                    className={`bg-color1 text-white py-6 px-12 rounded-3xl w-full md:w-auto text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''
+                                    className={`bg-color1 text-white py-6 px-12 rounded-3xl w-full text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''
                                         }`}
                                     disabled={!selectedColor || !selectedSize}
                                 >
@@ -158,7 +158,7 @@ export default function Product1() {
 
 
                             </div>
-                            <div className="flex bg-color5 p-3 text-center justify-center items-center gap-10 text-sm md:text-base">
+                            <div className="flex bg-[#F5F5F5] p-3 text-center justify-center items-center gap-10 text-sm md:text-base">
                                 <p>Free Shipping on Orders $150+</p>
                                 <p>Easy 30-Day Return & Exchanges</p>
                             </div>
@@ -195,7 +195,7 @@ export default function Product1() {
                     </div>
                 </div>
             </div>
-            <div className="flex px-[10vw]">
+            <div className="flex px-20">
                 <p className="flex text-3xl text-color1 font-bold">You May Also Like This</p>
             </div>
         </>

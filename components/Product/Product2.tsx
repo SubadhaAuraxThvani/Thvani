@@ -8,7 +8,7 @@ import {
 export default function Product2() {
     return (
         <div className="flex h-full w-full flex-col bg-color5">
-            <div className="flex text-4xl font-bold pt-4 text-color1 text-center justify-center">
+            <div className="flex text-4xl lg:text-[2xl] font-bold pt-4 text-color1 text-center justify-center">
                 <h1>FAQs</h1>
             </div>
             <div className="flex justify-center px-4 md:px-16 lg:px-[200px] xl:px-[400px] py-10">

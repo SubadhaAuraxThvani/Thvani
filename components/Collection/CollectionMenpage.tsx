@@ -20,138 +20,100 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 
-export default function MenCollectionpage() {
+export default function MenCollectionPage() {
+    const products = [
+        { img: img1, text: "Men&apos;s Sale", href: "/product" },
+        { img: img2, text: "Men&apos;s New Arrival", href: "/product" },
+        { img: img3, text: "Men&apos;s Casual Wear", href: "/product" },
+        { img: img4, text: "Men&apos;s Ethnic Wear", href: "/product" },
+    ];
+
+    const collectionProducts = [
+        { img: img1,badge:["Trending","New arrived"], text: "Organic Cotton Casual Shirt" },
+        { img: img2,badge:["Best seller"], text: "Organic Cotton Relaxed Pants" },
+        { img: img3,badge:["Trending"], text: "Organic Cotton T-Shirt" },
+    ];
+
+    const accordionItems = [
+        { value: "item-1", trigger: "Category", content: "Category content here." },
+        { value: "item-2", trigger: "Size", content: "Size content here." },
+        { value: "item-3", trigger: "Fit", content: "Fit content here." },
+        { value: "item-4", trigger: "Color", content: "Color content here." },
+        { value: "item-5", trigger: "New Arrivals", content: "New Arrivals content here." },
+        { value: "item-6", trigger: "Materials", content: "Materials content here." },
+    ];
+
     return (
         <div className="flex flex-col py-8 md:py-[50px]">
             <div className="flex flex-col gap-4 w-full">
+                {/* Header Section */}
                 <div className="px-4 md:px-[50px]">
-                    <p>Home / Mens</p>
-                    <p className="text-2xl md:text-3xl font-bold">Mens Clothing</p>
-                    <p className="text-base md:text-lg">
-                        Thoughtfully crafted and sustainably made men&apos;s attire. Discover everyday essentials.
+                    <p>Home / Men&apos;s</p>
+                    <p className="text-2xl md:text-3xl lg:text-[1.5vw] font-bold">
+                        Men&apos;s Clothing
+                    </p>
+                    <p className="text-base mt-4 md:text-lg">
+                        Thoughtfully Art and sustainably made Men&apos;s clothing. Welcome to everyday essentials.
                     </p>
                 </div>
+
+                {/* Products Section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-[50px]">
-                    {/* Product 1 */}
-                    <div className="flex flex-col gap-2 p-2 rounded-lg">
-                        <Image
-                            alt="Men&apos;s Sale"
-                            src={img1}
-                            className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
-                        />
-                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Sale</p>
-                        <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
+                    {products.map((product, index) => (
+                        <div key={index} className="flex flex-col gap-2 p-2 rounded-lg">
+                            <div className="w-full rounded-xl overflow-hidden h-[40vh] sm:h-[35vh] lg:h-[45vh]">
+                                <Image
+                                    alt={product.text}
+                                    src={product.img}
+                                    className="rounded-xl w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                                />
+                            </div>
+                            <p className="font-bold text-lg lg:text-left lg:text-[1.3vw] text-center">
+                                {product.text}
+                            </p>
+                            <div className="flex justify-center lg:justify-start">
+                                <Link href={product.href}>
+                                    <button className="p-3 mt-3 px-6 bg-black text-white rounded-full text-sm lg:text-[1.1vw] hover:bg-gray-800 transition-colors duration-200">
+                                        Shop
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Product 2 */}
-                    <div className="flex flex-col gap-2 p-2 rounded-lg">
-                        <Image
-                            alt="Men&apos;s New Arrival"
-                            src={img2}
-                            className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
-                        />
-                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s New Arrival</p>
-                        <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Product 3 */}
-                    <div className="flex flex-col gap-2 p-2 rounded-lg">
-                        <Image
-                            alt="Men&apos;s Dress"
-                            src={img3}
-                            className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
-                        />
-                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Dress</p>
-                        <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Product 4 */}
-                    <div className="flex flex-col gap-2 p-2 rounded-lg">
-                        <Image
-                            alt="Men&apos;s Ethnic Wear"
-                            src={img4}
-                            className="rounded-lg w-full h-[40vh] sm:h-[35vh] lg:h-[45vh] object-cover"
-                        />
-                        <p className="font-bold text-lg lg:text-left text-center">Men&apos;s Ethnic Wear</p>
-                        <div className="flex justify-center lg:justify-start">
-                            <button className="p-2 px-6 bg-black text-white rounded-md text-sm hover:bg-gray-800 transition-colors duration-200">
-                                Shop
-                            </button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
 
                 {/* Accordion and Product Grid */}
                 <div className="flex flex-col md:flex-row py-8 px-4 md:px-[50px] gap-8">
+                    {/* Accordion */}
                     <div className="w-full md:w-1/3 lg:w-1/4">
                         <Accordion type="single" collapsible className="w-full">
-                            <AccordionItem value="item-1">
-                                <AccordionTrigger>Category</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It adheres to the WAI-ARIA design pattern.
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-2">
-                                <AccordionTrigger>Size</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It comes with default styles that match the other components&apos; aesthetic.
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-3">
-                                <AccordionTrigger>Fit</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It&apos;s animated by default, but you can disable it if you prefer.
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-4">
-                                <AccordionTrigger>Color</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It&apos;s animated by default, but you can disable it if you prefer.
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-5">
-                                <AccordionTrigger>New Arrivals</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It&apos;s animated by default, but you can disable it if you prefer.
-                                </AccordionContent>
-                            </AccordionItem>
-                            <AccordionItem value="item-6">
-                                <AccordionTrigger>Materials</AccordionTrigger>
-                                <AccordionContent>
-                                    Yes. It&apos;s animated by default, but you can disable it if you prefer.
-                                </AccordionContent>
-                            </AccordionItem>
+                            {accordionItems.map((item) => (
+                                <AccordionItem key={item.value} value={item.value}>
+                                    <AccordionTrigger>{item.trigger}</AccordionTrigger>
+                                    <AccordionContent>{item.content}</AccordionContent>
+                                </AccordionItem>
+                            ))}
                         </Accordion>
                     </div>
 
                     {/* Product Grid */}
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            <CollectionProduct img={img1} text="Organic Fleece Oversized Hoodie" />
-                            <CollectionProduct img={img2} text="Organic Relaxed Pocket Tee" />
-                            <CollectionProduct img={img3} text="Organic Cotton Classic Tee" />
-                            <CollectionProduct img={img1} text="Organic Fleece Oversized Hoodie" />
-                            <CollectionProduct img={img2} text="Organic Relaxed Pocket Tee" />
-                            <CollectionProduct img={img3} text="Organic Cotton Classic Tee" />
-                            <CollectionProduct img={img1} text="Organic Fleece Oversized Hoodie" />
-                            <CollectionProduct img={img2} text="Organic Relaxed Pocket Tee" />
-                            <CollectionProduct img={img3} text="Organic Cotton Classic Tee" />
-                            <CollectionProduct img={img1} text="Organic Fleece Oversized Hoodie" />
-                            <CollectionProduct img={img2} text="Organic Relaxed Pocket Tee" />
-                            <CollectionProduct img={img3} text="Organic Cotton Classic Tee" />
+                            {collectionProducts.map((product, index) => (
+                                <CollectionProduct badge={product.badge} key={index} img={product.img} text={product.text} />
+                            ))}
+                        </div>
+                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
+                            {collectionProducts.map((product, index) => (
+                                <CollectionProduct badge={product.badge} key={index} img={product.img} text={product.text} />
+                            ))}
+                        </div>
+                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
+                            {collectionProducts.map((product, index) => (
+                                <CollectionProduct badge={product.badge} key={index} img={product.img} text={product.text} />
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -163,17 +125,13 @@ export default function MenCollectionpage() {
                             <PaginationItem>
                                 <PaginationPrevious href="#" />
                             </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">1</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#" isActive>
-                                    2
-                                </PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">3</PaginationLink>
-                            </PaginationItem>
+                            {[1, 2, 3].map((page) => (
+                                <PaginationItem key={page}>
+                                    <PaginationLink href="#" isActive={page === 2}>
+                                        {page}
+                                    </PaginationLink>
+                                </PaginationItem>
+                            ))}
                             <PaginationItem>
                                 <PaginationEllipsis />
                             </PaginationItem>

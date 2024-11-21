@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
-import logo from "../../images/logo.png"
+import logo from "../../images/logo.png";
 const Footer = () => {
   return (
     <footer className="bg-color1 relative mt-[20vh]">
@@ -11,14 +11,20 @@ const Footer = () => {
           {/* Logo  */}
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
-            <Image src={logo} width={140} height={80} className="invert object-cover brightness-200 h-12" alt="logo" ></Image>
+              <Image
+                src={logo}
+                width={140}
+                height={80}
+                className="invert object-cover brightness-200 h-12"
+                alt="logo"
+              ></Image>
             </Link>
           </div>
 
           {/* Links Section */}
-          <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-3 text-center md:text-left">
+          <div className="grid grid-cols-2 lg:text-[.9vw] gap-8 md:gap-[5vw] lg:grid-cols-3 text-center md:text-left">
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-white">
+              <h2 className="mb-6 text-sm lg:text-[1.1vw] font-semibold uppercase text-white">
                 Learn
               </h2>
               <ul className="font-medium">
@@ -45,7 +51,9 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase">Nature</h2>
+              <h2 className="mb-6 text-sm font-semibold lg:text-[1.1vw] uppercase">
+                Nature
+              </h2>
               <ul className="font-medium">
                 <li className="mb-4">
                   <Link href="/product/how" className="hover:underline">
@@ -62,11 +70,12 @@ const Footer = () => {
                     Footprint Calculator
                   </Link>
                 </li>
-                
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase">Account</h2>
+              <h2 className="mb-6 text-sm font-semibold lg:text-[1.1vw] uppercase">
+                Account
+              </h2>
               <ul className="font-medium">
                 <li className="mb-4">
                   <Link href="/login" className="hover:underline">
@@ -92,8 +101,8 @@ const Footer = () => {
             </div>
           </div>
           <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
+           
             <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
-              {" "}
               <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">
                 Get 15% Off
               </p>

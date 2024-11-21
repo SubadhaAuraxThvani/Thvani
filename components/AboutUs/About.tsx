@@ -18,9 +18,9 @@ export default function About() {
     return (
         <div className="flex flex-col">
             <div className="flex flex-col md:flex-row w-full h-auto md:h-[85vh]">
-                <div className="flex w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
-                    <p className="text-lg md:text-xl">WE ARE THVANI</p>
-                    <h1 className="text-3xl sm:pr-[20vw] pr-0 md:text-5xl font-bold text-color1">
+                <div className="flex justify-center w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
+                    <p className="text-lg md:text-xl lg:text-[1.2vw]">WE&apos;RE THVANI</p>
+                    <h1 className="text-3xl sm:pr-[20vw] pr-0 md:text-5xl lg:text-[4vw] font-bold text-color1">
                         Art Through Sustainable Fashion.
                     </h1>
                     <p className="text-sm md:text-xl">
@@ -28,27 +28,27 @@ export default function About() {
                     </p>
                     <div className="self-start">
                         <Link href="/women">
-                            <button className="inline-block border-2 p-3 border-color1 text-sm">
+                            <button className="inline-block border-2 p-3 border-color1 text-sm lg:text-[.9vw]">
                                 SEE OUR COLLECTIONS
                             </button>
                         </Link>
                     </div>
                 </div>
                 <div className="flex w-full md:w-1/2">
-                    <Image src={img1} alt="About Image" className=" w-full object-cover" />
+                    <Image src={img1} alt="About Image" className=" w-full object-contain" />
                 </div>
             </div>
 
             {/* Carousel Section */}
             <div className="flex justify-center items-center py-10 md:py-[50px] relative">
-                <Carousel className="w-full max-w-lg md:max-w-4xl border-none">
-                    <CarouselContent>
+                <Carousel className="w-full max-w-lg shadow-none md:max-w-5xl border-none">
+                    <CarouselContent className="border-0 shadow-none">
                         {Array.from({ length: 5 }).map((_, index) => (
                             <CarouselItem key={index}>
                                 <div className="p-2">
-                                    <Card className="h-full">
-                                        <CardContent className="flex flex-col gap-3 items-center justify-center px-4 mx-10 py-4">
-                                            <span className="text-lg py-5  md:text-xl font-bold text-center">
+                                    <Card className="h-full shadow-none border-none">
+                                        <CardContent className="flex flex-col shadow-none border-none gap-3 items-center justify-center px-4 mx-10 py-4">
+                                            <span className="text-lg py-5 md:text-xl lg:text-[1.3vw] font-bold text-center">
                                                 BELIEVE IN POSSIBLE
                                             </span>
                                             <span className="text-base py-5  md:text-lg lg:text-2xl font-medium text-center">
@@ -116,10 +116,10 @@ export default function About() {
             {/* CTA Section */}
             <div className="flex flex-col p-6 md:p-[100px] gap-5 justify-center text-center items-center">
                 <p className="text-lg md:text-3xl">
-                    Join us in making a difference. Trust in our journey, believe in our purpose, and together, lets inspire change. With Thvani, youre not just investing in fashion; youre investing in a legacy of sustainable beauty.
+                &quot;Join us in making a difference. Trust in our journey, believe in our purpose, and together, lets inspire change. With Thvani, youre not just investing in fashion; You&apos;re investing in a legacy of sustainable beauty.&quot;
                 </p>
                 <Link href="/login">
-                    <button className="inline-block border-2 p-3 border-color1 text-md px-[100px]">
+                    <button className="inline-block border-2 p-3 border-color1 text-md lg:text-[.8vw] mt-6 px-[100px]">
                         JOIN US NOW
                     </button>
                 </Link>
@@ -129,7 +129,7 @@ export default function About() {
             <div className="flex relative w-full h-[60vh]">
                 <Image alt="Process Image" src={img6} className="w-full object-cover" />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white gap-5 px-4">
-                    <p className="font-bold text-xl md:text-2xl">OUR PROCESS IS,</p>
+                    <p className="text-xl md:text-2xl">OUR PROCESS IS,</p>
                     <p className="font-bold text-3xl md:text-4xl">100% TRACEABLE.</p>
                     <p className="font-bold text-3xl md:text-4xl">KNOW YOUR SOURCE.</p>
                     <Link href="/product/where">
