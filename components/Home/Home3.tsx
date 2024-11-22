@@ -42,7 +42,7 @@ export default function Home3() {
                 </div>
             </div>
             <div className="flex flex-col justify-center items-center text-center lg:px-[100px] sm:text-center  sm:px-[20px] lg:items-start lg:text-left">
-                <p className="text-color1 mt-10 font-medium text-3xl lg:pr-[200px] lg:text-[3.2vw] lg:w-3/4 lg:text-left lg:pt-10 tracking-wide leading-relaxed">
+                <p className="text-color1 mt-10 font-bold text-3xl lg:pr-[200px] lg:text-[3.2vw] lg:w-3/4 lg:text-left lg:pt-10 tracking-wide leading-relaxed">
                     REDEFINING FASHION WITH SUSTAINABLE INNOVATION AND TIMELESS CRAFTSMANSHIP.
                 </p>
                 <div className="flex justify-center lg:justify-start lg:w-1/4 mt-5">
