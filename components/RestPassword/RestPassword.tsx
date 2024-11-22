@@ -4,7 +4,7 @@ export default function ResetPasswordPage() {
     return (
         <div className="flex flex-col justify-center items-center py-10 px-5 sm:py-[100px] sm:px-[100px]">
             <p className="text-2xl sm:text-3xl font-semibold">RESET PASSWORD</p>
-            <p className="text-sm sm:text-base mt-2 text-center">We will send you an email to reset your password.</p>
+            <p className="text-sm sm:text-base mt-2 text-center">We will send you an email to reset your password</p>
 
             <div className="flex items-center border-2 w-full sm:w-[50vw] mt-5 p-2 sm:p-3 gap-2 sm:gap-5 rounded-lg">
                 <input
