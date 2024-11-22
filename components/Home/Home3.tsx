@@ -2,8 +2,24 @@ import Link from "next/link";
 
 export default function Home3() {
     return (
-        <div className="flex mt-4 flex-col justify-between mb-[60px]">
-            <div className="flex leading-loose flex-col w-full text-center bg-color5 pb-10">
+        <div className="flex mt-16 flex-col justify-between mb-[60px]">
+            <div className="flex relative leading-loose flex-col w-full text-center bg-color5 pb-10">
+           <div className=" absolute -top-[15%] lg:-top-[20%] left-0">
+           <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="circlePath" d="M 100,50
+                             a 50,50 0 1,1 0,100
+                             a 50,50 0 1,1 0,-100" />
+  </defs>
+  <text>
+    <textPath href="#circlePath" startOffset="0%" textLength="300">
+      T h v a n i ● E a r t h ● C r a f t ●
+    </textPath>
+  </text>
+</svg>
+           </div>
+
+
                 <div className="flex flex-col py-12 w-full text-center gap-5">
                     <p className="text-2xl md:text-4xl lg:text-[2.6vw] font-bold text-color1">What we do</p>
                     <p className="mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[300px] text-sm ">

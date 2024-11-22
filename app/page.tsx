@@ -7,7 +7,7 @@ import { Home6 } from "@/components/Home/Home6";
 import Home7 from "@/components/Home/Home7";
 export default function App() {
   return (
-    <div>
+    <div className=" overflow-x-hidden">
       <Home/>
       <Home2 props={"Fashion with Natures Essence"}/>
       <Home3/>

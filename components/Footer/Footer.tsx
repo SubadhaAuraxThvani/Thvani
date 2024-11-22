@@ -101,8 +101,28 @@ const Footer = () => {
             </div>
           </div>
           <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
-           
             <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
+            <div className="absolute -top-[20%]">
+              {/* <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M 100,50
+                             a 200,100 0 1,1 0,100
+                             a 200,100 0 1,1 0,-100"
+                  />
+                </defs>
+                <text>
+                  <textPath
+                    href="#circlePath"
+                    startOffset="0%"
+                    textLength="200"
+                  >
+                    Spread love, not chemicals. Spread love, not chemicals.
+                  </textPath>
+                </text>
+              </svg> */}
+            </div>
               <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">
                 Get 15% Off
               </p>
