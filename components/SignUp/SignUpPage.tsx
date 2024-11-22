@@ -132,7 +132,11 @@ export default function SignUpPage() {
                     <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
                         <p className="text-color1 text-sm sm:text-base">Already have an account?</p>
                         <Link href="/login">
-                            <button className="underline text-sm sm:text-base text-left">SIGN IN</button>
+                            <p className="inline-flex text-black items-center font-semibold text-sm sm:text-base border-b border-current">
+                                SIGN IN
+                                <FaChevronRight size={15} className="ml-1" />
+                                <FaChevronRight size={15} />
+                            </p>
                         </Link>
                     </div>
                 </div>

@@ -139,7 +139,7 @@ export default function LoginPage() {
             Log In
           </button>
           <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
-            <Link href="/resetpassword">
+            <Link href="/restpassword">
               <p>Forgot Password?</p>
             </Link>
           </div>
@@ -149,9 +149,11 @@ export default function LoginPage() {
             Don’t have an account?
           </p>
           <Link href="/signup">
-            <button className="underline text-sm sm:text-base text-left">
+            <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
               SIGN UP
-            </button>
+              <FaChevronRight size={15} className="ml-1" />
+              <FaChevronRight size={15} />
+            </p>
           </Link>
         </div>
       </form>
