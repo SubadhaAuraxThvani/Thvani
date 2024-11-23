@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
 import logo from "../../images/logo.png";
 const Footer = () => {
   return (
-    <footer className="bg-color1 relative mt-[20vh]">
+    <footer className="bg-color1 z-20 relative mt-[20vh]">
       <div className="mx-auto w-full max-w-screen p-4 lg:px-10 py-6 lg:py-8">
         <div className="relative flex flex-col-reverse md:flex-row md:justify-between md:space-x-8 px-4 py-8 text-white">
           {/* Logo  */}
@@ -100,29 +100,34 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className=" relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
+          <div className=" z-30 relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
             <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
-            <div className="absolute -top-[20%]">
-              {/* <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 100,50
-                             a 200,100 0 1,1 0,100
-                             a 200,100 0 1,1 0,-100"
-                  />
-                </defs>
-                <text>
-                  <textPath
-                    href="#circlePath"
-                    startOffset="0%"
-                    textLength="200"
+              <div className="absolute lg:block !z-10 hidden lg:-right-[8%] lg:-top-[8%]">
+                <svg
+                  className=" scale-70 lg:scale-105"
+                  width="400"
+                  height="450"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <path
+                      id="iglooPath"
+                      d="M 30,210
+         A 170,155 0 1,1 320,290"
+                    />
+                  </defs>
+                  <text
+                    fill="#8B6E4E"
+                    fontWeight="600"
+                    font-size="25"
+                    text-anchor="middle"
                   >
-                    Spread love, not chemicals. Spread love, not chemicals.
-                  </textPath>
-                </text>
-              </svg> */}
-            </div>
+                    <textPath href="#iglooPath" startOffset="40%">
+                      Spread love, not chemicals. Spread love, not chemicals.
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
               <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">
                 Get 15% Off
               </p>
@@ -144,7 +149,7 @@ const Footer = () => {
 
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="flex mt-4 sm:justify-center sm:mt-0 text-white">
+          <div className="flex mt-4 sm:justify-center items-center sm:mt-0 text-white">
             <Link href="/">
               <FaInstagram />
             </Link>
@@ -154,7 +159,7 @@ const Footer = () => {
             <Link href="/" className="ms-5 mr-4">
               <FaPinterestP />
             </Link>
-            <div className="flex gap-3 flex-wrap mt-3 sm:mt-0">
+            <div className="flex gap-3 flex-wrap mt-0 sm:mt-0">
               <span>
                 <Link href="/privacy">Privacy Policy</Link>
               </span>
@@ -163,9 +168,11 @@ const Footer = () => {
               </span>
             </div>
           </div>
-          <span className="text-sm text-white sm:text-center mt-4 sm:mt-0">
-            © 2024 Craft Unique Essence
-          </span>
+          <div className="flex justify-center">
+            <span className="text-sm text-white sm:text-center mt-4 sm:mt-0">
+              © 2024 Craft Unique Essence
+            </span>
+          </div>
         </div>
       </div>
     </footer>
