@@ -21,7 +21,7 @@ export default function Home5() {
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">MATERIAL INNOVATION</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
-                        Pioneering the use of unique organic materials like banana, bamboo, and aloe vera to craft high-quality, eco-friendly garments that redefine sustainable fashion.
+                        We extract cellulose from banana, bamboo, and soy, converting them into filaments and yarn. These are then handwoven into sustainable fabrics, reflecting our commitment to material innovation.
                     </p>
                 </div>
                 {/* Card 2 */}
@@ -35,7 +35,7 @@ export default function Home5() {
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">CIRCULARITY</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
-                        Blending traditional techniques with modern zero-waste practices, ensuring every piece is ethically produced with minimal impact on the planet.
+                        At Thvani, we embrace zero-waste practices, using organic dyes from natural ingredients like rose flowers, marigold, and more. True leaf impressions are delicately imprinted on the fabric, creating unique, sustainable designs.
                     </p>
                 </div>
                 {/* Card 3 */}
@@ -47,9 +47,9 @@ export default function Home5() {
                         height={300}
                         className="mx-auto w-full aspect-[1/1] object-cover"
                     />
-                    <h1 className="text-lg md:text-xl lg:text-[1.2vw]">COLLECTIVE ACTIVISM</h1>
+                    <h1 className="text-lg md:text-xl lg:text-[1.2vw]">DESIGN INTEGRITY</h1>
                     <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
-                        Merging cutting-edge design with sustainability, offering fashion that’s not just timeless but also forward-thinking and eco-conscious.
+                        We sculpt timeless silhouettes with meticulous attention to detail, blending natural fibers with innovative designs. Our finishing techniques ensure every piece is as exquisite as it is sustainable, with eco-friendly packaging that echoes our commitment to a better tomorrow
                     </p>
                 </div>
             </div>

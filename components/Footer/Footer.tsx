@@ -170,7 +170,7 @@ const Footer = () => {
           </div>
           <div className="flex justify-center">
             <span className="text-sm text-white sm:text-center mt-4 sm:mt-0">
-              © 2024 Craft Unique Essence
+              © 2024 Thvani Earth Craft
             </span>
           </div>
         </div>

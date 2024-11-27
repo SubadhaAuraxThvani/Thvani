@@ -18,7 +18,7 @@ export default function Product() {
             <Product1 />
             <div className="grid my-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-5 lg:px-20 justify-items-center">
                             {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index} img={product.img} badge={product.badge} text={product.text} />
+                                <CollectionProduct key={index} img={product.img}  text={product.text} />
                             ))}
                         </div>
             <Product2/>

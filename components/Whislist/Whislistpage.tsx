@@ -2,6 +2,7 @@
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { removeFromWishlist, clearWishlist } from "@/store/features/whislist/whislistSlice";
 import Image from "next/image";
+import { MdDeleteOutline } from "react-icons/md";
 
 type WishlistItem = {
     id: string;
@@ -52,10 +53,10 @@ export default function WishlistPage() {
                                 )}
                             </div>
                             <button
+                                className="border-2 h-[6vh] w-[6vh] flex items-center justify-center rounded-md"
                                 onClick={() => handleRemove(item.id, item.size, item.color)}
-                                className="ml-auto mt-3 md:mt-0 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-200"
                             >
-                                Remove
+                                <MdDeleteOutline size={24} className="text-black" />
                             </button>
                         </div>
                     ))}

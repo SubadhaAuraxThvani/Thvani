@@ -102,17 +102,17 @@ export default function KidsCollectionPage() {
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6 px-5 lg:px-20 justify-items-center">
                             {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index} badge={product.badge} img={product.img} text={product.text} />
+                                <CollectionProduct key={index} img={product.img} text={product.text} />
                             ))}
                         </div>
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
                             {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index} badge={product.badge} img={product.img} text={product.text} />
+                                <CollectionProduct key={index}  img={product.img} text={product.text} />
                             ))}
                         </div>
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
                             {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index} badge={product.badge} img={product.img} text={product.text} />
+                                <CollectionProduct key={index}  img={product.img} text={product.text} />
                             ))}
                         </div>
                     </div>

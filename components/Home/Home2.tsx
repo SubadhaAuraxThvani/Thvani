@@ -41,7 +41,6 @@ export default function Home2({ props }: { props: string }) {
       {" "}
       {collectionProducts.map((product, index) => (
         <CollectionProduct
-          badge={product.badge}
           key={index}
           img={product.img}
           text={product.text}
@@ -54,7 +53,7 @@ export default function Home2({ props }: { props: string }) {
       {" "}
       {newArrivedProducts.map((product, index) => (
         <CollectionProduct
-          badge={product.badge}
+          // badge={product.badge}
           key={index}
           img={product.img}
           text={product.text}

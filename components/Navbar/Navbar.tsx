@@ -1,31 +1,36 @@
-"use client";
+"use client"
+import React, { useState } from 'react';
 import { IoIosSearch } from "react-icons/io";
 import { IoBagOutline } from "react-icons/io5";
-//import { CiHeart } from "react-icons/ci";
-//import { CiSliderHorizontal } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { Heart, X, AlignJustify } from 'lucide-react';
 import logo from "../../images/logo.png";
-import { useAppSelector } from "@/store/hooks";
-import { AlignJustify, Heart, X } from "lucide-react"
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleMenu = () => {
-        setIsOpen((prevState) => !prevState);
-    };
-    const items = useAppSelector((state) => state.cart.items);
     const [isBannerOpen, setIsBannerOpen] = useState(true);
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
+    const toggleSideNav = () => {
+        setIsSideNavOpen(!isSideNavOpen);
+    };
+
     return (
         <div className="relative">
-            {isBannerOpen && <div className="relative bg-color1 text-white text-center py-2 text-[10px] md:text-base">
-                <p>Shop Sale up to 25% Off - FREE SHIPPING on orders Over 500</p>
-                <X onClick={() => setIsBannerOpen(false)} className="cursor-pointer absolute top-1 md:top-2 right-3" /></div>}
+            {isBannerOpen && (
+                <div className="relative bg-color1 text-white text-center py-2 text-[10px] md:text-base">
+                    <p>Shop Sale up to 25% Off - FREE SHIPPING on orders Over 500</p>
+                    <X
+                        onClick={() => setIsBannerOpen(false)}
+                        className="cursor-pointer absolute top-1 md:top-2 right-3"
+                    />
+                </div>
+            )}
 
             <div className="flex justify-between items-center px-4 py-3 md:px-10 lg:py-4 bg-[#EEEEE9] shadow-md">
                 <div className="text-2xl font-bold">
-                    <Link href="/">
+                    <Link href="/" className="inline-block">
                         <Image
                             src={logo}
                             width={140}
@@ -41,7 +46,6 @@ export default function Navbar() {
                     <li><Link href="/men">MEN</Link></li>
                     <li><Link href="/kids">KIDS</Link></li>
                     <li><Link href="/women">ACCESSORIES</Link></li>
-                    {/* <li><Link href="/climate">Climate+</Link></li> */}
                     <li><Link href="/calculator">IMPACT</Link></li>
                 </ul>
 
@@ -49,53 +53,44 @@ export default function Navbar() {
                     <IoIosSearch size={25} />
                     <Link href="/cart" className="relative">
                         <IoBagOutline size={25} />
-                        {items.length > 0 && (
-                            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                                {items.length}
-                            </span>
-                        )}
                     </Link>
                     <Link href="/whislist" className="relative">
-                        <Heart className=" font-extralight" size={25} />
+                        <Heart className="font-extralight" size={25} />
                     </Link>
                     <Link href="/login">
                         <CgProfile size={25} />
                     </Link>
-                    {/* <div className="">
-                        <button onClick={toggleMenu}>
-                            
-                        </button>
-                    </div> */}
-                    <div className="lg:hidden">
-                        <button onClick={toggleMenu}>
+                    <div className="">
+                        <button onClick={toggleSideNav}>
                             <AlignJustify size={25} />
                         </button>
                     </div>
                 </div>
             </div>
 
-            {isOpen && (
-                <div className="lg:hidden absolute left-0 w-full bg-color1 text-white py-4 flex flex-col items-center gap-2 z-50">
-                    <ul className="list-none w-full flex flex-col items-center">
-                        <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/women">WOMEN</Link>
-                        </li>
-                        <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/men">MEN</Link>
-                        </li>
-                        <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/kids">KIDS</Link>
-                        </li>
-                        <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/women">ACCESSORIES</Link>
-                        </li>
-                        {/* <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/climate">Climate+</Link>
-                        </li> */}
-                        <li className="w-full text-center hover:bg-gray-700 rounded">
-                            <Link href="/calculator">IMPACT</Link>
-                        </li>
-                    </ul>
+            {/* Side Navigation Menu */}
+            {isSideNavOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40"
+                    onClick={toggleSideNav}
+                >
+                    <div
+                        className="fixed top-0 right-0 sm:w-1/4 w-3/4 h-full bg-color1 text-white py-6 px-4 transform transition-transform duration-300 z-50"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex justify-end mb-6">
+                            <button onClick={toggleSideNav} className="text-3xl">
+                                &times;
+                            </button>
+                        </div>
+                        <ul className="space-y-4 text-lg">
+                            <li><a href="/women" className="block py-2 hover:bg-gray-700">WOMEN</a></li>
+                            <li><a href="/men" className="block py-2 hover:bg-gray-700">MEN</a></li>
+                            <li><a href="/kids" className="block py-2 hover:bg-gray-700">KIDS</a></li>
+                            <li><a href="/women" className="block py-2 hover:bg-gray-700">ACCESSORIES</a></li>
+                            <li><a href="/calculator" className="block py-2 hover:bg-gray-700">IMPACT</a></li>
+                        </ul>
+                    </div>
                 </div>
             )}
         </div>

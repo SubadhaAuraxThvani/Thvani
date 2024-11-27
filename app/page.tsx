@@ -5,6 +5,7 @@ import Home4 from "@/components/Home/Home4";
 import Home5 from "@/components/Home/Home5";
 import { Home6 } from "@/components/Home/Home6";
 import Home7 from "@/components/Home/Home7";
+import Home8 from "@/components/Home/Home8";
 export default function App() {
   return (
     <div className=" overflow-x-hidden">
@@ -12,9 +13,10 @@ export default function App() {
       <Home2 props={"Fashion with Natures Essence"}/>
       <Home3/>
       <Home4/>
+      <Home7 />
       <Home5/>
       <Home6/>
-      <Home7/>
+      <Home8/>
     </div>
   );
 }

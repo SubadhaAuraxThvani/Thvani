@@ -8,9 +8,9 @@ import { addItem } from "@/store/features/cart/cartSlice";
 import { useAppDispatch } from "@/store/hooks";
 import { productData } from "@/dummyData";
 import { addToWishlist } from "@/store/features/whislist/whislistSlice";
-import img5 from "@/images/Product/Frame.png"
-import img6 from "@/images/Product/Frame2.png"
-import img7 from "@/images/Product/Frame3.png"
+import img5 from "@/images/other/image4.png"
+import img6 from "@/images/other/image5.png"
+import img7 from "@/images/other/image6.png"
 import { Button } from "../ui/button";
 import { toast } from "@/hooks/use-toast";
 
@@ -164,7 +164,7 @@ export default function Product1() {
                             </div>
                             <div className="flex flex-wrap w-full justify-evenly gap-4 md:gap-6 lg:gap-8">
                                 <div className="flex flex-col items-center text-center">
-                                    <Image src={img5} alt="Less Water" className="w-16 md:w-20 lg:w-24" />
+                                    <Image src={img5} alt="Less Water" className=" w-16 md:w-20 lg:w-24" />
                                     <p className="text-sm md:text-base lg:text-lg font-semibold">88.6% Less Water</p>
                                 </div>
                                 <div className="flex flex-col items-center text-center">
