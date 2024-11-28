@@ -43,23 +43,27 @@ const Home8: React.FC = () => {
     <div className="flex w-full flex-col items-center space-y-8 px-4 md:px-10 lg:px-[10vw]">
       {activeOption && (
         <div
-          className="flex flex-col lg:flex-row justify-center items-center lg:justify-between w-full space-y-8 lg:space-y-0"
+          className="flex flex-col lg:flex-row justify-center items-center lg:justify-between w-full space-y-8 lg:space-y-0 relative"
           ref={contentRef}
         >
-          <div className="flex w-full lg:w-1/2 justify-center items-center">
+          <div className="w-full lg:w-1/3 relative">
             <Image
               src={activeOption.img}
               alt={activeOption.label}
               width={500}
               height={500}
-              className="rounded-md max-w-full"
+              className="rounded-md w-full"
             />
+            <div className="lg:hidden absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4 text-center">
+              <p className="text-2xl py-3 font-semibold">{activeOption.title}</p>
+              <p className="mt-4 text-sm leading-relaxed">{activeOption.text}</p>
+            </div>
           </div>
-          <div className="flex flex-col w-full lg:w-1/2 justify-center items-center text-center lg:text-left px-4">
+          <div className="hidden lg:flex flex-col w-1/2 justify-center items-center text-center lg:text-left px-4">
             <p className="text-2xl md:text-3xl lg:text-4xl py-3 font-semibold">
               {activeOption.title}
             </p>
-            <p className="mt-4 text-sm md:text-base lg:text-lg leading-relaxed">
+            <p className="mt-4 text-sm md:text-base lg:text-xl leading-relaxed">
               {activeOption.text}
             </p>
           </div>
@@ -70,10 +74,11 @@ const Home8: React.FC = () => {
           <button
             key={id}
             onClick={() => setSelectedOption(id)}
-            className={`px-3 py-1 md:px-4 md:py-2 text-sm md:text-base font-medium ${selectedOption === id
+            className={`px-3 py-1 md:px-4 md:py-2 text-sm md:text-base font-medium ${
+              selectedOption === id
                 ? 'text-black border-b-2 border-color1'
                 : 'text-gray-400'
-              }`}
+            }`}
           >
             {label}
           </button>
