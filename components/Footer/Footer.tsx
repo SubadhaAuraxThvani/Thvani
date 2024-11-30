@@ -119,8 +119,8 @@ const Footer = () => {
                   <text
                     fill="#8B6E4E"
                     fontWeight="600"
-                    font-size="25"
-                    text-anchor="middle"
+                    fontSize="25"
+                    textAnchor="middle"
                   >
                     <textPath href="#iglooPath" startOffset="40%">
                       Spread love, not chemicals. Spread love, not chemicals.

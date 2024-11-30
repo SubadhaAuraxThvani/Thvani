@@ -12,7 +12,7 @@ export default function Home3() {
                              a 50,50 0 1,1 0,-100" />
                         </defs>
                         <text>
-                            <textPath href="#circlePath" startOffset="0%" textLength="300">
+                            <textPath href="#circlePath" startOffset="5%" textLength="300">
                                 &nbsp;   E a r t h &nbsp; C r a f t &nbsp; T h v a n i &nbsp;
                             </textPath>
                         </text>
