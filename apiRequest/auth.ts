@@ -50,21 +50,21 @@ export const loginUser = async (credentials: { email: string; password: string }
     }
 };
 
-export const googleLogin = async () => {
-    try {
-        const response = await axios({
-            method: "get",
-            url: `${origin}/auth/google`,
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const responseData = await response.data;
-        return responseData;
-    } catch (error: any) {
-        return error.response ? error.response.data : error;
-    }
-};
+// export const googleLogin = async () => {
+//     try {
+//         const response = await axios({
+//             method: "get",
+//             url: `${origin}/auth/google`,
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         });
+//         const responseData = await response.data;
+//         return responseData;
+//     } catch (error: any) {
+//         return error.response ? error.response.data : error;
+//     }
+// };
 
 export const googleCallback = async (code: string) => {
     try {
@@ -115,3 +115,7 @@ export const facebookCallback = async (code: string) => {
         return error.response ? error.response.data : error;
     }
 };
+
+export const googleLogin = () => {
+    window.location.href = `${origin}/auth/google`; 
+  };
