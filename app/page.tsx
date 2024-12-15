@@ -1,3 +1,4 @@
+import Leaf from "@/components/3dModel/Leaf";
 import Home from "@/components/Home/Home";
 import Home2 from "@/components/Home/Home2";
 import Home3 from "@/components/Home/Home3";
@@ -10,6 +11,7 @@ import Home8 from "@/components/Home/Home8";
 export default function App() {
   return (
     <div className="overflow-x-hidden">
+      <Leaf/>
       <video className="w-[100vw] h-[100vh] object-fill"  autoPlay loop muted>
         <source src="/video/video.mp4" type="video/mp4" />
       </video>

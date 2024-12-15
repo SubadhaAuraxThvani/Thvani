@@ -2,145 +2,145 @@ import axios from "axios";
 import { adminCookie, origin } from "./config";
 import Cookies from 'js-cookie'
 
-export const postProductData = async (data:any) => {
-    const reqData = JSON.stringify(data)
-    const token = Cookies.get(adminCookie)
-    try {
-        const response = await axios({
-            url:`${origin}/api/v1/admin/create-product`,
-            method:'post',
-            headers:{
-                'Authorization': `Bearer ${token}`, 
-                'Content-Type':'application/json'
-            },
-            data:reqData
-        })
-
-        const responseData = await response?.data
-
-        return responseData;
-    }
-    catch (err:any) {
-        console.log(err?.message);
-        
-    }
-
-}
-// Fetch all products (excluding deleted ones)
-export const fetchProducts = async () => {
-    try {
-        const token = Cookies.get(adminCookie);
-        const response = await axios({
-            method: "get",
-            url: `${origin}/api/v1/product/products`,
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const responseData = await response.data;
-        return responseData;
-    } catch (error: any) {
-        console.log("Error fetching products:", error?.message);
-        throw error;
-    }
-};
-
-export const fetchProductsPagination = async (page: any, limit: any, search: any) => {
-    try {
-        const token = Cookies.get(adminCookie);
-        const response = await axios({
-            method: "get",
-            url: `${origin}/api/v1/product/products/pagination?page=${page}&limit=${limit}&search=${search}`,
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const responseData = await response.data;
-        return responseData;
-    } catch (error: any) {
-        console.log("Error fetching products:", error?.message);
-        throw error;
-    }
-};
-
-// Fetch a single product by product_id
-export const fetchProductById = async (productId: string) => {
-    try {
-        const token = Cookies.get(adminCookie);
-        const response = await axios({
-            method: "get",
-            url: `${origin}/api/v1/product/product/${productId}`,
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const responseData = await response.data;
-        return responseData;
-    } catch (error: any) {
-        console.log("Error fetching product:", error?.message);
-        throw error;
-    }
-};
-
-// Edit product data
-export const editProductData = async (productId: string, data: any) => {
-    const reqData = JSON.stringify(data);
+// Create a new product
+export const postProductData = async (data: any) => {
     const token = Cookies.get(adminCookie);
     try {
-        const response = await axios({
-            url: `${origin}/api/v1/product/product/${productId}`,
-            method: 'put',
+        const response = await axios.post(`${origin}/api/v1/admin/create-product`, data, {
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             },
-            data: reqData
         });
-        return response?.data;
+        return response.data;
     } catch (err: any) {
-        console.log("Error updating product:", err?.message);
+        console.error(`Error creating product: ${err.message}`);
         throw err;
     }
 };
 
-// Delete product data (soft delete, set is_deleted to true)
+// Fetch all products
+export const fetchProducts = async () => {
+    const token = Cookies.get(adminCookie);
+    try {
+        const response = await axios.get(`${origin}/api/v1/product/products`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.data;
+    } catch (err: any) {
+        console.error("Error fetching products:", err.message);
+        throw err;
+    }
+};
+
+// Fetch products with pagination
+export const fetchProductsPagination = async (page: number, limit: number, search: string) => {
+    const token = Cookies.get(adminCookie);
+    try {
+        const response = await axios.get(
+            `${origin}/api/v1/product/products/pagination?page=${page}&limit=${limit}&search=${search}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        return response.data;
+    } catch (err: any) {
+        console.error("Error fetching paginated products:", err.message);
+        throw err;
+    }
+};
+
+// Fetch product by ID
+export const fetchProductById = async (productId: string) => {
+    const token = Cookies.get(adminCookie);
+    try {
+        const response = await axios.get(`${origin}/api/v1/product/product/${productId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.data;
+    } catch (err: any) {
+        console.error(`Error fetching product by ID: ${err.message}`);
+        throw err;
+    }
+};
+
+
+export const fetchProductByCategoryId = async (categoryId: string) => {
+    const token = Cookies.get(adminCookie);
+    try {
+        const response = await axios.get(`${origin}/api/v1/product/products/${categoryId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.data;
+    } catch (err: any) {
+        console.error(`Error fetching product by ID: ${err.message}`);
+        throw err;
+    }
+};
+
+// Edit product details
+export const editProductData = async (productId: string, data: any) => {
+    const token = Cookies.get(adminCookie);
+    try {
+        const response = await axios.put(`${origin}/api/v1/product/product/${productId}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.data;
+    } catch (err: any) {
+        console.error(`Error editing product: ${err.message}`);
+        throw err;
+    }
+};
+
+// Delete a product
 export const deleteProductData = async (productId: string) => {
     const token = Cookies.get(adminCookie);
     try {
-        const response = await axios({
-            url: `${origin}/api/v1/product/product/${productId}`,
-            method: 'delete',
+        const response = await axios.delete(`${origin}/api/v1/product/product/${productId}`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
             },
         });
-        return response?.data;
+        return response.data;
     } catch (err: any) {
-        console.log("Error deleting product:", err?.message);
+        console.error(`Error deleting product: ${err.message}`);
         throw err;
     }
 };
 
-// Update product availability (e.g., stock status)
+// Update product availability (stock status)
 export const updateProductAvailability = async (productId: string, data: any) => {
     const token = Cookies.get(adminCookie);
     try {
-        const response = await axios({
-            url: `${origin}/api/v1/product/product/${productId}/availability`,
-            method: 'put',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            data
-        });
-        return response?.data;
+        const response = await axios.put(
+            `${origin}/api/v1/product/product/${productId}/availability`,
+            data,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        return response.data;
     } catch (err: any) {
-        console.log("Error updating availability:", err?.message);
+        console.error(`Error updating product availability: ${err.message}`);
         throw err;
     }
 };

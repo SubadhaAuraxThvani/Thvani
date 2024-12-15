@@ -7,7 +7,7 @@ export const postsizeData = async (data:any) => {
     const token = Cookies.get(adminCookie)
     try {
         const response = await axios({
-            url:`${origin}/api/v1/admin/create-size`,
+            url:`${origin}/api/v1/size/create-size`,
             method:'post',
             headers:{
                 'Authorization': `Bearer ${token}`, 
