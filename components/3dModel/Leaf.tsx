@@ -25,7 +25,7 @@ const Model = () => {
 
 const Leaf = () => {
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center z-10" style={{ paddingTop: "200px" }}>
+    <div className="absolute w-full flex justify-center items-center" style={{ paddingTop: "100px" }}>
       <div style={{ width: "100%", height: "400px" }}>
         <Canvas>
           <ambientLight intensity={1} />  
