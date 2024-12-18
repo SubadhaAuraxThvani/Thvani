@@ -16,8 +16,8 @@ const Model = () => {
   });
 
   if (gltf.scene) {
-    gltf.scene.scale.set(1, 1, 4); 
-    gltf.scene.position.set(0, 0, 0); 
+    gltf.scene.scale.set(1, 1, 4); // Adjust scale to fit
+    gltf.scene.position.set(0, 0, 0); // Ensure the model is in the center
   }
 
   return <primitive ref={modelRef} object={gltf.scene} />;
@@ -25,13 +25,13 @@ const Model = () => {
 
 const Leaf = () => {
   return (
-    <div className="absolute w-full flex justify-center items-center" style={{ paddingTop: "100px" }}>
+    <div className="absolute left-0 right-0 bottom-0 flex justify-center items-center z-10" style={{ paddingTop: "200px" }}>
       <div style={{ width: "100%", height: "400px" }}>
         <Canvas>
           <ambientLight intensity={1} />  
-          <directionalLight position={[5, 5, 5]} intensity={1.5} /> 
-          <pointLight position={[-5, -5, 5]} intensity={1} />  
-          <spotLight position={[5, 5, 10]} angle={Math.PI / 6} intensity={2} />  
+          <directionalLight position={[30, 10, 10]} intensity={1.5} />
+          <directionalLight position={[0, 3, 50]} intensity={1.5} />
+          <directionalLight position={[-10, 0, 3]} intensity={1.5} />
           <Model />
           <OrbitControls enableZoom={false} />
         </Canvas>
