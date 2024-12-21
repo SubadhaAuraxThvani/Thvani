@@ -60,13 +60,14 @@ export default function Navbar() {
                     <Link href="/login">
                         <CgProfile size={25} />
                     </Link>
-                    <div className="">
+                    <div className="lg:hidden"> {/* Show burger menu only on smaller screens */}
                         <button onClick={toggleSideNav}>
                             <AlignJustify size={25} />
                         </button>
                     </div>
                 </div>
             </div>
+
 
             {/* Side Navigation Menu */}
             {isSideNavOpen && (

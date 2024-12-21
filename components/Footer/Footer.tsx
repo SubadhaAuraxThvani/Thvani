@@ -9,13 +9,11 @@ const Footer = () => {
       <div className="mx-auto w-full max-w-screen p-4 lg:px-10 py-6 lg:py-8">
         <div className="relative flex flex-col-reverse md:flex-row md:justify-between md:space-x-8 px-4 py-8 text-white">
           {/* Logo  */}
-          <div className="mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0 sm:h-[10vh] sm:w-[10vw] h-[20vh] w-[50vw] flex justify-center items-center">
             <Link href="/" className="flex items-center">
               <Image
                 src={logo}
-                width={140}
-                height={80}
-                className="invert object-cover brightness-200 h-12"
+                className="invert object-cover brightness-200 "
                 alt="logo"
               ></Image>
             </Link>
@@ -159,7 +157,7 @@ const Footer = () => {
             <Link href="/" className="ms-5 mr-4">
               <FaPinterestP />
             </Link>
-            <div className="flex gap-3 flex-wrap mt-0 sm:mt-0">
+            <div className="flex sm:text-[min(1.1vw,2vw)] text-[min(4vw,5vw)] gap-3 flex-wrap mt-0 sm:mt-0">
               <span>
                 <Link href="/privacy">Privacy Policy</Link>
               </span>
@@ -169,7 +167,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex justify-center">
-            <span className="text-sm text-white sm:text-center mt-4 sm:mt-0">
+            <span className="sm:text-[min(1.1vw,2vw)] text-[min(4vw,5vw)] text-white sm:text-center mt-4 sm:mt-0">
               © 2024 Thvani Earth Craft
             </span>
           </div>
