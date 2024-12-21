@@ -43,7 +43,7 @@ export function Home6() {
                                 <div className="flex flex-col md:flex-row w-full p-5">
                                     <div className="flex flex-1 items-center justify-center p-5 md:p-10">
                                         <div className="flex flex-col gap-5 font-bold text-center md:text-left">
-                                            <p className="text-xl md:text-sm font-light">What Our Customers Say</p>
+                                            <p className="sm:text-[min(1.25vw,1.5vw)] text-[min(3vw,4vw)] font-light">What Our Customers Say</p>
                                             <div className="flex justify-center md:justify-start">
                                                 <FaStar />
                                                 <FaStar />

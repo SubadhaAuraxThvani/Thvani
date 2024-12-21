@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -8,6 +8,27 @@ import * as THREE from "three";
 const Model = () => {
   const gltf = useGLTF("/model/leaf2.glb");
   const modelRef = useRef<THREE.Object3D>(null);
+  const [scale, setScale] = useState({ x: 1, y: 1, z: 4 });
+
+  useEffect(() => {
+    const updateScale = () => {
+      const width = window.innerWidth;
+
+      // Adjust scale based on screen width
+      if (width > 1600) {
+        setScale({ x: 1.5, y: 1.5, z: 6 });
+      } else if (width < 1600 && width > 1024) {
+        setScale({ x: 1, y: 1, z: 5 });
+      } else {
+        setScale({ x: 1, y: 1, z: 4 });
+      }
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
   useFrame(() => {
     if (modelRef.current) {
@@ -16,8 +37,8 @@ const Model = () => {
   });
 
   if (gltf.scene) {
-    gltf.scene.scale.set(1, 1, 4); // Adjust scale to fit
-    gltf.scene.position.set(0, 0, 0); // Ensure the model is in the center
+    gltf.scene.scale.set(scale.x, scale.y, scale.z);
+    gltf.scene.position.set(0, 0, 0); // Center the model
   }
 
   return <primitive ref={modelRef} object={gltf.scene} />;
@@ -25,7 +46,7 @@ const Model = () => {
 
 const Leaf = () => {
   return (
-    <div className="absolute left-0 right-0 bottom-0 flex justify-center items-center z-10" style={{ paddingTop: "200px" }}>
+    <div className="absolute flex justify-center items-center w-full h-[100vh] z-10">
       <div style={{ width: "100%", height: "400px" }}>
         <Canvas>
           <ambientLight intensity={1} />  

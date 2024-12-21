@@ -63,7 +63,7 @@ const Home8: React.FC = () => {
             <p className="text-2xl md:text-3xl lg:text-4xl py-3 font-semibold">
               {activeOption.title}
             </p>
-            <p className="mt-4 text-sm md:text-base lg:text-xl leading-relaxed">
+            <p className="mt-4 sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)] leading-relaxed">
               {activeOption.text}
             </p>
           </div>
@@ -74,7 +74,7 @@ const Home8: React.FC = () => {
           <button
             key={id}
             onClick={() => setSelectedOption(id)}
-            className={`px-3 py-1 md:px-4 md:py-2 text-sm md:text-base font-medium ${
+            className={`px-3 py-1 md:px-4 md:py-2 sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)] font-medium ${
               selectedOption === id
                 ? 'text-black border-b-2 border-color1'
                 : 'text-gray-400'

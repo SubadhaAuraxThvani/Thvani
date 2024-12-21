@@ -122,8 +122,8 @@ const Footer = () => {
                     fontSize="25"
                     textAnchor="middle"
                   >
-                    <textPath href="#iglooPath" startOffset="40%">
-                      Spread love, not chemicals. Spread love, not chemicals.
+                    <textPath href="#iglooPath" startOffset="43%">
+                      Spread love, not chemicals. Spread love.
                     </textPath>
                   </text>
                 </svg>

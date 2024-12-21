@@ -85,7 +85,7 @@ export default function Home2({ props }: { props: string }) {
           <p>New Arrival</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 px-5 lg:px-20 xl:px-48">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 rounded-none gap-2 lg:gap-14 px-5 lg:px-20 xl:px-50">
         {activeCarousel === "best seller" ? bestSellerItems : newArrivalItems}
       </div>
     </div>

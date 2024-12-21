@@ -82,32 +82,27 @@ console.log(currentIndex);
             delay: 6000,
           }),
         ]}
-        className="w-full"
+        className="w-full h-screen"
       >
-        <CarouselContent className="w-screen">
-          <CarouselItem className="">
-            <div className="flex">
-              <div
-                className="flex flex-col md:flex-row w-full"
-                style={{ height: "calc(100vh - 154px)" }}
-              >
+        <CarouselContent className="w-screen h-screen">
+          <CarouselItem className="h-screen">
+            <div className="flex h-screen">
+              <div className="flex flex-col md:flex-row w-full h-screen">
                 <div className="hidden md:block w-1/2 h-full relative">
                   <Image
                     src={bg1}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
                 </div>
-
                 <div className="w-full md:w-1/2 h-full relative">
                   <Image
                     src={bg5}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
-
                   {/* Text Content Overlay */}
                   <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-10 text-white text-center p-4">
                     <h1
@@ -128,7 +123,6 @@ console.log(currentIndex);
                     >
                       Upgrade to Organic Futurism Aesthetics
                     </p>
-
                     <Link href="/women">
                       <button className="mt-4 md:w-[15vw] sm:mt-6 px-4 sm:px-4 py-3 border border-white text-white bg-transparent hover:bg-white hover:text-black transition duration-300 rounded text-xs sm:text-sm md:text-base">
                         SHOP NOW
@@ -139,29 +133,24 @@ console.log(currentIndex);
               </div>
             </div>
           </CarouselItem>
-          <CarouselItem>
-            <div className="flex">
-              <div
-                className="flex flex-col md:flex-row w-full"
-                style={{ height: "calc(100vh - 154px)" }}
-              >
+          <CarouselItem className="h-screen">
+            <div className="flex h-screen">
+              <div className="flex flex-col md:flex-row w-full h-screen">
                 <div className="hidden md:block w-1/2 h-full relative">
                   <Image
                     src={bg1}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
                 </div>
-
                 <div className="w-full md:w-1/2 h-full relative">
                   <Image
                     src={bg5}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
-
                   {/* Text Content Overlay */}
                   <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-10 text-white text-center p-4">
                     <h1
@@ -182,7 +171,6 @@ console.log(currentIndex);
                     >
                       Upgrade to Organic Futurism Aesthetics
                     </p>
-
                     <Link href="/women">
                       <button className="mt-4 md:w-[15vw] sm:mt-6 px-4 sm:px-4 py-3 border border-white text-white bg-transparent hover:bg-white hover:text-black transition duration-300 rounded text-xs sm:text-sm md:text-base">
                         SHOP NOW
@@ -193,29 +181,24 @@ console.log(currentIndex);
               </div>
             </div>
           </CarouselItem>
-          <CarouselItem>
-            <div className="flex">
-              <div
-                className="flex flex-col md:flex-row w-full"
-                style={{ height: "calc(100vh - 154px)" }}
-              >
+          <CarouselItem className="h-screen">
+            <div className="flex h-screen">
+              <div className="flex flex-col md:flex-row w-full h-screen">
                 <div className="hidden md:block w-1/2 h-full relative">
                   <Image
                     src={bg1}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
                 </div>
-
                 <div className="w-full md:w-1/2 h-full relative">
                   <Image
                     src={bg5}
                     alt="Background Image"
-                    className="brightness-50"
+                    className="brightness-50 object-cover"
                     fill
                   />
-
                   {/* Text Content Overlay */}
                   <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-10 text-white text-center p-4">
                     <h1
@@ -236,7 +219,6 @@ console.log(currentIndex);
                     >
                       Upgrade to Organic Futurism Aesthetics
                     </p>
-
                     <Link href="/women">
                       <button className="mt-4 md:w-[15vw] sm:mt-6 px-4 sm:px-4 py-3 border border-white text-white bg-transparent hover:bg-white hover:text-black transition duration-300 rounded text-xs sm:text-sm md:text-base">
                         SHOP NOW
@@ -251,23 +233,20 @@ console.log(currentIndex);
         <div className="absolute p-1 flex -translate-x-1/2 text-[#232323] justify-center top-[80%] left-[50%]">
           <div className="relative flex justify-center">
             <div onClick={decrementIndex}>
-              {" "}
               <CarouselPrevious className=" left-0 bg-[#DAD2C7] hover:bg-[#d5cdc3] border-none rounded-r-none rounded-l-full relative" />
             </div>
             <div className="bg-[#DAD2C7] flex items-center px-2 gap-2">
               {[1, 1, 1].map((_, index) => (
                 <div
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    currentIndex === index
+                  className={`w-2 h-2 rounded-full transition-all ${currentIndex === index
                       ? " bg-[#232323] scale-125"
                       : "bg-[#232323]/60"
-                  }`}
+                    }`}
                 />
               ))}
             </div>
             <div onClick={incrementIndex}>
-              {" "}
               <CarouselNext className="relative bg-[#DAD2C7] hover:bg-[#d5cdc3] rounded-r-full right-0 border-none rounded-l-none" />
             </div>
           </div>
@@ -277,6 +256,10 @@ console.log(currentIndex);
         speed={100}
         className="flex h-[50px] w-full bg-color1 text-white items-center"
       >
+        <p className="text-xl sm:text-sm inline-block px-[100px]">ZERO WASTE</p>
+        <p className="text-xl sm:text-2xl inline-block px-[100px]">
+          ORGANIC FUTURISM AESTHETICS
+        </p>
         <p className="text-xl sm:text-sm inline-block px-[100px]">ZERO WASTE</p>
         <p className="text-xl sm:text-2xl inline-block px-[100px]">
           ORGANIC FUTURISM AESTHETICS
