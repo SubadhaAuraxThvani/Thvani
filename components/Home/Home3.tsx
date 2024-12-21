@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Home3() {
     return (
-        <div className="flex mt-20 flex-col justify-between mb-[60px]">
+        <div className="flex mt-20 pt-10 flex-col justify-between mb-[60px]">
             <div className="flex relative leading-loose flex-col w-full text-center bg-color5 pb-10">
-                <div className="absolute -top-[15%] lg:-top-[25%] left-0">
+                <div className="absolute -top-[12%] lg:-top-[16%] left-0">
                     <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <path id="circlePath" d="M 100,50
