@@ -99,7 +99,7 @@ const Footer = () => {
             </div>
           </div>
           <div className=" z-30 relative flex flex-col items-center justify-center h-[20vh] lg:h-auto w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] text-center mx-auto ">
-            <div className=" absolute bottom-[10%] rounded-full bg-color2 p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
+            <div className=" absolute bottom-[10%] rounded-full bg-color9 sm:p-10  max-w-[250px] h-auto aspect-square sm:max-w-[300px] md:max-w-[350px] ">
               <div className="absolute lg:block !z-10 hidden lg:-right-[8%] lg:-top-[8%]">
                 <svg
                   className=" scale-70 lg:scale-105"
@@ -126,19 +126,19 @@ const Footer = () => {
                   </text>
                 </svg>
               </div>
-              <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">
+              <p className="mt-5 text-white text-xl sm:text-2xl md:text-3xl font-bold">
                 Get 15% Off
               </p>
-              <p className="text-white text-xs sm:text-sm md:text-base mt-2">
+              <p className="text-white text-xs sm:text-sm md:text-[13px] mt-5">
                 Join our mailing list to receive exclusive offers <br /> plus
                 15% OFF your next order.
               </p>
               <input
-                className="mt-3 text-black p-2 w-[80%] max-w-[180px] md:max-w-[220px] rounded-md text-center text-sm outline-none"
-                placeholder="Your Email"
+                className="mt-3 text-black font-semibold bg-color11 p-2 w-[80%] max-w-[180px] md:max-w-[220px]  text-sm outline-none"
+                placeholder="Your email"
                 type="text"
               />
-              <button className="mt-3 w-[70%] max-w-[180px] md:max-w-[220px] rounded-lg bg-color4 text-white p-2 text-sm md:text-base">
+              <button className="mt-3 w-[80%] max-w-[180px] md:max-w-[220px] font-bold rounded-full bg-color10 text-white p-2 text-sm md:text-base">
                 Become a VIP
               </button>
             </div>
@@ -157,7 +157,7 @@ const Footer = () => {
             <Link href="/" className="ms-5 mr-4">
               <FaPinterestP />
             </Link>
-            <div className="flex sm:text-[min(1.1vw,2vw)] text-[min(4vw,5vw)] gap-3 flex-wrap mt-0 sm:mt-0">
+            <div className="flex lg:text-[1.1vw] text-sm gap-3 flex-wrap mt-0 sm:mt-0">
               <span>
                 <Link href="/privacy">Privacy Policy</Link>
               </span>
@@ -167,7 +167,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex justify-center">
-            <span className="sm:text-[min(1.1vw,2vw)] text-[min(4vw,5vw)] text-white sm:text-center mt-4 sm:mt-0">
+            <span className="lg:text-[1.1vw] text-sm text-white sm:text-center mt-4 sm:mt-0">
               © 2024 Thvani Earth Craft
             </span>
           </div>

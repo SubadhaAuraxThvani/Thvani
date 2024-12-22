@@ -74,7 +74,7 @@ const Home8: React.FC = () => {
           <button
             key={id}
             onClick={() => setSelectedOption(id)}
-            className={`px-3 py-1 md:px-4 md:py-2 sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)] font-medium ${
+            className={`px-3 py-1 md:px-4 md:py-2 lg:text-[1.3vw] text-sm font-medium ${
               selectedOption === id
                 ? 'text-black border-b-2 border-color1'
                 : 'text-gray-400'

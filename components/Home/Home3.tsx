@@ -12,8 +12,8 @@ export default function Home3() {
                              a 50,50 0 1,1 0,-100" />
                         </defs>
                         <text className="font-bold text-xl ">
-                            <textPath href="#circlePath" startOffset="5%" textLength="300">
-                                &nbsp;   E a r t h &nbsp; C r a f t &nbsp; T h v a n i &nbsp;
+                            <textPath href="#circlePath" startOffset="5%" textLength="320">
+                                &nbsp;   E A R T H &nbsp; C R A F T &nbsp; T H V A N I &nbsp;
                             </textPath>
                         </text>
                     </svg>
