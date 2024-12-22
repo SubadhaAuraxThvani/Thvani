@@ -129,7 +129,7 @@ const Footer = () => {
               <p className="mt-5 text-white text-xl sm:text-2xl md:text-3xl font-bold">
                 Get 15% Off
               </p>
-              <p className="text-white text-xs sm:text-sm md:text-[13px] mt-5">
+              <p className="text-white text-[10px] sm:text-sm md:text-[13px] mt-5">
                 Join our mailing list to receive exclusive offers <br /> plus
                 15% OFF your next order.
               </p>
