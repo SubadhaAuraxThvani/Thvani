@@ -55,15 +55,15 @@ const Home8: React.FC = () => {
               className="rounded-md w-full"
             />
             <div className="lg:hidden absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4 text-center">
-              <p className="text-2xl py-3 font-semibold">{activeOption.title}</p>
-              <p className="mt-4 text-sm leading-relaxed">{activeOption.text}</p>
+              <p className="text-2xl py-3 font-medium">{activeOption.title}</p>
+              <p className="mt-4  text-sm leading-relaxed">{activeOption.text}</p>
             </div>
           </div>
           <div className="hidden lg:flex flex-col w-1/2 justify-center items-center text-center lg:text-left px-4">
-            <p className="text-2xl md:text-3xl lg:text-4xl py-3 font-semibold">
+            <p className="text-xl md:text-2xl lg:text-3xl py-3 font-medium">
               {activeOption.title}
             </p>
-            <p className="mt-4 sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)] leading-relaxed">
+            <p className="mt-4 text-color1 sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)]">
               {activeOption.text}
             </p>
           </div>
