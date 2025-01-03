@@ -1,8 +1,9 @@
 "use client"
 import { useState, useEffect } from "react";
-import { Edit, Trash2} from "lucide-react";
+import { Edit, Trash2, X, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Table,
   TableBody,
@@ -11,6 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,30 +36,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { fetchProductsPagination, deleteProductData } from "@/apiRequest/product";
+import {
+  fetchTestimonialPaginationsData,
+  deleteTestimonialData,
+  editTestimonialData,
+} from "@/apiRequest/testimonal";
 import AdminDashboardLayout from "..";
-import CreateProduct from "./createproducts";
+import CreateTestimonial from "./createtestimonal";
 
-interface Product {
+interface Testimonial {
   _id: string;
-  name: string;
-  description: string;
-  price: string;
-  category_id?: {
-    name: string;
-  };
-  size: string;
-  stock: string;
-  image : [
-    
-  ]
+  user_name: string;
+  content: string;
+  rating: number;
 }
 
 const TableSkeleton = () => (
   <>
     {[1, 2, 3, 4, 5].map((i) => (
       <TableRow key={i}>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((j) => (
+        {[1, 2, 3, 4, 5].map((j) => (
           <TableCell key={j}>
             <div className="h-4 bg-muted animate-pulse rounded" />
           </TableCell>
@@ -62,13 +65,17 @@ const TableSkeleton = () => (
   </>
 );
 
-export default function ProductDashboard() {
+export default function TestimonialDashboard() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Edit dialog state
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editData, setEditData] = useState<{ id: string; content: string }>({ id: "", content: "" });
 
   // Delete dialog state
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -80,16 +87,16 @@ export default function ProductDashboard() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await fetchProductsPagination(page, limit, search);
-        if (data) {
-          setProducts(data.data || []);
-          setCount(data.count || 0);
+        const data = await fetchTestimonialPaginationsData(page, limit, search);
+        if (data && data.data) {
+          setTestimonials(data.data);
+          setCount(data.count);
         }
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching testimonials:", error);
         toast({
           title: "Error",
-          description: "Failed to fetch products",
+          description: "Failed to fetch testimonials",
           variant: "destructive",
         });
       } finally {
@@ -99,42 +106,84 @@ export default function ProductDashboard() {
     fetchData();
   }, [page, limit, search]);
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
+  const handleEdit = (testimonial: Testimonial) => {
+    setEditData({ id: testimonial._id, content: testimonial.content });
+    setEditDialogOpen(true);
+  };
+
+  const handleUpdate = async () => {
     try {
-      const response = await deleteProductData(deleteId);
-      if (response?.success) {
-        setProducts((prev) => prev.filter((item) => item._id !== deleteId));
-        setDeleteId(null);
-        setDeleteDialogOpen(false);
-        toast({
-          title: "Success",
-          description: "Product deleted successfully",
-        });
-      } else {
-        throw new Error("Failed to delete product");
-      }
+      const updatedTestimonial = await editTestimonialData(
+        { content: editData.content },
+        editData.id
+      );
+      setTestimonials((prev) =>
+        prev.map((t) =>
+          t._id === editData.id
+            ? { ...t, content: updatedTestimonial.content }
+            : t
+        )
+      );
+      setEditDialogOpen(false);
+      toast({
+        title: "Success",
+        description: "Testimonial updated successfully",
+      });
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error("Error updating testimonial:", error);
       toast({
         title: "Error",
-        description: "Failed to delete product",
+        description: "Failed to update testimonial",
         variant: "destructive",
       });
     }
   };
 
+  const handleDelete = async () => {
+    if (!deleteId) return;
+    try {
+      await deleteTestimonialData(deleteId);
+      setTestimonials((prev) => prev.filter((t) => t._id !== deleteId));
+      setDeleteId(null);
+      setDeleteDialogOpen(false);
+      toast({
+        title: "Success",
+        description: "Testimonial deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error deleting testimonial:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete testimonial",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const renderRating = (rating: number) => (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`h-4 w-4 ${
+            i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          }`}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <AdminDashboardLayout>
       <div className="p-8">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold tracking-tight">Product Management</h2>
-         <CreateProduct/>
+          <h2 className="text-3xl font-bold tracking-tight">Testimonial Management</h2>
+          <CreateTestimonial/>
         </div>
 
         <div className="mb-6">
           <Input
-            placeholder="Search products..."
+            placeholder="Search testimonials..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="max-w-sm"
@@ -146,37 +195,31 @@ export default function ProductDashboard() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[80px]">S.No</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Size</TableHead>
-                <TableHead>Stock</TableHead>
-                <TableHead>Image</TableHead>
+                <TableHead>User Name</TableHead>
+                <TableHead>Content</TableHead>
+                <TableHead>Rating</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableSkeleton />
-              ) : products.length > 0 ? (
-                products.map((product, index) => (
-                  <TableRow key={product._id}>
+              ) : testimonials.length > 0 ? (
+                testimonials.map((testimonial, index) => (
+                  <TableRow key={testimonial._id}>
                     <TableCell className="font-medium">
                       {(page - 1) * limit + index + 1}
                     </TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell className="max-w-[200px] truncate">
-                      {product.description}
+                    <TableCell>{testimonial.user_name}</TableCell>
+                    <TableCell className="max-w-[300px]">
+                      <p className="truncate">{testimonial.content}</p>
                     </TableCell>
-                    <TableCell>{product.price}</TableCell>
-                    <TableCell>{product.category_id?.name || "No Category"}</TableCell>
-                    <TableCell>{product.size}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
+                    <TableCell>{renderRating(testimonial.rating)}</TableCell>
                     <TableCell className="text-right space-x-2">
                       <Button
                         variant="outline"
                         size="sm"
+                        onClick={() => handleEdit(testimonial)}
                         className="mr-2"
                       >
                         <Edit className="h-4 w-4" />
@@ -185,7 +228,7 @@ export default function ProductDashboard() {
                         variant="destructive"
                         size="sm"
                         onClick={() => {
-                          setDeleteId(product._id);
+                          setDeleteId(testimonial._id);
                           setDeleteDialogOpen(true);
                         }}
                       >
@@ -196,15 +239,15 @@ export default function ProductDashboard() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center text-muted-foreground">
-                    No products found
+                  <TableCell colSpan={5} className="text-center text-muted-foreground">
+                    No testimonials found
                   </TableCell>
                 </TableRow>
               )}
             </TableBody>
           </Table>
 
-          {products.length > 0 && (
+          {testimonials.length > 0 && (
             <div className="p-4 border-t">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
@@ -220,7 +263,7 @@ export default function ProductDashboard() {
                       <SelectValue placeholder={limit} />
                     </SelectTrigger>
                     <SelectContent side="top">
-                      {[5, 10, 25].map((value) => (
+                      {[5, 10, 25, 50].map((value) => (
                         <SelectItem key={value} value={value.toString()}>
                           {value}
                         </SelectItem>
@@ -239,13 +282,42 @@ export default function ProductDashboard() {
           )}
         </div>
 
+        {/* Edit Dialog */}
+        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle className="flex justify-between items-center">
+                Edit Testimonial
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6"
+                  onClick={() => setEditDialogOpen(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="grid gap-4 py-4">
+              <Textarea
+                placeholder="Edit testimonial content..."
+                value={editData.content}
+                onChange={(e) => setEditData((prev) => ({ ...prev, content: e.target.value }))}
+                className="min-h-[100px]"
+              />
+              <Button onClick={handleUpdate}>Update</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
         {/* Delete Confirmation Dialog */}
         <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Delete Product</AlertDialogTitle>
+              <AlertDialogTitle>Delete Testimonial</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to delete this product? This action cannot be undone.
+                Are you sure you want to delete this testimonial? This action cannot be undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

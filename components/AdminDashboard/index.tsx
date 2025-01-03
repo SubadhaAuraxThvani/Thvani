@@ -1,13 +1,22 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 import { CiMenuFries } from "react-icons/ci";
-import './index.css'
-import { FaUsers, FaProductHunt, FaComments, FaCogs, FaShippingFast, FaFileInvoiceDollar, FaChartBar, 
-  // FaHandsHelping, 
-  FaQuestionCircle } from "react-icons/fa";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import './index.css';
+import {
+  FaUsers,
+  FaProductHunt,
+  FaComments,
+  FaCogs,
+  FaShippingFast,
+  FaFileInvoiceDollar,
+  FaChartBar,
+  FaQuestionCircle,
+} from "react-icons/fa";
 
 // Admin menu items with corresponding icons
 const adminList = [
@@ -15,13 +24,14 @@ const adminList = [
   { id: 2, text: "Product Management", route: "/admin/products", icon: <FaProductHunt /> },
   { id: 3, text: "Reviews & Feedback", route: "/admin/reviews", icon: <FaComments /> },
   { id: 4, text: "Categories", route: "/admin/categories", icon: <FaCogs /> },
-  { id: 5, text: "Testimonals", route: "/admin/testimonals", icon: <FaComments /> },
+  { id: 5, text: "Testimonials", route: "/admin/testimonials", icon: <FaComments /> },
   { id: 7, text: "Orders", route: "/admin/orders", icon: <FaFileInvoiceDollar /> },
   { id: 9, text: "Analytics & Reports", route: "/admin/analytics", icon: <FaChartBar /> },
   { id: 10, text: "Payments", route: "/admin/payments", icon: <FaFileInvoiceDollar /> },
   { id: 11, text: "Shipping & Delivery", route: "/admin/shipping", icon: <FaShippingFast /> },
+  { id: 12, text: "Size", route: "/admin/size", icon: <FaShippingFast /> },
   { id: 13, text: "Site Settings", route: "/admin/site-settings", icon: <FaCogs /> },
-  { id: 16, text: "FAQ's", route: "/admin/faq", icon: <FaQuestionCircle /> }
+  { id: 16, text: "FAQ's", route: "/admin/faq", icon: <FaQuestionCircle /> },
 ];
 
 interface AdminDashboardProps {
@@ -29,22 +39,21 @@ interface AdminDashboardProps {
 }
 
 const AdminDashboardLayout: React.FC<AdminDashboardProps> = ({ children }) => {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
-  // Simulated authentication check
-  // useEffect(() => {
-  //   const token = Cookies.get("jwt_token");
-  //   if (token) {
-  //     setIsAuthenticated(true);
-  //   } else {
-  //     document.location.replace("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const adminAuthToken = Cookies.get("adminAuthToken");
+      if (!adminAuthToken) {
+        router.replace("/admin-login");
+      }
+    }
+  }, [router]);
 
-  // const handleLogout = () => {
-  //   Cookies.remove("jwt_token");
-  //   document.location.replace("/login");
-  // };
+  const handleLogout = () => {
+    Cookies.remove("adminAuthToken");
+    router.replace("/admin-login");
+  };
 
   return (
     <Box className="flex min-h-screen bg-gray-100 shadow-lg">
@@ -54,19 +63,14 @@ const AdminDashboardLayout: React.FC<AdminDashboardProps> = ({ children }) => {
           Admin Menu
         </Typography>
         {adminList.map((item) => (
-          <Box
-            key={item.id}
-            className="hover:bg-gray-700 rounded-lg"
-          >
-            {/* Sidebar Links with Icons */}
-            <a
+          <Box key={item.id} className="hover:bg-gray-700 rounded-lg">
+            <Link
               href={item.route}
               className="py-2 px-3 text-black hover:text-gray-300 flex items-center space-x-2"
             >
-              {/* Menu Item Icon */}
-              <span className="text-xl ">{item.icon}</span>
+              <span className="text-xl">{item.icon}</span>
               <span className="text-list">{item.text}</span>
-            </a>
+            </Link>
           </Box>
         ))}
       </div>
@@ -76,12 +80,9 @@ const AdminDashboardLayout: React.FC<AdminDashboardProps> = ({ children }) => {
         {/* Navbar */}
         <nav className="bg-white shadow-lg fixed w-full z-10 top-0 left-0 p-3 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            {/* Sidebar Toggle Button */}
             <Button className="text-gray-600 md:hidden">
               <CiMenuFries className="text-2xl" />
             </Button>
-
-            {/* Admin Title */}
             <Typography
               variant="h6"
               component="a"
@@ -91,15 +92,14 @@ const AdminDashboardLayout: React.FC<AdminDashboardProps> = ({ children }) => {
               ADMIN
             </Typography>
           </div>
-
-          {/* Logout Button */}
-          <Button className="bg-blue-500 text-white hover:bg-blue-600">Log Out</Button>
+          <Button
+            onClick={handleLogout}
+            className="bg-blue-500 text-white hover:bg-blue-600"
+          >
+            Log Out
+          </Button>
         </nav>
-
-        {/* Main Content */}
-        <Box className="pt-16">
-          {children}
-        </Box>
+        <Box className="pt-16">{children}</Box>
       </Box>
     </Box>
   );

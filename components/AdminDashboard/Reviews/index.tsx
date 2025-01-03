@@ -1,219 +1,315 @@
-"use client";
-
-import React, { useState, useEffect, useCallback } from "react";
+"use client"
+import { useState, useEffect, useCallback } from "react";
+import { Pencil, Trash2, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
-    Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TablePagination,
-    TableRow,
-    TextField,
-    Typography,
-    Skeleton,
-} from "@mui/material";
-import { MdDelete, MdEdit } from "react-icons/md";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
-    fetchreviewsPaginationsData,
-    deletereviewsData,
-    editreviewsData,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import {
+  fetchreviewsPaginationsData,
+  deletereviewsData,
+  editreviewsData,
 } from "@/apiRequest/reviews";
 import AdminDashboardLayout from "..";
 
-// Define a type for Review
 interface Review {
-    _id: string;
-    user_id: string;
-    product_id: string;
-    rating: number;
-    comment: string;
+  _id: string;
+  user_id: string;
+  product_id: string;
+  rating: number;
+  comment: string;
 }
 
-const ReviewsTable = () => {
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [totalReviews, setTotalReviews] = useState(0);
-    const [loading, setLoading] = useState(true);
+const TableSkeleton = () => (
+  <>
+    {[1, 2, 3].map((i) => (
+      <TableRow key={i}>
+        {[1, 2, 3, 4, 5].map((j) => (
+          <TableCell key={j}>
+            <div className="h-4 w-full bg-muted animate-pulse rounded" />
+          </TableCell>
+        ))}
+      </TableRow>
+    ))}
+  </>
+);
 
-    // Dialog states for edit and delete
-    const [editDialogOpen, setEditDialogOpen] = useState(false);
-    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    const [currentReview, setCurrentReview] = useState<Review | null>(null);
-    const [newComment, setNewComment] = useState("");
+export default function ReviewsTable() {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
-    // Memoize fetchReviews with useCallback to avoid redefining it on each render
-    const fetchReviews = useCallback(async () => {
-        setLoading(true);
-        const data = await fetchreviewsPaginationsData(page + 1, rowsPerPage, "");
-        if (data) {
-            setReviews(data.data);
-            setTotalReviews(data.count);
-        }
-        setLoading(false);
-    }, [page, rowsPerPage]);
+  // Edit dialog state
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [currentReview, setCurrentReview] = useState<Review | null>(null);
+  const [newComment, setNewComment] = useState("");
 
-    useEffect(() => {
-        fetchReviews();
-    }, [fetchReviews]); // Now fetchReviews is included as a dependency
+  // Delete dialog state
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
-    const handlePageChange = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-        setPage(newPage);
-    };
+  const { toast } = useToast();
 
+  const fetchReviews = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await fetchreviewsPaginationsData(page, limit, search);
+      if (data) {
+        setReviews(data.data);
+        setTotalReviews(data.count);
+      }
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch reviews",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [page, limit, search]);
 
-    const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
 
-    const handleDelete = async (id: string) => {
-        try {
-            await deletereviewsData(id);
-            setDeleteDialogOpen(false);
-            fetchReviews();
-        } catch (error) {
-            console.error("Error deleting review:", error);
-        }
-    };
+  const handleEdit = async () => {
+    if (!currentReview) return;
+    try {
+      await editreviewsData({ comment: newComment }, currentReview._id);
+      setEditDialogOpen(false);
+      toast({
+        title: "Success",
+        description: "Review updated successfully",
+      });
+      fetchReviews();
+    } catch (error) {
+      console.error("Error updating review:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update review",
+        variant: "destructive",
+      });
+    }
+  };
 
-    const handleEdit = async () => {
-        if (currentReview) {
-            try {
-                await editreviewsData({ comment: newComment }, currentReview._id);
-                setEditDialogOpen(false);
-                fetchReviews();
-            } catch (error) {
-                console.error("Error updating review:", error);
-            }
-        }
-    };
+  const handleDelete = async () => {
+    if (!deleteId) return;
+    try {
+      await deletereviewsData(deleteId);
+      setDeleteDialogOpen(false);
+      toast({
+        title: "Success",
+        description: "Review deleted successfully",
+      });
+      fetchReviews();
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete review",
+        variant: "destructive",
+      });
+    }
+  };
 
-    return (
-        <AdminDashboardLayout>
-        <Box>
-            <Typography variant="h6" gutterBottom>
-                Reviews Table
-            </Typography>
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>User ID</TableCell>
-                            <TableCell>Product ID</TableCell>
-                            <TableCell>Rating</TableCell>
-                            <TableCell>Comment</TableCell>
-                            <TableCell>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {loading ? (
-                            Array.from({ length: rowsPerPage }).map((_, index) => (
-                                <TableRow key={index}>
-                                    {Array.from({ length: 5 }).map((_, idx) => (
-                                        <TableCell key={idx}>
-                                            <Skeleton variant="rectangular" height={30} />
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))
-                        ) : reviews.length > 0 ? (
-                            reviews.map((review) => (
-                                <TableRow key={review._id}>
-                                    <TableCell>{review.user_id}</TableCell>
-                                    <TableCell>{review.product_id}</TableCell>
-                                    <TableCell>{review.rating}</TableCell>
-                                    <TableCell>{review.comment}</TableCell>
-                                    <TableCell>
-                                        <Button
-                                            startIcon={<MdEdit />}
-                                            onClick={() => {
-                                                setCurrentReview(review);
-                                                setNewComment(review.comment);
-                                                setEditDialogOpen(true);
-                                            }}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            color="error"
-                                            startIcon={<MdDelete />}
-                                            onClick={() => {
-                                                setCurrentReview(review);
-                                                setDeleteDialogOpen(true);
-                                            }}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        ) : (
-                            <TableRow>
-                                <TableCell colSpan={5} align="center">
-                                    No Reviews Found
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-                <TablePagination
-                    component="div"
-                    count={totalReviews}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    onPageChange={(event, newPage) => handlePageChange(event, newPage)}
-                    onRowsPerPageChange={handleRowsPerPageChange}
-                    rowsPerPageOptions={[5, 10, 25]}
-                />
+  return (
+    <AdminDashboardLayout>
 
+    <div className="p-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-3xl font-bold tracking-tight">Reviews Management</h2>
+      </div>
 
-            {/* Edit Dialog */}
-            <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
-                <DialogTitle>Edit Review</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        fullWidth
-                        label="Comment"
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-                    <Button onClick={handleEdit} color="primary">
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>
+      <div className="mb-6">
+        <Input
+          placeholder="Search reviews..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="max-w-sm"
+        />
+      </div>
 
-            {/* Delete Confirmation Dialog */}
-            <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
-                <DialogTitle>Delete Confirmation</DialogTitle>
-                <DialogContent>
-                    Are you sure you want to delete this review?
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>User ID</TableHead>
+              <TableHead>Product ID</TableHead>
+              <TableHead>Rating</TableHead>
+              <TableHead>Comment</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {loading ? (
+              <TableSkeleton />
+            ) : reviews.length > 0 ? (
+              reviews.map((review) => (
+                <TableRow key={review._id}>
+                  <TableCell>{review.user_id}</TableCell>
+                  <TableCell>{review.product_id}</TableCell>
+                  <TableCell>{review.rating}</TableCell>
+                  <TableCell className="max-w-md truncate">{review.comment}</TableCell>
+                  <TableCell className="text-right space-x-2">
                     <Button
-                        onClick={() => currentReview && handleDelete(currentReview._id)}
-                        color="error"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setCurrentReview(review);
+                        setNewComment(review.comment);
+                        setEditDialogOpen(true);
+                      }}
                     >
-                        Delete
+                      <Pencil className="h-4 w-4" />
                     </Button>
-                </DialogActions>
-            </Dialog>
-        </Box>
-        </AdminDashboardLayout>
-    );
-};
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => {
+                        setDeleteId(review._id);
+                        setDeleteDialogOpen(true);
+                      }}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center text-muted-foreground">
+                  No reviews found
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
 
-export default ReviewsTable;
+        {reviews.length > 0 && (
+          <div className="p-4 border-t">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <p className="text-sm font-medium">Rows per page</p>
+                <Select
+                  value={limit.toString()}
+                  onValueChange={(value) => {
+                    setLimit(Number(value));
+                    setPage(1);
+                  }}
+                >
+                  <SelectTrigger className="h-8 w-[70px]">
+                    <SelectValue placeholder={limit} />
+                  </SelectTrigger>
+                  <SelectContent side="top">
+                    {[5, 10, 25, 50, 100].map((value) => (
+                      <SelectItem key={value} value={value.toString()}>
+                        {value}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex items-center space-x-6 lg:space-x-8">
+                <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+                  Page {page} of {Math.ceil(totalReviews / limit)}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Edit Dialog */}
+      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex justify-between items-center">
+              Edit Review
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6"
+                onClick={() => setEditDialogOpen(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Input
+                placeholder="Enter comment"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+            </div>
+
+            <Button onClick={handleEdit} className="w-full">
+              Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Review</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this review? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+    </AdminDashboardLayout>
+
+  );
+}

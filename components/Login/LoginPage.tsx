@@ -1,162 +1,125 @@
 "use client";
-import { useState } from "react";
+
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
 import img1 from "@/images/other/image2.png";
 import Link from "next/link";
-import { FaChevronRight } from "react-icons/fa";
-
-export const FaceBookLogin = async () => {
-  try {
-    const data = await fetch(
-      process.env.NEXT_PUBLIC_API_URL+"/auth/auth/facebook"
-    );
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-  
-};
-
-export  const GoogleLogin = async () => {
-  try {
-    const data = await fetch(
-      process.env.NEXT_PUBLIC_API_URL+"auth/auth/google"
-    );
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { LoginUser } from '@/apiRequest/login';
 
 export default function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    role:2,
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Redirect function to navigate to different pages
+  const navigateTo = (url: string) => {
+    window.location.href = url;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleGoogleLogin = () => {
+    window.location.href = "/auth/google";
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
-    setSuccessMessage(""); // Clear previous success messages
+
+    const data = { email, password };
 
     try {
-      const response = await fetch(
-        "https://api.thvaniearthcraft.com/api/v1/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+      const response = await LoginUser(data);
+
+      if (response?.data?.token) {
+        Cookies.set("jwt_token", response.data.token, { expires: 1 });
+
+        if (response.data.role === "admin") {
+          navigateTo("/admin");
+        } else {
+          navigateTo("/");
         }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          "Login failed. Please check your credentials and try again."
-        );
-      }
-
-      const data = await response.json();
-      // setSuccessMessage("Logged in successfully! Redirecting...");
-      console.log(data.token); // Example token
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || "An error occurred. Please try again.");
       } else {
-        setError("An unknown error occurred. Please try again.");
+        setError("Login failed. Please check your credentials.");
+      }
+    } catch (err: unknown) {  // Change from any to unknown
+      // Type guard to check if err is an Error object
+      if (err instanceof Error) {
+        setError("Invalid credentials. Please try again.");
+        console.error("Login API call error:", err.message);
+      } else {
+        setError("An unexpected error occurred.");
+        console.error("Unknown error:", err);
       }
     }
-
   };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-
- 
+  if (!isMounted) return null;
 
   return (
     <div className="flex flex-col lg:flex-row w-full py-10 px-5 sm:px-10 md:px-20 lg:px-[100px] gap-5">
-      <form
-        className="flex flex-col gap-5 p-5 sm:p-10 w-full lg:w-1/2"
-        onSubmit={handleSubmit}
-      >
-        <p className="flex justify-center items-center text-2xl font-semibold">
-          Log In
-        </p>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        {successMessage && (
-          <p className="text-green-500 text-sm">{successMessage}</p>
-        )}
-        <div onClick={GoogleLogin} className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
+      <div className="flex flex-col gap-5 p-5 sm:p-10 w-full lg:w-1/2">
+        <p className="flex justify-center items-center text-2xl font-semibold">Log In</p>
+        {error && <p className="text-red-500">{error}</p>}
+
+        {/* Google Login Button */}
+        <div
+          className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg"
+          onClick={handleGoogleLogin}
+        >
           <FcGoogle size={28} />
           <p className="text-base sm:text-lg">Connect With Google</p>
         </div>
-        <div
-          onClick={FaceBookLogin}
-          className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg"
-        >
+
+        {/* Facebook Login Button */}
+        <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
           <FaFacebook size={28} color="blue" />
           <p className="text-base sm:text-lg">Connect With Facebook</p>
         </div>
-        <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
-          <input
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full outline-none"
-            required
-          />
-        </div>
-        <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full outline-none"
-            required
-          />
-        </div>
-        <div className="flex justify-between w-full gap-3 sm:gap-5">
-          <button
-            type="submit"
-            className="bg-color1 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg"
-          >
-            Log In
-          </button>
-          <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
-            <Link href="/restpassword">
-              <p>Forgot Password?</p>
-            </Link>
+
+        {/* Login Form */}
+        <form onSubmit={handleLogin}>
+          <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
+            <input
+              placeholder="Email"
+              className="w-full outline-none"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-color1 text-sm sm:text-base">
-            Don’t have an account?
-          </p>
-          <Link href="/signup">
-            <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
-              SIGN UP
-              <FaChevronRight size={15} className="ml-1" />
-              <FaChevronRight size={15} />
-            </p>
-          </Link>
-        </div>
-      </form>
+          <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
+            <input
+              placeholder="Password"
+              type="password"
+              className="w-full outline-none"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          {/* Submit Button and Forgot Password */}
+          <div className="flex justify-between w-full gap-3 sm:gap-5">
+            <div className="bg-color1 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg">
+              <button type="submit">Login</button>
+            </div>
+            <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
+              <Link href="/restpassword"><p>Forgot Password?</p></Link>
+            </div>
+          </div>
+
+          {/* Signup Link */}
+          <div className="flex flex-col gap-2">
+            <p className="text-color1 text-sm sm:text-base">Don`&apos;`t have an account?</p>
+            <Link href="/signup"><button className="underline text-sm sm:text-base text-left">SIGN UP</button></Link>
+          </div>
+        </form>
+      </div>
+
       <div className="flex flex-col p-5 sm:p-10 gap-5 w-full lg:w-1/2 bg-color5">
         <div className="flex justify-center items-center">
           <Image

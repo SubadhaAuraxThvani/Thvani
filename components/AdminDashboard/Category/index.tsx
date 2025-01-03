@@ -1,278 +1,404 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+"use client"
+import { useState, useEffect } from "react";
+import {Pencil, Trash2, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
-  TablePagination,
+  TableHeader,
   TableRow,
-  TextField,
-  Typography,
-  Skeleton,
-} from "@mui/material";
-import { MdDelete, MdEdit } from "react-icons/md";
-import CreateCategory from "./createcategory";
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 import {
   fetchCategoryPaginationsData,
   deleteCategoryData,
   editCategoryData,
-} from "../../../apiRequest/category";
+  postCategoryData,
+} from "@/apiRequest/category";
 import AdminDashboardLayout from "..";
+import CreateCategory from "./createcategory";
 
-// Skeleton Row for Table Loading State
-const ShimmerRow = ({ columns }: { columns: number }) => (
-  <TableRow>
-    {Array.from({ length: columns }).map((_, index) => (
-      <TableCell key={index}>
-        <Skeleton variant="rectangular" height={30} />
-      </TableCell>
-    ))}
-  </TableRow>
-);
-
-// Define the Category interface
 interface Category {
   _id: string;
   name: string;
   is_deleted: boolean;
 }
 
-const CategoriesDashboard: React.FC = () => {
-  const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(10);
-  const [count, setCount] = useState<number>(0);
-  const [editId, setEditId] = useState<string | null>(null);
-  const [editName, setEditName] = useState<string>("");
-  const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
-  const [search] = useState<string>("");
-  const [categoryArray, setCategoryArray] = useState<Category[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+export default function CategoriesDashboard() {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [totalCategories, setTotalCategories] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
+  // Dialog states
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [formError, setFormError] = useState("");
+
+  const { toast } = useToast();
+
+  // Fetch categories
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const data = await fetchCategoryPaginationsData(page, limit, search);
-      if (data && data.data) {
-        setCategoryArray(data.data);
-        setCount(data.count);
-        setLimit(data.limit);
-        setPage(data.page);
-      } else {
-        setCategoryArray([]);
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchCategoryPaginationsData(page, limit, search);
+        setCategories(data.data || []);
+        setTotalCategories(data.count || 0);
+      } catch (error) {
+        console.log(error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch categories",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-    fetchData();
+    fetchCategories();
   }, [page, limit, search]);
 
-  const handleEdit = (category: Category) => {
-    setEditId(category._id);
-    setEditName(category.name);
-  };
+  // Create category
+  const handleCreate = async () => {
+    if (!newCategoryName.trim()) {
+      setFormError("Category name is required");
+      return;
+    }
 
-  const handleUpdate = async (id: string) => {
     try {
-      const updatedCategory = await editCategoryData({ name: editName }, id);
-      setCategoryArray((prevArray) =>
-        prevArray.map((category) =>
-          category._id === id ? { ...category, name: updatedCategory.name } : category
-        )
-      );
-      setEditId(null);
-      setEditName("");
-      alert("Category updated successfully");
-    } catch {
-      alert("Failed to update category");
+      await postCategoryData({ name: newCategoryName });
+      toast({ title: "Success", description: "Category created successfully" });
+      setCreateDialogOpen(false);
+      setNewCategoryName("");
+      setFormError("");
+      // Refresh categories
+      const data = await fetchCategoryPaginationsData(page, limit, search);
+      setCategories(data.data || []);
+      setTotalCategories(data.count || 0);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "Failed to create category",
+        variant: "destructive",
+      });
     }
   };
 
+  // Edit category
+  const handleEdit = async (id: string, newName: string) => {
+    try {
+      await editCategoryData({ name: newName }, id);
+      toast({ title: "Success", description: "Category updated successfully" });
+      // Refresh categories
+      const data = await fetchCategoryPaginationsData(page, limit, search);
+      setCategories(data.data || []);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "Failed to update category",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Delete category
   const handleDelete = async () => {
+    if (!selectedCategory) return;
+
     try {
-      if (deleteId) {
-        await deleteCategoryData(deleteId);
-        setCategoryArray((prevArray) =>
-          prevArray.filter((category) => category._id !== deleteId)
-        );
-        setDeleteId(null);
-        setOpenDeleteDialog(false);
-        alert("Category deleted successfully");
-      }
-    } catch {
-      alert("Failed to delete category");
+      await deleteCategoryData(selectedCategory._id);
+      toast({ title: "Success", description: "Category deleted successfully" });
+      setDeleteDialogOpen(false);
+      setSelectedCategory(null);
+      // Refresh categories
+      const data = await fetchCategoryPaginationsData(page, limit, search);
+      setCategories(data.data || []);
+      setTotalCategories(data.count || 0);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "Failed to delete category",
+        variant: "destructive",
+      });
     }
   };
 
-  const handleCancel = () => {
-    setEditName("");
+  return (
+    <AdminDashboardLayout>
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold tracking-tight">Category Management</h2>
+          <CreateCategory/>
+        </div>
+
+        <div className="mb-6">
+          <Input
+            placeholder="Search categories..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="max-w-sm"
+          />
+        </div>
+
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">S.No</TableHead>
+                <TableHead>Category Name</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                Array.from({ length: 3 }).map((_, i) => (
+                  <TableRow key={i}>
+                    <TableCell>
+                      <div className="h-4 w-8 bg-muted animate-pulse rounded" />
+                    </TableCell>
+                    <TableCell>
+                      <div className="h-4 w-32 bg-muted animate-pulse rounded" />
+                    </TableCell>
+                    <TableCell>
+                      <div className="h-8 w-24 bg-muted animate-pulse rounded" />
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : categories.length > 0 ? (
+                categories.map((category, index) => (
+                  <CategoryRow
+                    key={category._id}
+                    category={category}
+                    index={index}
+                    onEdit={handleEdit}
+                    onDelete={() => {
+                      setSelectedCategory(category);
+                      setDeleteDialogOpen(true);
+                    }}
+                    page={page}
+                    limit={limit}
+                  />
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3} className="text-center text-muted-foreground">
+                    No categories found
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+
+          {categories.length > 0 && (
+            <div className="p-4 border-t">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <p className="text-sm font-medium">Rows per page</p>
+                  <Select
+                    value={limit.toString()}
+                    onValueChange={(value) => {
+                      setLimit(Number(value));
+                      setPage(1);
+                    }}
+                  >
+                    <SelectTrigger className="h-8 w-[70px]">
+                      <SelectValue placeholder={limit} />
+                    </SelectTrigger>
+                    <SelectContent side="top">
+                      {[5, 10, 25, 50, 100].map((value) => (
+                        <SelectItem key={value} value={value.toString()}>
+                          {value}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="flex items-center space-x-6 lg:space-x-8">
+                  <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+                    Page {page} of {Math.ceil(totalCategories / limit)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Create Dialog */}
+        <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle className="flex justify-between items-center">
+                Create Category
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6"
+                  onClick={() => setCreateDialogOpen(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Input
+                  placeholder="Enter category name"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                />
+              </div>
+
+              {formError && (
+                <div className="text-sm text-destructive bg-destructive/15 p-3 rounded-md">
+                  {formError}
+                </div>
+              )}
+
+              <Button onClick={handleCreate} className="w-full">
+                Create
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Delete Dialog */}
+        <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete Category</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to delete this category? This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDelete}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+    </AdminDashboardLayout>
+  );
+}
+
+// Category Row Component
+function CategoryRow({
+  category,
+  index,
+  onEdit,
+  onDelete,
+  page,
+  limit,
+}: {
+  category: Category;
+  index: number;
+  onEdit: (id: string, name: string) => void;
+  onDelete: (id: string) => void;
+  page: number;
+  limit: number;
+}) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState(category.name);
+
+  const handleUpdate = () => {
+    onEdit(category._id, editName);
+    setIsEditing(false);
   };
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage + 1);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setLimit(parseInt(event.target.value, 10));
-  };
-
-  const onClickDeleteTableRow = (id: string) => {
-    setDeleteId(id);
-    setOpenDeleteDialog(true);
-  };
-
-  const Child = ({ data, index }: { data: Category; index: number }) => (
-    <TableRow key={data._id}>
-      <TableCell align="left">
-        <Typography>{(page - 1) * limit + index + 1}</Typography>
-      </TableCell>
-      <TableCell align="left">
-        {editId === data._id ? (
-          <TextField
-            fullWidth
+  return (
+    <TableRow>
+      <TableCell>{(page - 1) * limit + index + 1}</TableCell>
+      <TableCell>
+        {isEditing ? (
+          <Input
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
+            className="max-w-sm"
             autoFocus
           />
         ) : (
-          <Typography>{data.name}</Typography>
+          category.name
         )}
       </TableCell>
-      <TableCell align="right">
-        {editId === data._id ? (
+      <TableCell className="text-right space-x-2">
+        {isEditing ? (
           <>
-            <Button
-              variant="contained"
-              sx={{ gap: 1, marginRight: "10px", background: "green" }}
-              onClick={() => handleUpdate(data._id)}
-            >
-              Update
+            <Button variant="default" size="sm" onClick={handleUpdate}>
+              Save
             </Button>
             <Button
-              variant="contained"
-              sx={{ gap: 1, marginRight: "10px", background: "gray" }}
-              onClick={handleCancel}
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setIsEditing(false);
+                setEditName(category.name);
+              }}
             >
               Cancel
             </Button>
           </>
         ) : (
-          <Button
-            variant="contained"
-            sx={{ gap: 1, marginRight: "10px", background: "green" }}
-            onClick={() => handleEdit(data)}
-          >
-            <MdEdit fontSize={20} /> Edit
-          </Button>
-        )}
-        {data.is_deleted ? (
-          <Button disabled>Delete</Button>
-        ) : (
-          <Button
-            variant="contained"
-            sx={{ gap: 1, marginRight: "10px", background: "red" }}
-            onClick={() => onClickDeleteTableRow(data._id)}
-          >
-            <MdDelete fontSize={20} /> Delete
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsEditing(true)}
+              disabled={category.is_deleted}
+            >
+              <Pencil className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => onDelete(category._id)}
+              disabled={category.is_deleted}
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </>
         )}
       </TableCell>
     </TableRow>
   );
-
-  const DeleteConfirmationDialog = () => (
-    <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
-      <DialogTitle>Delete Confirmation</DialogTitle>
-      <DialogContent>Are you sure you want to delete this category?</DialogContent>
-      <DialogActions>
-        <Button onClick={() => setOpenDeleteDialog(false)}>Cancel</Button>
-        <Button onClick={handleDelete} color="error">
-          Delete
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-
-  return (
-    <AdminDashboardLayout>
-      <Box sx={{ padding: 2 }}>
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <CreateCategory />
-        </Box>
-        <Box sx={{ padding: 2 }}>
-          <Typography variant="h6">Category Master Table</Typography>
-          {loading ? (
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      <Skeleton variant="text" width={50} />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton variant="text" width={150} />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton variant="text" width={150} />
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Array.from({ length: limit }).map((_, index) => (
-                    <ShimmerRow key={index} columns={3} />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          ) : categoryArray && categoryArray.length > 0 ? (
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left">S.No</TableCell>
-                    <TableCell align="left">Category Name</TableCell>
-                    <TableCell align="right">Action</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {categoryArray
-                    .filter((category) => !category.is_deleted)
-                    .map((x, index) => (
-                      <Child key={x._id} data={x} index={index} />
-                    ))}
-                </TableBody>
-              </Table>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                component="div"
-                count={count}
-                page={page - 1}
-                onPageChange={handleChangePage}
-                rowsPerPage={limit}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </TableContainer>
-          ) : (
-            <Typography>No Results Found</Typography>
-          )}
-        </Box>
-      </Box>
-      <DeleteConfirmationDialog />
-    </AdminDashboardLayout>
-  );
-};
-
-export default CategoriesDashboard;
+}

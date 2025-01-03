@@ -1,120 +1,121 @@
-import { Box, Button, Modal, TextField, Snackbar, Alert } from "@mui/material";
-import { GrClose } from "react-icons/gr";
+"use client"
 import { useState } from "react";
-// import { IoCreate } from "react-icons/io5";
-import { postsizeData } from "../../../apiRequest/size"; // Update to size-related API request
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '50%',
-    height: "50%",
-    bgcolor: 'background.paper',
-    p: 4,
-    borderRadius: '20px',
-    border: 'none'
-};
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
+import { postsizeData } from "@/apiRequest/size";
 
 export default function CreateSize() {
-    const [open, setOpen] = useState(false);
-    const [sizeName, setSizeName] = useState(""); // Change categoryName to sizeName
-    const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const [sizeName, setSizeName] = useState("");
+  const [error, setError] = useState("");
+  const { toast } = useToast();
 
-    // Notification state
-    const [notifyMessage, setNotifyMessage] = useState("");
-    const [openNotifier, setOpenNotifier] = useState(false);
-    const [hideDuration, setHideDuration] = useState(3000);
+  const handleClose = () => {
+    setOpen(false);
+    resetForm();
+  };
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {
-        setOpen(false);
-        setSizeName(""); 
-        setError("");
-    };
+  const resetForm = () => {
+    setSizeName("");
+    setError("");
+  };
 
-    const handleSubmit = async () => {
-        const data = {
-            name: sizeName, 
-        };
+  const handleSubmit = async () => {
+    if (!sizeName.trim()) {
+      setError("Size name is required.");
+      return;
+    }
 
-        try {
-            await postsizeData(data); 
-            handleClose();
-            setNotifyMessage(`${sizeName} has been created.`);
-            setOpenNotifier(true);
-            setHideDuration(3000);
-            window.location.reload();
-        } catch (error) {
-            console.error("Error creating size:", error);
-            setError("Failed to create size. Please try again.");
-            setNotifyMessage("Failed to create size.");
-            setOpenNotifier(true);
-            setHideDuration(3000);
-        }
-    };
+    try {
+      const response = await postsizeData({ name: sizeName });
+      
+      if (response.data.message === "Size name already exists") {
+        setError("This size name already exists.");
+        toast({
+          title: "Error",
+          description: "This size name already exists.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    // Close notification
-    const handleCloseNotifier = () => {
-        setOpenNotifier(false);
-    };
+      handleClose();
+      toast({
+        title: "Success",
+        description: `${sizeName} has been created.`,
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Error creating size:", error);
+      setError("Failed to create size. Please try again.");
+      toast({
+        title: "Error",
+        description: "Failed to create size. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
-    return (
-        <>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Button
-                    onClick={handleOpen}
-                    sx={{
-                        gap: 1,
-                        marginRight: "5px",
-                        background: 'rgba(0, 0, 0, 0.1)',
-                        color: "black",
-                        padding: "5px 10px",
-                        '&:hover': {
-                            background: 'rgba(0, 0, 0, 0.6)',
-                            color: 'white',
-                        }
-                    }}
-                >
-                    Create a Size
-                </Button>
-            </Box>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                        <h4>Create Size</h4>
-                        <GrClose onClick={handleClose} />
-                    </Box>
-                    <Box sx={{ display: "flex", flexDirection: 'column', width: '100%', justifyContent: "center", alignItems: 'center', height: '70%' }}>
-                        <TextField
-                            variant="standard"
-                            label="Enter Size Name"
-                            sx={{ margin: 2, width: "250px" }}
-                            value={sizeName} // Bind sizeName value
-                            onChange={(e) => setSizeName(e.target.value)} // Update sizeName on change
-                        />
-                        <Button variant='contained' sx={{ margin: 2 }} onClick={handleSubmit}>Submit</Button>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
-                    </Box>
-                </Box>
-            </Modal>
+  return (
+    <div className="flex justify-center mt-4">
+      <Button 
+        onClick={() => setOpen(true)}
+        variant="outline"
+        className="bg-background/10 hover:bg-background/60 hover:text-primary-foreground"
+      >
+        Create a Size
+      </Button>
 
-            {/* Snackbar for notifications */}
-            <Snackbar
-                open={openNotifier}
-                autoHideDuration={hideDuration}
-                onClose={handleCloseNotifier}
-            >
-                <Alert onClose={handleCloseNotifier} severity={error ? "error" : "success"} sx={{ width: '100%' }}>
-                    {notifyMessage}
-                </Alert>
-            </Snackbar>
-        </>
-    );
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle className="flex justify-between items-center">
+              Create Size
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6"
+                onClick={handleClose}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Input
+                placeholder="Enter Size Name"
+                value={sizeName}
+                onChange={(e) => setSizeName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+              />
+            </div>
+
+            {error && (
+              <div className="text-sm text-destructive bg-destructive/15 p-3 rounded-md">
+                {error}
+              </div>
+            )}
+
+            <Button onClick={handleSubmit} className="w-full">
+              Submit
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
 }

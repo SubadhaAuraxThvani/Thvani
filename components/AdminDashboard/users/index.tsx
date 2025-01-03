@@ -1,193 +1,177 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+"use client"
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
 import {
-    Box,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TablePagination,
-    TableRow,
-    TextField,
-    Typography,
-    Skeleton
-} from "@mui/material";
-import { MdDelete } from "react-icons/md";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import AdminDashboardLayout from "..";
 import { fetchUsersPaginationsData } from "@/apiRequest/users";
-import AdminDashboardLayout from '..';
 
-// Define a User type for type safety
-interface User {
-    _id: string;
-    name: string;
+interface Users {
+  _id: string;
+  full_name: string;
+  email: string;
 }
 
-const UsersTable = () => {
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
-    const [count, setCount] = useState(0);
-    const [deleteId, setDeleteId] = useState<string | null>(null);
-    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [search, setSearch] = useState('');
-    const [usersArray, setUsersArray] = useState<User[]>([]);  // Type usersArray as User[]
-    const [loading, setLoading] = useState(true);
+const TableSkeleton = () => (
+  <>
+    {[1, 2, 3, 4, 5].map((i) => (
+      <TableRow key={i}>
+        {[1, 2, 3, 4, 5].map((j) => (
+          <TableCell key={j}>
+            <div className="h-4 bg-muted animate-pulse rounded" />
+          </TableCell>
+        ))}
+      </TableRow>
+    ))}
+  </>
+);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            const data = await fetchUsersPaginationsData(page, limit, search);
-            if (data && data.data) {
-                setUsersArray(data.data);
-                setCount(data.count);
-                setLimit(data.limit);
-                setPage(data.page);
-            } else {
-                setUsersArray([]); // Safely handle empty data
-            }
-            setLoading(false);
-        };
-        fetchData();
-    }, [page, limit, search]);
+export default function TestimonialDashboard() {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [count, setCount] = useState(0);
+  const [search, setSearch] = useState("");
+  const [users, setUsers] = useState<Users[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    const handleDelete = async (id: string) => {
-        try {
-            // Delete logic here (use API to delete user)
-            setUsersArray(prevArray => prevArray.filter(user => user._id !== id));
-            setDeleteId(null);
-            setOpenDeleteDialog(false);
-            alert("User deleted successfully");
-        } catch (err) {
-            console.log(err);
-            alert("Failed to delete user");
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchUsersPaginationsData(page, limit, search);
+        if (data && data.data) {
+            setUsers(data.data);
+          setCount(data.count);
         }
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch testimonials",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
     };
+    fetchData();
+  }, [page, limit, search]);
 
-    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-        setPage(newPage + 1);
-    };
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setLimit(parseInt(event.target.value, 10));
-    };
+  // const renderRating = (rating: number) => (
+  //   <div className="flex items-center gap-0.5">
+  //     {Array.from({ length: 5 }).map((_, i) => (
+  //       <Star
+  //         key={i}
+  //         className={`h-4 w-4 ${
+  //           i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+  //         }`}
+  //       />
+  //     ))}
+  //   </div>
+  // );
 
-    const onClickDeleteTableRow = (id: string) => {
-        setOpenDeleteDialog(true);
-        setDeleteId(id);
-    };
+  return (
+    <AdminDashboardLayout>
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold tracking-tight">Users Management</h2>
+        </div>
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(event.target.value);
-    };
+        <div className="mb-6">
+          <Input
+            placeholder="Search Users..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="max-w-sm"
+          />
+        </div>
 
-    const handleSearch = () => {
-        setSearch(searchQuery);
-    };
-
-    const SkeletonLoader = () => (
-        <TableBody>
-            {[...Array(limit)].map((_, index) => (
-                <TableRow key={index}>
-                    <TableCell>
-                        <Skeleton variant="text" width={40} height={20} />
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[80px]">S.No</TableHead>
+                <TableHead>FUll Name</TableHead>
+                <TableHead>Email</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                <TableSkeleton />
+              ) : users.length > 0 ? (
+                users.map((user, index) => (
+                  <TableRow key={user._id}>
+                    <TableCell className="font-medium">
+                      {(page - 1) * limit + index + 1}
                     </TableCell>
-                    <TableCell>
-                        <Skeleton variant="text" width="60%" height={20} />
+                    <TableCell>{user.full_name}</TableCell>
+                    <TableCell className="max-w-[300px]">
+                      <p className="truncate">{user.email}</p>
                     </TableCell>
-                    <TableCell align="right">
-                        <Skeleton variant="rectangular" width={80} height={36} />
-                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center text-muted-foreground">
+                    No Users found
+                  </TableCell>
                 </TableRow>
-            ))}
-        </TableBody>
-    );
+              )}
+            </TableBody>
+          </Table>
 
-    const DeleteConfirmationDialog = () => (
-        <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
-            <DialogTitle>Delete Confirmation</DialogTitle>
-            <DialogContent>
-                Are you sure you want to delete this user?
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => setOpenDeleteDialog(false)}>Cancel</Button>
-                <Button onClick={() => handleDelete(deleteId as string)} color="error">Delete</Button>
-            </DialogActions>
-        </Dialog>
-    );
+          {users.length > 0 && (
+            <div className="p-4 border-t">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <p className="text-sm font-medium">Rows per page</p>
+                  <Select
+                    value={limit.toString()}
+                    onValueChange={(value) => {
+                      setLimit(Number(value));
+                      setPage(1);
+                    }}
+                  >
+                    <SelectTrigger className="h-8 w-[70px]">
+                      <SelectValue placeholder={limit} />
+                    </SelectTrigger>
+                    <SelectContent side="top">
+                      {[5, 10, 25, 50].map((value) => (
+                        <SelectItem key={value} value={value.toString()}>
+                          {value}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-    return (
-        <AdminDashboardLayout>
-            <Box sx={{ padding: 2 }}>
-                <Typography variant="h6">Users Table</Typography>
-                <Box sx={{ display: 'flex', marginBottom: 2, marginTop: 2 }}>
-                    <TextField
-                        label="Search User"
-                        variant="outlined"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        sx={{ marginRight: 2 }}
-                        size='small' />
-                    <Button variant="contained" onClick={handleSearch}>Search</Button>
-                </Box>
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="left">S.No</TableCell>
-                                <TableCell align="left">User Name</TableCell>
-                                <TableCell align="right">Action</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        {loading ? (
-                            <SkeletonLoader />
-                        ) : usersArray && usersArray.length > 0 ? (
-                            <TableBody>
-                                {usersArray.map((x: User, index: number) => (
-                                    <TableRow key={x._id}>
-                                        <TableCell align="left">
-                                            <Typography>{(page - 1) * limit + index + 1}</Typography>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Typography>{x.name}</Typography>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <Button
-                                                variant='contained'
-                                                sx={{ background: 'red' }}
-                                                onClick={() => onClickDeleteTableRow(x._id)}
-                                            >
-                                                <MdDelete fontSize={20} /> Delete
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        ) : (
-                            <Typography>No Results Found</Typography>
-                        )}
-                    </Table>
-                    {!loading && (
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                            component="div"
-                            count={count}
-                            page={page - 1}
-                            onPageChange={handleChangePage}
-                            rowsPerPage={limit}
-                            onRowsPerPageChange={handleChangeRowsPerPage} />
-                    )}
-                </TableContainer>
-            </Box>
-            <DeleteConfirmationDialog />
-        </AdminDashboardLayout>
-    );
-};
-
-export default UsersTable;
+                <div className="flex items-center space-x-6 lg:space-x-8">
+                  <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+                    Page {page} of {Math.ceil(count / limit)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </AdminDashboardLayout>
+  );
+}
