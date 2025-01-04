@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Edit, Trash2} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalTitle} from "@/components/ui/Modal";
 import {
   Table,
   TableBody,
@@ -43,9 +44,12 @@ interface Product {
   };
   size: string;
   stock: string;
-  image : [
-    
-  ]
+  images: [
+    {
+      _id: string;
+      image_url: string;
+    }
+  ];
 }
 
 const TableSkeleton = () => (
@@ -74,6 +78,11 @@ export default function ProductDashboard() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string>("");
+
+
+
   const { toast } = useToast();
 
   useEffect(() => {
@@ -98,6 +107,17 @@ export default function ProductDashboard() {
     };
     fetchData();
   }, [page, limit, search]);
+
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl); // Set the clicked image URL
+    setIsImageModalOpen(true); // Open the modal
+  };
+
+  const handleCloseModal = () => {
+    setIsImageModalOpen(false); // Close the modal
+    setSelectedImage(""); // Clear the selected image
+  };
 
   const handleDelete = async () => {
     if (!deleteId) return;
@@ -129,7 +149,7 @@ export default function ProductDashboard() {
       <div className="p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold tracking-tight">Product Management</h2>
-         <CreateProduct/>
+          <CreateProduct />
         </div>
 
         <div className="mb-6">
@@ -174,6 +194,16 @@ export default function ProductDashboard() {
                     <TableCell>{product.size}</TableCell>
                     <TableCell>{product.stock}</TableCell>
                     <TableCell className="text-right space-x-2">
+                      {product.images && product.images.length > 0 && (
+                        <img
+                          src={product.images[0].image_url}
+                          alt={product.name}
+                          className="w-16 h-16 object-cover cursor-pointer"
+                          onClick={() => handleImageClick(product.images[0].image_url)}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell className="text-right space-x-2">
                       <Button
                         variant="outline"
                         size="sm"
@@ -203,6 +233,26 @@ export default function ProductDashboard() {
               )}
             </TableBody>
           </Table>
+
+          <Modal isOpen={isImageModalOpen} onClose={handleCloseModal}>
+            <ModalContent>
+              <ModalHeader>
+                <ModalTitle>Product Image</ModalTitle>
+              </ModalHeader>
+              <ModalBody>
+                <img
+                  src={selectedImage}
+                  alt="Product"
+                  className="w-full h-auto object-contain"
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="outline" onClick={handleCloseModal}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
 
           {products.length > 0 && (
             <div className="p-4 border-t">

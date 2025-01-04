@@ -4,7 +4,7 @@ import Dashboard from "@/components/AdminDashboard/dashboard";
 export default function AdminDashboard() {
  
   return (
-    <AdminDashBoardData>
+<AdminDashBoardData>
       <Dashboard/>
     </AdminDashBoardData>  );
 }
