@@ -45,7 +45,7 @@ const Model = () => {
 
 const Leaf = () => {
   return (
-    <div className="absolute flex justify-center items-center w-full px-[10vh] h-[100vh] z-10">
+    <div className="absolute flex justify-center items-center w-full px-[16vh] h-[100vh] z-10">
       <div style={{ width: "100%", height: "400px" }}>
         <Canvas>
           <ambientLight intensity={1} />  
