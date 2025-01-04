@@ -14,7 +14,6 @@ const Model = () => {
     const updateScale = () => {
       const width = window.innerWidth;
 
-      // Adjust scale based on screen width
       if (width > 1600) {
         setScale({ x: 1.5, y: 1.5, z: 6 });
       } else if (width < 1600 && width > 1024) {
@@ -38,7 +37,7 @@ const Model = () => {
 
   if (gltf.scene) {
     gltf.scene.scale.set(scale.x, scale.y, scale.z);
-    gltf.scene.position.set(0, 0, 0); // Center the model
+    gltf.scene.position.set(0, 0, 0);
   }
 
   return <primitive ref={modelRef} object={gltf.scene} />;
@@ -46,7 +45,7 @@ const Model = () => {
 
 const Leaf = () => {
   return (
-    <div className="absolute flex justify-center items-center w-full h-[100vh] z-10">
+    <div className="absolute flex justify-center items-center w-full sm:px-[95vh] px-[10vh] h-[100vh] z-10">
       <div style={{ width: "100%", height: "400px" }}>
         <Canvas>
           <ambientLight intensity={1} />  
