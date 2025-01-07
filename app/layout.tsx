@@ -5,6 +5,9 @@ import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import StoreProvider from "./StoreProvider";
 import { Toaster } from "@/components/ui/toaster"
+import { auth } from "@/app/auth"
+import NextAuthProvider from "./providers/NextAuthProvider"
+
 
 export const metadata: Metadata = {
   title: "Thvani",
@@ -16,20 +19,26 @@ const font = Playfair_Display({
   weight: ['400', '700']
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await auth()
+
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </head>
       <body className={font.className}>
+        
         <StoreProvider>
           <Navbar />
-          {children}
+          <NextAuthProvider session={session}>
+            {children}
+          </NextAuthProvider>
           <Toaster />
           <Footer />
         </StoreProvider>

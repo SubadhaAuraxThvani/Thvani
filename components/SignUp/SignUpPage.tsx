@@ -1,40 +1,64 @@
-"use client";
-
+"use client"
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaChevronRight, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
-import img1 from '@/images/other/image2.png';
+import img1 from "@/images/other/image2.png";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { signupUser } from '@/apiRequest/signup';
-import { useRouter } from 'next/navigation';
+import { signupUser } from "@/apiRequest/signup";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { toast } from "@/hooks/use-toast";
+import { signIn, useSession } from "next-auth/react";
 
-// Define an interface for the API error response
+
 interface ApiError {
     response?: {
         status: number;
+        data?: {
+            message?: string; // Add the message field for error responses
+        };
     };
 }
 
 export default function SignUpPage() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [error, setError] = useState("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false); // Loading state for preventing input
     const router = useRouter();
+    const { data: session } = useSession()
+
+
+    React.useEffect(() => {
+        if (session) {
+            router.push("/profile")
+        }
+    }, [session, router])
 
     useEffect(() => {
-        const token = Cookies.get('authToken');
+        const token = Cookies.get("authToken");
         if (token) {
-            router.push('/');
+            router.push("/");
         }
     }, []);
 
-    const handleGoogleLogin = () => {
-        window.location.href = "/auth/google";
+    const handleGoogleLogin = async () => {
+        try {
+            const res = await signIn('google', {
+                callbackUrl: '/',
+            });
+            console.log(res);
+            
+        } catch (error) {
+            toast({
+                variant: "newVariant",
+                title: "An error occurred during Google sign-in",
+            });
+        }
     };
 
     const handleFacebookLogin = () => {
@@ -47,33 +71,68 @@ export default function SignUpPage() {
         const full_name = `${firstName} ${lastName}`;
         const data = { full_name, email, password, phone_number: phoneNumber };
 
+        setLoading(true); // Start loading state
+
         try {
             const response = await signupUser(data);
+            console.log("API Response:", response); // Log the response object
 
-            if (response.status === 201) {
-                window.location.href = "/login";
+            // If the signup is successful, show success message
+            if (response && response.message) {
+                toast({
+                    variant: "newVariant",
+                    title: response.message, // Display the success message from the API
+                });
+            } else {
+                toast({
+                    variant: "newVariant",
+                    title: "Something went wrong. Please try again.", // Fallback error message
+                });
             }
         } catch (err) {
-            // Type guard to check if err is an ApiError
-            if (isApiError(err) && err.response?.status === 409) {
-                setError("Email already registered. Please login.");
-                setTimeout(() => {
-                    window.location.href = "/login";
-                }, 3000);
+            console.error("Sign up error:", err); // Log the error for debugging
+
+            // Type guard to handle API error and display specific error messages
+            if (isApiError(err)) {
+                const errorMessage = err.response?.data?.message || "Something went wrong.";
+                let toastTitle = "Error occurred. Please try again.";
+
+                // Map specific error messages to display more descriptive toast
+                if (errorMessage.includes("Email already registered")) {
+                    toastTitle = "Email is already registered. Please login.";
+                } else if (errorMessage.includes("Phone number already exists")) {
+                    toastTitle = "Phone number is already registered. Please use a different number.";
+                } else {
+                    toastTitle = errorMessage; // Display the exact error message
+                }
+
+                toast({
+                    variant: "newVariant",
+                    title: toastTitle, // Display the specific error message in the toast
+                });
             } else {
-                setError("Something went wrong. Please try again.");
+                toast({
+                    variant: "newVariant",
+                    title: "Something went wrong. Please try again.", // General error message
+                });
             }
+        } finally {
+            setLoading(false); // Stop loading state after the request finishes
         }
     };
 
-    // Type guard function
+    // Type guard function to check if the error is from the API
     function isApiError(error: unknown): error is ApiError {
         return (
-            typeof error === 'object' &&
+            typeof error === "object" &&
             error !== null &&
-            'response' in error &&
-            typeof (error as ApiError).response === 'object'
+            "response" in error &&
+            typeof (error as ApiError).response === "object"
         );
+    }
+
+    if (session) {
+        return null
     }
 
     return (
@@ -107,6 +166,7 @@ export default function SignUpPage() {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             required
+                            disabled={loading} // Disable input fields while loading
                         />
                     </div>
                     <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
@@ -117,6 +177,7 @@ export default function SignUpPage() {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                             required
+                            disabled={loading} // Disable input fields while loading
                         />
                     </div>
                     <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
@@ -127,6 +188,7 @@ export default function SignUpPage() {
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             required
+                            disabled={loading} // Disable input fields while loading
                         />
                     </div>
                     <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
@@ -137,6 +199,7 @@ export default function SignUpPage() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            disabled={loading} // Disable input fields while loading
                         />
                     </div>
                     <div className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg">
@@ -147,17 +210,24 @@ export default function SignUpPage() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            disabled={loading} // Disable input fields while loading
                         />
                     </div>
 
                     <div className="flex sm:flex-row flex-col justify-between w-full gap-3 sm:gap-5 mt-4">
                         <div className="bg-color1 h-12 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:opacity-90">
-                            <button type="submit" className="w-full h-full">Create Account</button>
+                            <button type="submit" className="w-full h-full" disabled={loading}> {/* Disable button while loading */}
+                                {loading ? "Creating Account..." : "Create Account"}
+                            </button>
                         </div>
                         <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
                             <p className="text-color1 text-sm sm:text-base">Already have an account?</p>
                             <Link href="/login">
-                                <button className="underline text-sm sm:text-base text-left hover:opacity-80">SIGN IN</button>
+                                <p className="inline-flex text-black items-center font-semibold text-sm sm:text-base border-b border-current">
+                                    SIGN IN
+                                    <FaChevronRight size={15} className="ml-1" />
+                                    <FaChevronRight size={15} />
+                                </p>
                             </Link>
                         </div>
                     </div>
@@ -174,14 +244,14 @@ export default function SignUpPage() {
                 <p className="font-normal text-lg sm:text-xl">Experience Fashion with Purpose.</p>
                 <p className="text-sm sm:text-base">
                     At THVANI, we believe that fashion should do more than just look good—it should feel good, too. By
-                    signing up, you`&apos`re becoming part of a community that values sustainability, innovation, and timeless
+                    signing up, you`&apos;re becoming part of a community that values sustainability, innovation, and timeless
                     style.
                 </p>
                 <Link href="/women">
                     <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current hover:opacity-80">
                         Start Shopping Now
-                        <FaChevronRight size={15} className="ml-1" />
-                        <FaChevronRight size={15} />
+                        <FaChevronRight size={15} className="ml-2" />
+                        <FaChevronRight size={15} className="ml-2" />
                     </p>
                 </Link>
             </div>
