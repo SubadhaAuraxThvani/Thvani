@@ -164,11 +164,14 @@ const Footer = () => {
               <span>
                 <Link href="/term">Terms and Conditions</Link>
               </span>
+              <span>
+                <Link href="/exchange-policy">Exchange Policy</Link>
+              </span>
             </div>
           </div>
           <div className="flex justify-center">
             <span className="lg:text-[1.1vw] text-sm text-white sm:text-center mt-4 sm:mt-0">
-              © 2024 Thvani Earth Craft
+              © 2025 Thvani Earth Craft
             </span>
           </div>
         </div>

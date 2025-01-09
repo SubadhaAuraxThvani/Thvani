@@ -29,19 +29,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      </head>
       <body className={font.className}>
-        
-        <StoreProvider>
-          <Navbar />
-          <NextAuthProvider session={session}>
+        <NextAuthProvider session={session}>
+          <StoreProvider>
+            <Navbar />
             {children}
-          </NextAuthProvider>
-          <Toaster />
-          <Footer />
-        </StoreProvider>
+            <Footer />
+            <Toaster />
+          </StoreProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

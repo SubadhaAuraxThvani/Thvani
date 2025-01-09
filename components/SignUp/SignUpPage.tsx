@@ -9,7 +9,7 @@ import { signupUser } from "@/apiRequest/signup";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "@/hooks/use-toast";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react"
 
 
 interface ApiError {
@@ -27,20 +27,21 @@ export default function SignUpPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
-    const [error, setError] = useState<string>("");
+    const [error] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false); // Loading state for preventing input
     const router = useRouter();
     const { data: session } = useSession()
 
-
     React.useEffect(() => {
+        console.log("Session Debug:", session);
         if (session) {
-            router.push("/profile")
+            router.push("/profile");
         }
-    }, [session, router])
+    }, [session, router]);
 
     useEffect(() => {
         const token = Cookies.get("authToken");
+        console.log("Token Debug:", token);
         if (token) {
             router.push("/");
         }
@@ -58,12 +59,22 @@ export default function SignUpPage() {
                 variant: "newVariant",
                 title: "An error occurred during Google sign-in",
             });
+            console.log(error);
+            
         }
     };
 
-    const handleFacebookLogin = () => {
-        window.location.href = "/auth/facebook";
-    };
+    //  const handleFacebookLogin = async () => {
+    //    try {
+    //      await signIn("facebook", { callbackUrl: "/profile" });
+    //    } catch (error) {
+    //      console.log(error);
+    //      toast({
+    //        variant: "newVariant",
+    //        title: "Failed to sign in with Facebook",
+    //      });
+    //    }
+    //  };
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -131,10 +142,6 @@ export default function SignUpPage() {
         );
     }
 
-    if (session) {
-        return null
-    }
-
     return (
         <div className="flex flex-col lg:flex-row w-full py-10 px-5 sm:px-10 md:px-20 lg:px-[100px] gap-5">
             <div className="flex flex-col gap-5 p-5 sm:p-10 w-full lg:w-1/2">
@@ -151,7 +158,7 @@ export default function SignUpPage() {
 
                 <div
                     className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg cursor-pointer hover:bg-gray-50"
-                    onClick={handleFacebookLogin}
+                    // onClick={handleFacebookLogin}
                 >
                     <FaFacebook size={28} color="blue" />
                     <p className="text-base sm:text-lg">Connect With Facebook</p>
@@ -223,11 +230,13 @@ export default function SignUpPage() {
                         <div className="text-color1 text-base sm:text-lg py-2 sm:py-3">
                             <p className="text-color1 text-sm sm:text-base">Already have an account?</p>
                             <Link href="/login">
-                                <p className="inline-flex text-black items-center font-semibold text-sm sm:text-base border-b border-current">
-                                    SIGN IN
-                                    <FaChevronRight size={15} className="ml-1" />
-                                    <FaChevronRight size={15} />
-                                </p>
+                                <button className="underline text-sm sm:text-base text-left">
+                                    <p className="inline-flex items-center text-black font-semibold text-sm sm:text-base border-b border-current">
+                                        SIGN IN
+                                        <FaChevronRight size={15} className="ml-1" />
+                                        <FaChevronRight size={15} />
+                                    </p>
+                                </button>
                             </Link>
                         </div>
                     </div>

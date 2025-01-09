@@ -12,143 +12,104 @@ import { toast } from "@/hooks/use-toast";
 import { signIn, useSession } from "next-auth/react"
 
 
-interface ApiError {
-  response?: {
-    status: number;
-    data?: {
-      message?: string;
-    };
-  };
-}
-
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [error] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(true); // To toggle password visibility
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const router = useRouter();
-  const { data: session } = useSession()
+  const { status } = useSession();
 
+  // Redirect if already authenticated
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    if (token) {
-      router.push("/");
+    if (status === "authenticated") {
+      router.push("/profile");
+      router.refresh(); // Force a router refresh
     }
-  }, []);
-
-  React.useEffect(() => {
-    if (session) {
-      router.push("/profile")
-    }
-  }, [session, router])
+  }, [status, router]);
 
   const handleGoogleLogin = async () => {
     try {
-      await signIn("google", { callbackUrl: "/profile" })
+      await signIn("google", { callbackUrl: "/profile" });
     } catch (error) {
+      console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to sign in with Google",
-      })
+        variant: "newVariant",
+        title: "Failed to sign in with Google",
+      });
     }
-  }
-
-  if (session) {
-    return null
-  }
-
-  const handleFacebookLogin = () => {
-    window.location.href = "/auth/facebook";
   };
+
+  // const handleFacebookLogin = async () => {
+  //   try {
+  //     await signIn("facebook", { callbackUrl: "/profile" });
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast({
+  //       variant: "newVariant",
+  //       title: "Failed to sign in with Facebook",
+  //     });
+  //   }
+  // };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    setLoading(true); // Start loading state
+    setLoading(true);
 
     try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      })
+      // Step 1: Your custom API login
+      const apiResponse = await LoginUser({ email, password });
+      console.log('API Login successful:', apiResponse);
 
-      if (result?.error) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Invalid email or password",
-        })
-      } else {
-        router.push("/profile")
+      if (apiResponse.token) {
+        // Step 2: Set the cookie
+        Cookies.set("authToken", apiResponse.token, { expires: 7 });
+
+        // Step 3: NextAuth signin
+        const signInResult = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        console.log('NextAuth Sign In Result:', signInResult);
+
+        if (signInResult?.ok) {
+          // Step 4: Redirect using multiple methods to ensure it works
+          toast({
+            variant: "newVariant",
+            title: "Login successful",
+          });
+
+          // Method 1: Direct window location change
+          window.location.href = "/profile";
+
+          // Method 2: Router push as backup
+          router.push("/profile");
+          router.refresh();
+        }
       }
     } catch (error) {
+      console.error("Login error:", error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong",
-      })
+        variant: "newVariant",
+        title: "Login failed. Please try again.",
+      });
     } finally {
-      setLoading(false)
-    }
-
-    try {
-      const response = await LoginUser({ email, password });
-      console.log("API Response:", response); // Log the response object
-
-      if (response && response.message) {
-        toast({
-          variant: "newVariant",
-          title: response.message, // Display the success message from the API
-        });
-        // On success, redirect to home page or dashboard
-        router.push("/");
-      } else {
-        toast({
-          variant: "newVariant",
-          title: "Something went wrong. Please try again.",
-        });
-      }
-    } catch (err) {
-      console.error("Login error:", err); // Log the error for debugging
-
-      if (isApiError(err)) {
-        const errorMessage = err.response?.data?.message || "Something went wrong.";
-        let toastTitle = "Error occurred. Please try again.";
-
-        if (errorMessage.includes("Invalid email or password")) {
-          toastTitle = "Incorrect email or password.";
-        } else {
-          toastTitle = errorMessage;
-        }
-
-        toast({
-          variant: "newVariant",
-          title: toastTitle,
-        });
-      } else {
-        toast({
-          variant: "newVariant",
-          title: "Something went wrong. Please try again.",
-        });
-      }
-    } finally {
-      setLoading(false); // Stop loading state after the request finishes
+      setLoading(false);
     }
   };
 
-  // Type guard function to check if the error is from the API
-  function isApiError(error: unknown): error is ApiError {
-    return (
-      typeof error === "object" &&
-      error !== null &&
-      "response" in error &&
-      typeof (error as ApiError).response === "object"
-    );
+  // Show loading state while checking session
+  if (status === "loading") {
+    return <div>Loading...</div>;
   }
 
+  // Don't render the login form if already authenticated
+  if (status === "authenticated") {
+    return null;
+  }
   return (
     <div className="flex flex-col lg:flex-row w-full py-10 px-5 sm:px-10 md:px-20 lg:px-[100px] gap-5">
       <div className="flex flex-col gap-5 p-5 sm:p-10 w-full lg:w-1/2">
@@ -165,7 +126,7 @@ export default function LoginPage() {
 
         <div
           className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg cursor-pointer hover:bg-gray-50"
-          onClick={handleFacebookLogin}
+          // onClick={handleFacebookLogin}
         >
           <FaFacebook size={28} color="blue" />
           <p className="text-base sm:text-lg">Connect With Facebook</p>
@@ -216,12 +177,11 @@ export default function LoginPage() {
             <p className="text-color1 text-sm sm:text-base">Don&apos;t have an account?</p>
             <Link href="/signup">
               <button className="underline text-sm sm:text-base text-left">
-              <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
+                <p className="inline-flex items-center font-semibold text-sm sm:text-base border-b border-current">
                   SIGN UP
-              
-              <FaChevronRight size={15} className="ml-1" />
-              <FaChevronRight size={15} />
-              </p>
+                  <FaChevronRight size={15} className="ml-1" />
+                  <FaChevronRight size={15} />
+                </p>
               </button>
             </Link>
           </div>

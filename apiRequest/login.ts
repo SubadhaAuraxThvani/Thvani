@@ -1,28 +1,32 @@
-import axios from "axios";
-import { adminCookie, origin } from "./config";
-import Cookies from "js-cookie";
 
-export const LoginUser = async (data: any) => {
-  const reqData = JSON.stringify(data); 
+// apiRequest/login.ts
+import axios from 'axios';
+
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export const LoginUser = async (credentials: LoginCredentials) => {
   try {
-    const response = await axios({
-      url: `${origin}/api/v1/auth/login`,
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: reqData,
-    });
-
-    const responseData = await response?.data;
-
-    if (responseData?.token) {
-      Cookies.set(adminCookie, responseData.token, { expires: 1 }); 
+    const response = await axios.post(
+      `${API_BASE_URL}/auth/login`,
+      credentials,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    // Log the full error response for debugging
+    if (axios.isAxiosError(error)) {
+      console.log('Error Response Data:', error.response?.data);
+      console.log('Error Status:', error.response?.status);
     }
-
-    return responseData;
-  } catch (err: any) {
-    console.error("Login API call error:", err?.message);
-    throw err;
+    throw error;
   }
 };

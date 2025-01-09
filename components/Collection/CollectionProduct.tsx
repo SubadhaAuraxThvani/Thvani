@@ -27,7 +27,7 @@ const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text }) => {
                     <span className="pl-2 text-gray-700">256</span>
                 </div>
                 <div>
-                    <span className="text-xs md:text-sm lg:text-base text-gray-800 font-medium">{text}</span>
+                    <span className="text-xs md:text-sm lg:text-[1.1vw] text-gray-800 font-bold">{text}</span>
                 </div>
                 <div>
                     <p className="text-sm md:text-base lg:text-lg font-semibold text-gray-900">$10</p>
