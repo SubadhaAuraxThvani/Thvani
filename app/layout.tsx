@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar/Navbar";
-import { Playfair_Display } from "next/font/google"
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import StoreProvider from "./StoreProvider";
-import { Toaster } from "@/components/ui/toaster"
-import { auth } from "@/app/auth"
-import NextAuthProvider from "./providers/NextAuthProvider"
-
+import { Toaster } from "@/components/ui/toaster";
+import { auth } from "@/app/auth";
+import NextAuthProvider from "./providers/NextAuthProvider";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Thvani",
@@ -15,21 +15,46 @@ export const metadata: Metadata = {
 };
 
 const font = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700']
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const session = await auth()
+  const session = await auth();
 
   return (
     <html lang="en">
       <body className={font.className}>
+        <Script
+          id="facebook-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+              n.callMethod.apply(n, arguments) : n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '904017971814600');
+            fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=904017971814600&ev=PageView&noscript=1"
+          />
+        </noscript>
         <NextAuthProvider session={session}>
           <StoreProvider>
             <Navbar />
