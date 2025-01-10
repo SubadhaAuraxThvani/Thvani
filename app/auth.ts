@@ -57,7 +57,7 @@ export const config = {
               secure: true,
               sameSite: "lax",
               path: "/",
-              domain: "https://thvaniearthcraft.com", // Ensure this is correct
+              domain: "thvaniearthcraft.com", // Ensure this is correct
             });
 
             return {
