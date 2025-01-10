@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
-import type { NextAuthConfig } from "next-auth";
 import { cookies } from "next/headers";
+import type { NextAuthConfig } from "next-auth";
 
 interface ApiLoginResponse {
   message: string;
@@ -19,7 +19,7 @@ interface ApiLoginResponse {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const config = {
+export const config: NextAuthConfig = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -51,12 +51,13 @@ export const config = {
           const data: ApiLoginResponse = await response.json();
 
           if (response.ok && data) {
-            // Store the token in a cookie
+            // Store the token in a cookie with domain and path
             cookies().set("authToken", data.token, {
               httpOnly: true,
-              secure: process.env.NODE_ENV === "production",
+              secure: true,
               sameSite: "lax",
               path: "/",
+              domain: "thvaniearthcraft.com", // Ensure this is correct
             });
 
             return {
@@ -117,6 +118,6 @@ export const config = {
       cookies().delete("authToken");
     },
   },
-} satisfies NextAuthConfig;
+};
 
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+export default NextAuth(config);
