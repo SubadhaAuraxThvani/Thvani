@@ -114,6 +114,7 @@ export const config = {
   },
   events: {
     signOut: async () => {
+      // Clear the auth token cookie on signout
       cookies().delete("authToken");
     },
   },
