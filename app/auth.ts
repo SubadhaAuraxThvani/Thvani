@@ -62,13 +62,12 @@ export const config = {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       async profile(profile) {
         try {
-          const response = await fetch(`${API_BASE_URL}/auth/google`, {
+          const response = await fetch(`${API_BASE_URL}/auth/facebook`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              email: profile.email,
               full_name: profile.name,
             }),
           });
