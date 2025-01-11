@@ -47,14 +47,14 @@ export default async function RootLayout({
             `,
           }}
         />
-        <noscript>
+        {/* <noscript>
           <img
             height="1"
             width="1"
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=904017971814600&ev=PageView&noscript=1"
           />
-        </noscript>
+        </noscript> */}
         <NextAuthProvider session={session}>
           <StoreProvider>
             <Navbar />
