@@ -66,7 +66,7 @@ export default function SignUpPage() {
 
      const handleFacebookLogin = async () => {
        try {
-         await signIn("facebook", { callbackUrl: "/profile" });
+         await signIn("facebook", { callbackUrl: "/" });
        } catch (error) {
          console.log(error);
          toast({
