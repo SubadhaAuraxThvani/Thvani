@@ -89,8 +89,10 @@ export const config = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              email: user.email,
-              password: "googlepassword",
+              full_name:user.name,
+              email:user.email,
+              password:"password",
+              phone_number: "1234567890",
             }),
           });
 
