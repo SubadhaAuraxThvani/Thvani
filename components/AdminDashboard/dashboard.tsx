@@ -9,8 +9,6 @@ import {
   FaComments,
   FaCogs,
   FaShippingFast,
-  FaFileInvoiceDollar,
-  FaChartBar,
   FaQuestionCircle,
 } from "react-icons/fa";
 
