@@ -24,10 +24,74 @@ export const config = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      async profile(profile) {
+        try {
+          const response = await fetch(`${API_BASE_URL}/auth/google`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: profile.email,
+              full_name: profile.name,
+            }),
+          });
+
+          const data = await response.json();
+
+          return {
+            id: data.user.id,
+            name: data.user.full_name,
+            email: data.user.email,
+            phone_number: data.user.phone_number,
+            token: data.token,
+          };
+        } catch (error) {
+          console.log(error);
+          return {
+            id: profile.sub,
+            name: profile.name,
+            email: profile.email,
+            phone_number: `google_${Date.now()}`,
+          };
+        }
+      },
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      async profile(profile) {
+        try {
+          const response = await fetch(`${API_BASE_URL}/auth/google`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: profile.email,
+              full_name: profile.name,
+            }),
+          });
+
+          const data = await response.json();
+
+          return {
+            id: data.user.id,
+            name: data.user.full_name,
+            email: data.user.email,
+            phone_number: data.user.phone_number,
+            token: data.token,
+          };
+        } catch (error) {
+          console.log(error);
+          return {
+            id: profile.sub,
+            name: profile.name,
+            email: profile.email,
+            phone_number: `Facebook_${Date.now()}`,
+          };
+        }
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -51,13 +115,12 @@ export const config = {
           const data: ApiLoginResponse = await response.json();
 
           if (response.ok && data) {
-            // Store the token in a cookie
             cookies().set("authToken", data.token, {
               httpOnly: true,
               secure: true,
               sameSite: "lax",
               path: "/",
-              domain: "thvaniearthcraft.com", // Ensure this is correct
+              domain: "thvaniearthcraft.com",
             });
 
             return {
@@ -88,7 +151,6 @@ export const config = {
         token.token = user.token;
       }
 
-      // Handle session updates
       if (trigger === "update" && session) {
         Object.assign(token, session);
       }
@@ -110,11 +172,10 @@ export const config = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
   },
   events: {
     signOut: async () => {
-      // Clear the auth token cookie on signout
       cookies().delete("authToken");
     },
   },
