@@ -64,17 +64,17 @@ export default function SignUpPage() {
         }
     };
 
-    //  const handleFacebookLogin = async () => {
-    //    try {
-    //      await signIn("facebook", { callbackUrl: "/profile" });
-    //    } catch (error) {
-    //      console.log(error);
-    //      toast({
-    //        variant: "newVariant",
-    //        title: "Failed to sign in with Facebook",
-    //      });
-    //    }
-    //  };
+     const handleFacebookLogin = async () => {
+       try {
+         await signIn("facebook", { callbackUrl: "/profile" });
+       } catch (error) {
+         console.log(error);
+         toast({
+           variant: "newVariant",
+           title: "Failed to sign in with Facebook",
+         });
+       }
+     };
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -158,7 +158,7 @@ export default function SignUpPage() {
 
                 <div
                     className="flex items-center border-2 w-full p-2 gap-3 sm:gap-5 rounded-lg cursor-pointer hover:bg-gray-50"
-                    // onClick={handleFacebookLogin}
+                    onClick={handleFacebookLogin}
                 >
                     <FaFacebook size={28} color="blue" />
                     <p className="text-base sm:text-lg">Connect With Facebook</p>
