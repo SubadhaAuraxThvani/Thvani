@@ -81,46 +81,6 @@ export const config = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider === "google") {
-        try {
-          // Call your backend API to create/update user
-          const response = await fetch(`${API_BASE_URL}/auth/signup`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              full_name:user.name,
-              email:user.email,
-              password:"password",
-              phone_number: "1234567890",
-            }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok && data.token) {
-            // Store the token in a cookie
-            cookies().set("authToken", data.token, {
-              httpOnly: true,
-              secure: true,
-              sameSite: "lax",
-              path: "/",
-              domain: "thvaniearthcraft.com",
-            });
-
-            // Add the token to the user object so it's available in the jwt callback
-            user.token = data.token;
-            return true;
-          }
-          return false;
-        } catch (error) {
-          console.error("Error during Google sign up:", error);
-          return false;
-        }
-      }
-      return true;
-    },
-
     async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;

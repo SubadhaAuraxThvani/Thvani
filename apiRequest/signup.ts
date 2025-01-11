@@ -24,7 +24,7 @@ export const signupUser = async (data: any) => {
       return responseData;
     } catch (err: any) {
       console.error("Signup API call error:", err?.message);
-      throw err;
+      throw err;z
     }
   };
   
