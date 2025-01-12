@@ -15,7 +15,7 @@ export default function CheckOutPage() {
                     <div className="flex-shrink-0">
                         <TbCircleNumber1Filled size={32} />
                     </div>
-                    <div className="flex flex-col gap-3 w-full">
+                    <div className="font-lato flex flex-col gap-3 w-full">
                         <label className="text-lg font-semibold">Enter Your Email</label>
                         <p className="text-sm">
                             Already have an account? <span className="underline">Log In</span>

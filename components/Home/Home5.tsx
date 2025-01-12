@@ -2,6 +2,9 @@ import Image from "next/image";
 import img9 from "@/images/Home/img9.png";
 import img10 from "@/images/Home/img10.png";
 import img11 from "@/images/Home/img11.png";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
 
 export default function Home5() {
     return (
@@ -20,7 +23,7 @@ export default function Home5() {
                         className="mx-auto w-full aspect-[1/1] object-cover"
                     />
                     <h1 className="text-lg md:text-xl lg:text-[1.2vw]">MATERIAL INNOVATION</h1>
-                    <p className="px-5 md:px-0 lg:text-[1vw] font-medium">
+                    <p className={`${lato.className} px-5 md:px-0 lg:text-[1vw] font-medium`}>
                         We extract cellulose from banana, bamboo, and soy, converting them into filaments and yarn. These are then handwoven into sustainable fabrics, reflecting our commitment to material innovation.
                     </p>
                 </div>

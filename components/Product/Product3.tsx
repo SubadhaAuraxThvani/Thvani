@@ -3,6 +3,11 @@
 import { useState } from "react";
 import HowItsMadeCarousel from "@/components/Product/HowItMade/How";
 import WhereItsMadeCarousel from "@/components/Product/WhereMade/Where";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
+
+
 const Product3: React.FC = () => {
     const [activeCarousel, setActiveCarousel] = useState<"how" | "where">("how");
 
@@ -17,7 +22,7 @@ const Product3: React.FC = () => {
                     Everything we make has an impact on the planet.
                 </h1>
             </div>
-            <div className="flex font-bold w-full justify-center md:justify-evenly px-4 md:px-[100px] lg:px-[300px] xl:px-[450px] text-lg">
+            <div className={`${lato.className} flex font-bold w-full justify-center md:justify-evenly px-4 md:px-[100px] lg:px-[300px] xl:px-[450px] text-lg`}>
                 <div className="flex cursor-pointer" onClick={() => handleTextClick("how")}>
                     <p className={`relative ${activeCarousel === "how" ? "underline" : ""} pb-1`}>How its made</p>
                 </div>

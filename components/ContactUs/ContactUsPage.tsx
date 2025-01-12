@@ -35,7 +35,7 @@ export default function ContactUsPage() {
             <div className="flex flex-col items-center py-[50px] sm:py-[80px] px-6 sm:px-8 lg:px-[100px]">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold">Reach Out Us</p>
-                    <p className="text-base sm:text-lg lg:text-xl">
+                    <p className="font-lato text-base sm:text-lg lg:text-xl">
                         For further assistance with your order, please reach out via the form below.
                     </p>
                 </div>

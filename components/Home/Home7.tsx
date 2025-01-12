@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
 
 export default function Home7() {
     return (
@@ -13,10 +16,9 @@ export default function Home7() {
             </div>
             <div className="flex w-full lg:mt-0 mt-10 mb-8 lg:w-1/3 justify-center lg:mx-[100px] flex-col gap-5">
                 <span className="text-2xl lg:text-[2vw] leading-tight">Our Uniqueness: Fashion Rooted in Natures Wisdom</span>
-                <span className="text-sm lg:text-[.9vw] leading-tight">We go beyond the typical eco-friendly approach by transforming these materials through state-of-the-art processes, balancing craftsmanship with modern technology.</span>
+                <span className={`${lato.className} text-sm lg:text-[.9vw] leading-tight`}>We go beyond the typical eco-friendly approach by transforming these materials through state-of-the-art processes, balancing craftsmanship with modern technology.</span>
                 <div className="text-color4 border-2 w-[50%] sm:w-[30%] lg:w-[10vw] p-2 text-center rounded-3xl border-color4 mx-auto lg:mx-0">
                     <Link href="/women">
-
                         <button className="text-lg lg:text-[1vw]">SHOP NOW</button>
                     </Link>
                 </div>

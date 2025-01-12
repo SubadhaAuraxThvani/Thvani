@@ -9,12 +9,12 @@ export default function Cal() {
         <div className="flex flex-col py-10 px-5 lg:flex-row">
             <div className="flex w-full text-center justify-center items-center gap-5 flex-col">
                 <h1 className="text-3xl lg:text-4xl font-bold">Sustainable Footprint Calculator</h1>
-                <h1 className="text-xl lg:text-2xl">Tracks the carbon and water footprint of our products.</h1>
+                <h1 className="font-lato text-xl lg:text-2xl">Tracks the carbon and water footprint of our products.</h1>
 
-                <p className="text-md w-full md:w-[50vw] lg:w-[30vw] text-left">
+                <p className="font-lato text-md w-full md:w-[50vw] lg:w-[30vw] text-left">
                     We calculate how the impact of producing Ref products compares with most clothes bought in the United States. We share RefScale results for each product we make on our website and publish the totals in our Sustainability Report.
                 </p>
-                <p className="text-md w-full md:w-[50vw] lg:w-[30vw] text-left">
+                <p className="font-lato text-md w-full md:w-[50vw] lg:w-[30vw] text-left">
                     Sustainability takes into consideration impacts from most processes in the products life cycle.
                 </p>
 
@@ -52,7 +52,7 @@ export default function Cal() {
 
                 <div className="flex flex-col pt-10">
                     <p className="text-2xl lg:text-3xl font-bold">Product Life Cycle</p>
-                    <div className="flex flex-col lg:flex-row gap-10 pt-10">
+                    <div className="font-lato flex flex-col lg:flex-row gap-10 pt-10">
                         <div className="flex flex-col gap-5 font-bold">
                             <p>INPUTS</p>
                             <p>Water</p>
@@ -112,7 +112,7 @@ export default function Cal() {
                     </div>
                 </div>
 
-                <div className="flex flex-col pt-10 gap-10 md:px-20 lg:px-60">
+                <div className="font-lato flex flex-col pt-10 gap-10 md:px-20 lg:px-60">
                     <h1 className="text-lg lg:text-xl font-medium">What impacts do we measure?</h1>
                     <h1 className="text-lg font-medium text-left">CO2</h1>
                     <p className="text-md lg:text-lg font-medium text-left">

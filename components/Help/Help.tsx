@@ -15,12 +15,12 @@ import Product2 from "../Product/Product2";
 
 export default function HelpPage() {
     return (
-        <div className="flex flex-col  min-h-screen">
+        <div className="font-inter flex flex-col  min-h-screen">
             <div className="flex flex-col md:flex-row bg-color5 p-6 md:px-[100px] w-full justify-center items-center gap-6 md:gap-10">
                 <div className="flex flex-col gap-2 w-full md:w-1/2 text-center md:text-left">
                     <p className="text-xl font-medium ">Thvani</p>
-                    <p className="text-4xl font-extrabold ">Help Center</p>
-                    <p className="text-lg ">We are here to help you</p>
+                    <p className="text-4xl font-inter ">Help Center</p>
+                    <p className="text-lg font-inter">We are here to help you</p>
                 </div>
                 <div className="h-12 flex w-full md:w-1/2 flex-row bg-white  shadow-md px-4 items-center">
                     <CiSearch className="text-2xl" />
@@ -31,33 +31,33 @@ export default function HelpPage() {
                 </div>
             </div>
             <div className="flex flex-col px-6 md:px-[50px] lg:px-[100px] py-[30px] md:py-[50px]">
-                <p className="text-2xl md:text-3xl font-bold py-[10px]">Quick Actions</p>
+                <p className="font-inter text-2xl md:text-3xl py-[10px]">Quick Actions</p>
                 <div className="flex flex-col md:flex-row py-[30px] md:py-[50px] w-full justify-center md:justify-evenly items-center gap-5">
                     <div className="flex w-full md:w-1/3 flex-col border-[1px] p-6 md:p-[50px] gap-2 border-black justify-center items-center min-h-[300px]">
                         <IoLocationOutline size={32} />
-                        <p className="font-bold text-lg">Track a Package</p>
+                        <p className=" text-lg">Track a Package</p>
                         <p className="text-sm text-center">You ll be prompted to sign in first</p>
                     </div>
                     <div className="flex w-full md:w-1/3 flex-col border-[1px] p-6 md:p-[50px] gap-2 border-black justify-center items-center min-h-[300px]">
                         <FiPackage size={32} />
-                        <p className="font-bold text-lg">Start an Exchange</p>
+                        <p className=" text-lg">Start an Exchange</p>
                         <p className="text-sm text-center">Have your order number ready</p>
                     </div>
                     <div className="flex w-full md:w-1/3 flex-col border-[1px] p-6 md:p-[50px] gap-2 border-black justify-center items-center min-h-[300px]">
                         <TbSquares size={32} />
-                        <p className="font-bold text-lg">Bulk Order</p>
+                        <p className=" text-lg">Bulk Order</p>
                         <p className="text-sm text-center">A great option for corporate events or gifting</p>
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row pb-[30px] md:pb-[50px] w-full justify-center md:justify-evenly items-center gap-5">
                     <div className="flex w-full md:w-1/2 flex-col border-[1px] p-6 md:p-[50px] gap-2 border-black justify-center items-center min-h-[300px]">
                         <RiContactsLine size={32} />
-                        <p className="font-bold text-lg">Contact Us</p>
+                        <p className=" text-lg">Contact Us</p>
                         <p className="text-sm text-center">Need help? We re a chat or email away!</p>
                     </div>
                     <div className="flex w-full md:w-1/2 flex-col border-[1px] p-6 md:p-[50px] gap-2 border-black justify-center items-center min-h-[300px]">
                         <IoChatboxOutline size={32} />
-                        <p className="font-bold text-lg">Live Chat</p>
+                        <p className=" text-lg">Live Chat</p>
                         <p className="text-sm text-center">7am-5pm PT, 7 days a week</p>
                     </div>
                 </div>

@@ -47,8 +47,8 @@ const Carousel = () => {
                 />
             </div>
             <div className="flex flex-col w-full lg:w-1/2 py-5 lg:py-[50px] px-5 lg:px-10 gap-8 justify-between relative pb-16">
-                <p className="text-2xl lg:text-3xl">Why We Choose Organic Fabrics</p>
-                <p className="text-lg lg:text-xl leading-relaxed">
+                <p className="font-inter text-2xl lg:text-3xl">Why We Choose Organic Fabrics</p>
+                <p className="font-poppins text-lg lg:text-xl leading-relaxed">
                     Organic fabrics are at the heart of what we do at THVANI. Discover the benefits of
                     choosing organic, not just for your wardrobe, but for the planet.
                 </p>
@@ -69,7 +69,7 @@ const Carousel = () => {
                                     alt={item.text}
                                     className="h-[30vh] lg:h-[40vh] w-full object-cover"
                                 />
-                                <p className="text-sm lg:text-base font-medium mt-3">{item.text}</p>
+                                <p className="font-poppins text-sm lg:text-base font-medium mt-3">{item.text}</p>
                             </div>
                         ))}
                     </div>

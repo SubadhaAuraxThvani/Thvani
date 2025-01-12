@@ -54,7 +54,7 @@ export default function WomenCollectionPage() {
                     <p className="text-2xl md:text-3xl lg:text-[1.5vw] font-bold">
                         Women&apos;s Clothing
                     </p>
-                    <p className="text-base mt-4 md:text-lg">
+                    <p className="text-base mt-4 md:text-lg font-lato">
                         Thoughtfully Art and sustainably made Women&apos;s dress. Welcome to everyday essentials.
                     </p>
                 </div>

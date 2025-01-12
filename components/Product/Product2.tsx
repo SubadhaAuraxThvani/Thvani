@@ -4,10 +4,13 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ['latin'], weight: '400' });
+
 
 export default function Product2() {
     return (
-        <div className="flex h-full w-full flex-col bg-color5">
+        <div className={`${inter.className} flex h-full w-full flex-col bg-color5`}>
             <div className="flex text-4xl lg:text-[2xl] font-bold pt-4 text-color1 text-center justify-center">
                 <h1>FAQs</h1>
             </div>

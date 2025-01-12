@@ -28,7 +28,7 @@ export default function OrderExchange() {
                         className="w-full sm:w-[20vw] h-[20vh] sm:h-[30vh]  rounded-lg"
                     />
                     <div className="flex flex-col gap-2 sm:gap-5">
-                        <p className="text-lg sm:text-2xl font-bold">
+                        <p className="font-lato text-lg sm:text-2xl font-bold">
                             Women Ethnic wear - golden white / L
                         </p>
                         <div className="flex flex-col">
@@ -39,7 +39,7 @@ export default function OrderExchange() {
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">
-                        <p className="font-bold">Item Price:</p>
+                        <p className="font-lato">Item Price:</p>
                         <p>$10.00</p>
                     </div>
                     <div>

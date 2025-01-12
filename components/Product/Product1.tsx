@@ -13,6 +13,8 @@ import img6 from "@/images/other/image5.png"
 import img7 from "@/images/other/image6.png"
 import { Button } from "../ui/button";
 import { toast } from "@/hooks/use-toast";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
 
 
 // const [productData1, setProductData1] = useState<any | null>(null);
@@ -158,7 +160,7 @@ export default function Product1() {
 
 
                             </div>
-                            <div className="flex bg-[#F5F5F5] p-3 text-center justify-center items-center gap-10 text-sm md:text-base">
+                            <div className={`${lato.className} flex bg-[#F5F5F5] p-3 text-center justify-center items-center gap-10 text-sm md:text-base`}>
                                 <p>Free Shipping on Orders $150+</p>
                                 <p>Easy 30-Day Return & Exchanges</p>
                             </div>
@@ -185,7 +187,7 @@ export default function Product1() {
                                         >
                                             {section}
                                         </AccordionTrigger>
-                                        <AccordionContent className="px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600">
+                                        <AccordionContent className={`${lato.className}  px-4 pb-4 text-base md:text-lg lg:text-lg text-gray-600`}>
                                             {`Details for ${section}`}
                                         </AccordionContent>
                                     </AccordionItem>
