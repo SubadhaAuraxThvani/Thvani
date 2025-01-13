@@ -132,9 +132,9 @@ const Product1: React.FC<CollectionProductProps> = ({ id }) => {
                                         <FaStar key={i} />
                                     ))}
                                 <div className="flex gap-2">
-                                    <p className="text-sm md:text-base">{productData1?.rating || '3'}</p>
+                                    <p className="font-lato text-sm md:text-base">{productData1.rating}</p>
                                     <p>|</p>
-                                    <p className="text-sm md:text-base">{productData1?.reviewsCount || '134K'} Reviews</p>
+                                    <p className="text-sm md:text-base">{productData1.reviewsCount} Reviews</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
