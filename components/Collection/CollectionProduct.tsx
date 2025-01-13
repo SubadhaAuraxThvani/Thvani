@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { StaticImageData } from "next/image";
+import { Lato } from "next/font/google";
+
+const lato = Lato({ subsets: ['latin'], weight: '400' });
 
 interface CollectionProductProps {
     img: string | StaticImageData;
@@ -35,8 +38,8 @@ const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text ,price,
                     <FaStar /><FaStar /><FaStar /><FaStar />
                     <span className="pl-2 text-gray-700">256</span>
                 </div>
-                <div>
-                    <span className="text-xs md:text-sm lg:text-base text-gray-800 font-medium">{text}</span>
+                <div className={lato.className}>
+                    <span className="text-xs md:text-sm lg:text-[1.1vw] text-gray-800 font-bold">{text}</span>
                 </div>
                 <div>
                     <p className="text-sm md:text-base lg:text-lg font-semibold text-gray-900">${price}</p>

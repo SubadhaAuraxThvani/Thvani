@@ -28,7 +28,7 @@ export default function Blogpage() {
                     </div>
                     <div className="px-5 text-center md:text-left">
                         <p className="text-2xl pb-4 md:text-4xl font-bold">SUSTAINABLE FASHION: BEYOND THE BUZZWORD</p>
-                        <p className="text-sm md:text-base font-medium">
+                        <p className="font-lato text-sm md:text-base font-medium">
                             DIVE INTO WHAT TRULY DEFINES SUSTAINABLE FASHION. EXPLORE THE MATERIALS, PROCESSES, AND PRACTICES THAT SET GENUINELY SUSTAINABLE BRANDS APART FROM THOSE JUST FOLLOWING THE TREND. LEARN HOW TO MAKE INFORMED CHOICES AS A CONSCIOUS CONSUMER.
                         </p>
                     </div>
@@ -58,7 +58,7 @@ export default function Blogpage() {
                 </div>
             </div>
 
-            <Marquee speed={100} className="flex font-bold w-full px-0 my-[50px] h-[50px] bg-color5 text-black items-center overflow-hidden">
+            <Marquee speed={100} className="font-poppins flex font-bold w-full px-0 my-[50px] h-[50px] bg-color5 text-black items-center overflow-hidden">
                 <p className="text-xs sm:text-sm inline-block mr-[50px]">
                     EVERY STITCH TELLS A STORY OF SUSTAINABILITY.
                 </p>
@@ -107,8 +107,8 @@ export default function Blogpage() {
                             objectFit="cover" 
                         />
                     </div>
-                    <p className="font-bold text-xs">FALL</p>
-                    <p>Fashion with a conscience, crafted for you.</p>
+                    <p className="font-poppins font-bold text-xs">FALL</p>
+                    <p className="font-inter">Fashion with a conscience, crafted for you.</p>
                 </div>
                 <div className="flex gap-5 flex-col  px-5">
                     <div className="relative h-64 w-64"> 
@@ -119,8 +119,8 @@ export default function Blogpage() {
                             objectFit="cover" // Cover the area
                         />
                     </div>
-                    <p className="font-bold text-xs">NEWLY LAUNCHED</p>
-                    <p>Eco-friendly fabrics, extraordinary fashion.</p>
+                    <p className="font-poppins font-bold text-xs">NEWLY LAUNCHED</p>
+                    <p className="font-inter">Eco-friendly fabrics, extraordinary fashion.</p>
                 </div>
                 <div className="flex gap-5 flex-col px-5">
                     <div className="relative h-64 w-64"> {/* Adjust height and width here */}
@@ -131,8 +131,8 @@ export default function Blogpage() {
                             objectFit="cover" // Cover the area
                         />
                     </div>
-                    <p className="font-bold text-xs">DATING</p>
-                    <p>Where style meets responsibility.</p>
+                    <p className="font-poppins font-bold text-xs">DATING</p>
+                    <p className="font-inter">Where style meets responsibility.</p>
                 </div>
                 <div className="flex gap-5 flex-col  px-5">
                     <div className="relative h-64 w-64"> {/* Adjust height and width here */}
@@ -143,8 +143,8 @@ export default function Blogpage() {
                             objectFit="cover" // Cover the area
                         />
                     </div>
-                    <p className="font-bold text-xs">SHOPPING</p>
-                    <p>Sustainable style, timeless impact.</p>
+                    <p className="font-poppins font-bold text-xs">SHOPPING</p>
+                    <p className="font-inter">Sustainable style, timeless impact.</p>
                 </div>
                 <div className="flex gap-5 flex-col  px-5">
                     <div className="relative h-64 w-64">
@@ -155,8 +155,8 @@ export default function Blogpage() {
                             objectFit="cover"
                         />
                     </div>
-                    <p className="font-bold text-xs">FALL</p>
-                    <p>Fashion with a conscience, crafted for you.</p>
+                    <p className="font-poppins font-bold text-xs">FALL</p>
+                    <p className="font-inter">Fashion with a conscience, crafted for you.</p>
                 </div>
                 <div className="flex gap-5 flex-col  px-5">
                     <div className="relative h-64 w-64">
@@ -167,8 +167,8 @@ export default function Blogpage() {
                             objectFit="cover" // Cover the area
                         />
                     </div>
-                    <p className="font-bold text-xs">NEWLY LAUNCHED</p>
-                    <p>Eco-friendly fabrics, extraordinary fashion.</p>
+                    <p className="font-poppins font-bold text-xs">NEWLY LAUNCHED</p>
+                    <p className="font-inter">Eco-friendly fabrics, extraordinary fashion.</p>
                 </div>
                 <div className="flex gap-5 flex-col px-5">
                     <div className="relative h-64 w-64"> {/* Adjust height and width here */}
@@ -179,8 +179,8 @@ export default function Blogpage() {
                             objectFit="cover" // Cover the area
                         />
                     </div>
-                    <p className="font-bold text-xs">DATING</p>
-                    <p>Where style meets responsibility.</p>
+                    <p className="font-poppins font-bold text-xs">DATING</p>
+                    <p className="font-inter">Where style meets responsibility.</p>
                 </div>
             </Marquee>
             <div className="flex flex-col py-10 lg:py-[50px] justify-center items-center">
@@ -190,17 +190,17 @@ export default function Blogpage() {
                 <div className="flex flex-col lg:flex-row w-full gap-5 lg:gap-10 py-10 lg:py-[50px] px-5 lg:px-[100px] font-bold">
                     <div className="flex flex-col gap-5 lg:gap-10 w-full lg:w-1/3 border-2 border-black">
                         <p className="px-5 py-2">Trending</p>
-                        <p className="p-5 text-lg lg:text-xl">Explore the intersection of technology & sustainability</p>
+                        <p className="font-inter p-5 text-lg lg:text-xl">Explore the intersection of technology & sustainability</p>
                         <Image src={img17} alt="" className="h-[30vh] lg:h-[50vh]" />
                     </div>
                     <div className="flex flex-col gap-5 lg:gap-10 w-full lg:w-1/2 border-2 border-black">
                         <Image src={img18} alt="" className="object-cover w-full h-[30vh] lg:h-[50vh]" />
                         <p className="px-5 py-2">Fashion</p>
-                        <p className="p-5 text-lg lg:text-xl">The Role of Certifications in Sustainable Fashion</p>
+                        <p className="font-inter p-5 text-lg lg:text-xl">The Role of Certifications in Sustainable Fashion</p>
                     </div>
                     <div className="flex flex-col gap-5 lg:gap-10 w-full lg:w-1/3 border-2 border-black">
                         <p className="px-5 py-2">Latest</p>
-                        <p className="p-5 text-lg lg:text-xl">Certifications like Fair Trade, GOTS, and B Corp</p>
+                        <p className="font-inter p-5 text-lg lg:text-xl">Certifications like Fair Trade, GOTS, and B Corp</p>
                         <Image src={img9} alt="" className="h-[30vh] lg:h-[50vh]" />
                     </div>
                 </div>
@@ -208,11 +208,11 @@ export default function Blogpage() {
                     <div className="flex flex-col gap-5 lg:gap-10 w-full lg:w-1/2 border-2 border-black">
                         <Image src={img10} alt="" className="object-cover w-full h-[30vh] lg:h-[50vh]" />
                         <p className="px-5 py-2">Trending</p>
-                        <p className="p-5 text-lg lg:text-xl">Sustainable Living: Tips for an Eco-Friendly Lifestyle</p>
+                        <p className="font-inter p-5 text-lg lg:text-xl">Sustainable Living: Tips for an Eco-Friendly Lifestyle</p>
                     </div>
                     <div className="flex flex-col gap-5 lg:gap-10 w-full lg:w-1/2 border-2 border-black">
                         <p className="px-5 py-2">Latest</p>
-                        <p className="p-5 text-lg lg:text-xl">Transparency is key at THVANI. Learn about our ethical sourcing practices</p>
+                        <p className="font-inter p-5 text-lg lg:text-xl">Transparency is key at THVANI. Learn about our ethical sourcing practices</p>
                         <Image src={img11} alt="" className="object-cover w-full h-[30vh] lg:h-[50vh]" />
                     </div>
                 </div>
@@ -221,8 +221,8 @@ export default function Blogpage() {
             <div className="flex flex-col lg:flex-row px-5 lg:px-[100px] py-[30px] lg:py-[50px] mx-5 lg:mx-[100px] bg-color5">
                 <div className="flex flex-col gap-5 w-full lg:w-1/2">
                     <p>Fashion</p>
-                    <p className="text-2xl lg:text-4xl">The Role of Certifications in Sustainable Fashion</p>
-                    <p className="text-lg lg:text-xl font-medium">Certifications like Fair Trade, GOTS, and B Corp are more than just labels. Learn what these certifications mean, how they’re earned, and why they’re important markers of true sustainability in fashion.</p>
+                    <p className="font-inter text-2xl lg:text-4xl">The Role of Certifications in Sustainable Fashion</p>
+                    <p className="font-poppins text-lg lg:text-xl ">Certifications like Fair Trade, GOTS, and B Corp are more than just labels. Learn what these certifications mean, how they’re earned, and why they’re important markers of true sustainability in fashion.</p>
                     <Link href="/sustainable">
                         <button className="bg-black justify-center items-center text-white w-[40vw] lg:w-[10vw] h-10">READ MORE</button>
                     </Link>

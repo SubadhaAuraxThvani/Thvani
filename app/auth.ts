@@ -71,7 +71,6 @@ export const config = {
               full_name: profile.name,
             }),
           });
-          console.log(profile);
           const data = await response.json();
           
           return {

@@ -42,8 +42,8 @@ export default function WishlistPage() {
                                 height={120}
                                 className="rounded-lg object-cover"
                             />
-                            <div className="flex flex-col md:flex-1">
-                                <p className="text-lg md:text-xl font-semibold">{item.name}</p>
+                            <div className="font-lato flex flex-col md:flex-1">
+                                <p className=" text-lg md:text-xl font-semibold">{item.name}</p>
                                 <p className="text-md text-gray-600">Price: {item.price}</p>
                                 {item.color && (
                                     <p className="text-sm text-gray-500">Color: {item.color}</p>

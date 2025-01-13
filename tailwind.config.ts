@@ -63,6 +63,11 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      fontFamily: {
+        lato: ["Lato", "sans-serif"], // Adding Lato font
+        inter: ["Inter", "sans-serif"], // Adding Inter font
+        poppins: ["Poppins", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -94,4 +99,5 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

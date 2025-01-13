@@ -3,6 +3,9 @@ import Link from "next/link";
 import React from "react";
 import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa";
 import logo from "../../images/logo.png";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
 const Footer = () => {
   return (
     <footer className="bg-color1 z-20 relative mt-[20vh]">
@@ -28,22 +31,33 @@ const Footer = () => {
               <ul className="font-medium">
                 <li className="mb-4">
                   <Link href="/about" className="hover:underline">
-                    About Thvani
+                    <p className={lato.className}>
+                      About Thvani
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/contactus" className="hover:underline">
-                    Contact
+                    <p className={lato.className}>
+
+                      Contact
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/blog" className="hover:underline">
-                    Blogs
+                    <p className={lato.className}>
+
+                      Blogs
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/help" className="hover:underline">
-                    Help
+                    <p className={lato.className}>
+
+                      Help
+                    </p>
                   </Link>
                 </li>
               </ul>
@@ -55,17 +69,26 @@ const Footer = () => {
               <ul className="font-medium">
                 <li className="mb-4">
                   <Link href="/product/how" className="hover:underline">
-                    Material Sourcing
+                    <p className={lato.className}>
+
+                      Material Sourcing
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/sustainable" className="hover:underline">
-                    Sustainability
+                    <p className={lato.className}>
+
+                      Sustainability
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/calculator" className="hover:underline">
-                    Footprint Calculator
+                    <p className={lato.className}>
+
+                      Footprint Calculator
+                    </p>
                   </Link>
                 </li>
               </ul>
@@ -77,22 +100,34 @@ const Footer = () => {
               <ul className="font-medium">
                 <li className="mb-4">
                   <Link href="/login" className="hover:underline">
-                    Login
+                    <p className={lato.className}>
+
+                      Login
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/whislist" className="hover:underline">
-                    Wishlist
+                    <p className={lato.className}>
+
+                      Wishlist
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/orderexchange" className="hover:underline">
-                    Orders
+                    <p className={lato.className}>
+
+                      Orders
+                    </p>
                   </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="/trackOrder" className="hover:underline">
-                    Track Order
+                    <p className={lato.className}>
+
+                      Track Order
+                    </p>
                   </Link>
                 </li>
               </ul>
@@ -159,18 +194,33 @@ const Footer = () => {
             </Link>
             <div className="flex lg:text-[1.1vw] text-sm gap-3 flex-wrap mt-0 sm:mt-0">
               <span>
-                <Link href="/privacy">Privacy Policy</Link>
+                <Link href="/privacy">
+                  <p className={lato.className}>
+                    Privacy Policy
+                  </p>
+                  </Link>
+
               </span>
               <span>
-                <Link href="/term">Terms and Conditions</Link>
+                <Link href="/term">
+                  <p className={lato.className}>
+
+                Terms and Conditions
+                  </p>
+                </Link>
               </span>
               <span>
-                <Link href="/exchange-policy">Exchange Policy</Link>
+                <Link href="/exchange-policy">
+                  <p className={lato.className}>
+
+                Exchange Policy
+                  </p>
+                </Link>
               </span>
             </div>
           </div>
           <div className="flex justify-center">
-            <span className="lg:text-[1.1vw] text-sm text-white sm:text-center mt-4 sm:mt-0">
+            <span className={`${lato.className} lg:text-[1.1vw] text-sm text-white sm:text-center mt-4 sm:mt-0`}>
               © 2025 Thvani Earth Craft
             </span>
           </div>

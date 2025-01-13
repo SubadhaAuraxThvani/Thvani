@@ -51,13 +51,13 @@ export default function About() {
     <div className="flex flex-col">
       <div className="flex flex-col md:flex-row w-full h-auto md:h-[85vh]">
         <div className="flex justify-center w-full md:w-1/2 flex-col px-6 md:px-[50px] gap-5 py-10 md:py-[50px]">
-          <p className="text-lg md:text-xl lg:text-[1.2vw]">
+          <p className="font-lato text-lg md:text-xl lg:text-[1.2vw]">
             WE&apos;RE THVANI
           </p>
           <h1 className="text-3xl sm:pr-[20vw] pr-0 md:text-5xl lg:text-[4vw] font-bold text-color1">
             Art Through Sustainable Fashion.
           </h1>
-          <p className="text-sm md:text-xl">
+          <p className="text-sm md:text-xl font-lato">
             Where innovation meets nature, creating a fusion of style,
             sustainability, and modern craftsmanship. we are reimagining fashion
             through a lens of responsibility and creativity. Our journey is
@@ -114,7 +114,7 @@ export default function About() {
                       <span className="text-lg py-5 md:text-xl lg:text-[1.3vw] font-bold text-center">
                         BELIEVE IN POSSIBLE
                       </span>
-                      <span className="text-base py-5  md:text-lg lg:text-2xl font-medium text-center">
+                      <span className="font-lato text-base py-5  md:text-lg lg:text-2xl font-medium text-center">
                         At THVANI, we don t just create clothing; we Art a
                         movement. Every stitch, every fabric, every design is a
                         testament to our unwavering commitment to sustainability
@@ -163,7 +163,7 @@ export default function About() {
             <p className="text-2xl md:text-4xl font-bold text-gray-800">
               Our Mission & Vision
             </p>
-            <p className="text-md md:text-lg text-gray-600 leading-relaxed">
+            <p className="font-lato text-md md:text-lg text-gray-600 leading-relaxed">
               At THVANI, we dont just create clothing; we craft a movement.
               Every stitch, every fabric, every design is a testament to our
               unwavering commitment to sustainability and innovation. By
@@ -193,7 +193,7 @@ export default function About() {
             <p className="text-2xl md:text-4xl font-bold text-gray-800">
               Future of Fashion
             </p>
-            <p className="text-md md:text-lg text-gray-600 leading-relaxed">
+            <p className="font-lato text-md md:text-lg text-gray-600 leading-relaxed">
               Our process begins with selecting organic and regenerative
               materials like bamboo, banana, and orange fibers—fabrics that not
               only feel luxurious but also tread lightly on the planet. From
@@ -210,7 +210,7 @@ export default function About() {
             <p className="text-2xl md:text-4xl font-bold text-gray-800">
               The Principles That Guide Us
             </p>
-            <p className="text-md md:text-lg text-gray-600 leading-relaxed">
+            <p className="font-lato text-md md:text-lg text-gray-600 leading-relaxed">
               Every piece we create begins with deep respect for the
               environment, from our dyeing methods using natural extracts to our
               zero-waste designs. While we appreciate the value of cutting-edge
@@ -233,7 +233,7 @@ export default function About() {
 
       {/* CTA Section */}
       <div className="flex flex-col p-6 md:p-[100px] gap-5 justify-center text-center items-center">
-        <p className="text-lg md:text-3xl">
+        <p className="text-lg md:text-3xl font-lato">
           &quot;Join us in making a difference. Trust in our journey, believe in
           our purpose, and together, lets inspire change. With Thvani, youre not
           just investing in fashion; You&apos;re investing in a legacy of

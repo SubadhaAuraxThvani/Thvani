@@ -103,7 +103,7 @@ const [cart,setCart] = useState([]);
                                             />
                                         </div>
                                         {/* Product Details Section */}
-                                        <div className="flex w-full lg:w-3/4 flex-col gap-5 sm:gap-10">
+                                        <div className="font-lato flex w-full lg:w-3/4 flex-col gap-5 sm:gap-10">
                                             <p className="text-lg sm:text-xl lg:text-xl font-bold">{product.name}</p>
                                             <div className="flex w-full">
                                                 <div className="flex flex-col gap-5 sm:gap-10 w-1/2">

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
+import { Lato } from 'next/font/google';
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +15,9 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import emblaCarouselAutoplay from "embla-carousel-autoplay";
+
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
 
 export default function Home() {
   const textRef = useRef<HTMLDivElement>(null);
@@ -112,7 +116,7 @@ console.log(currentIndex);
                       New Linen For Life
                     </h1>
                     <p
-                      className="text-xs sm:text-sm md:text-lg mt-2 md:mt-4"
+                      className={`${lato.className} text-xs sm:text-sm md:text-lg mt-2 md:mt-4`}
                       style={{ textShadow: "1px 1px 2px rgba(0, 0, 0, 0.7)" }}
                     >
                       Beautiful, healthy, and durable

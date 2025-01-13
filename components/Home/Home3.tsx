@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Lato } from "next/font/google";
+const lato = Lato({ subsets: ['latin'], weight: '400' });
+
 
 export default function Home3() {
     return (
@@ -22,32 +25,32 @@ export default function Home3() {
 
                 <div className="flex flex-col py-10 w-full text-center gap-5">
                     <p className="text-2xl md:text-4xl lg:text-[2.6vw] font-bold text-color1">What we do</p>
-                    <p className="mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[300px] sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)]">
+                    <p className={`${lato.className} mx-5 text-color1 md:mx-40 lg:mx-[200px] xl:mx-[300px] sm:text-[min(1.25vw,4vw)] text-[min(3vw,4vw)]`}>
                         Sustainable fashion crafted to inspire individuality, spark creativity, and honor our planet
                     </p>
                 </div>
                 <div className="flex flex-wrap justify-around px-5 py-10">
-                    <div className="flex pb-10 flex-col text-left w-full lg:w-[25vw] md:w-[300px] gap-10">
+                    <div className="flex pb-10 flex-col text-left w-full lg:w-[30vw] md:w-[300px] gap-10">
                         <h1 className="text-lg md:text-2xl lg:text-[1.3vw] font-bold">Our Mission :</h1>
-                        <p className="text-sm md:text-base xl:text-[.9vw]">
+                        <p className={`${lato.className} text-sm md:text-base xl:text-[1.1vw]`}>
                             Our mission is to create timeless clothing that celebrates individuality, supports artisans, and nurtures the earth through sustainable practices.
                         </p>
                         <Link href="/sustainable">
                             <span className="underline">Learn More</span>
                         </Link>
                     </div>
-                    <div className="flex pb-10 flex-col text-left w-full lg:w-[25vw] md:w-[300px] gap-10">
+                    <div className="flex pb-10 flex-col text-left w-full lg:w-[30vw] md:w-[300px] gap-10">
                         <h1 className="text-lg md:text-2xl lg:text-[1.3vw]  font-bold">About Us :</h1>
-                        <p className=" text-sm md:text-base xl:text-[.9vw]">
+                        <p className={`${lato.className} text-sm md:text-base xl:text-[1.1vw]`}>
                             At Thvani, we craft timeless pieces through organic fabrics, botanical dyeing, and handwoven artistry, honoring both individuality and the earth.
                         </p>
                         <Link href="/about">
                             <span className="underline">Learn More</span>
                         </Link>
                     </div>
-                    <div className="flex flex-col text-left lg:w-[25vw] w-full md:w-[300px] gap-10">
+                    <div className="flex flex-col text-left lg:w-[30vw] w-full md:w-[300px] gap-10">
                         <h1 className="text-lg md:text-2xl lg:text-[1.3vw]  font-bold">Heritage Reimagined:</h1>
-                        <p className="text-sm md:text-base xl:text-[.9vw]">
+                        <p className={`${lato.className} text-sm md:text-base xl:text-[1.1vw]`}>
                             We blend age-old craftsmanship with modern innovation to create fashion that respects tradition while shaping the future.
                         </p>
                         <Link href="/product/how">

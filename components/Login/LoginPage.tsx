@@ -225,7 +225,7 @@ export default function LoginPage() {
           />
         </div>
         <p className="font-normal text-lg sm:text-xl">Experience Fashion with Purpose.</p>
-        <p className="text-sm sm:text-base">
+        <p className="font-lato text-sm sm:text-base">
           At THVANI, we believe that fashion should do more than just look good—it should feel good, too. By
           logging in, you&apos;re part of a community that values sustainability, innovation, and timeless style.
         </p>
