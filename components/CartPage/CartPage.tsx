@@ -6,8 +6,54 @@ import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { productData } from "@/dummyData";
 import { updateQuantity, removeItem } from "@/store/features/cart/cartSlice"; // Import removeItem
+import { useEffect,useState } from "react";
+import { useSession, signOut } from "next-auth/react"
+
+const API_BASE_URL = "http://localhost:5000";
 
 export default function CartPage() {
+    const { data: session } = useSession()
+const [cart,setCart] = useState([]);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!session?.user?.email) return
+
+            try {
+                console.log("came here");
+                const { email, name } = session.user;
+                console.log(email, name, 'google login')
+                // Call your server API to save the user in the database
+               
+                const response = await fetch(
+                    `${API_BASE_URL}/api/v1/auth/user/${session.user.email}`
+                )
+                if (!response.ok) throw new Error("Failed to fetch user data")
+
+                const data = await response.json()
+
+                const cartresponse = await fetch(`${API_BASE_URL}/api/v1/cart/cart/${data.user.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!cartresponse.ok) {
+      throw new Error("Failed to fetch cart items");
+    }
+
+    const cartItems = await cartresponse.json();
+  setCart(cartItems)
+               
+            } catch (error) {
+                
+                console.log(error);
+
+            } 
+        }
+        fetchUserData()
+    }, [session])
+
     const items = useAppSelector((state: { cart: { items: { id: string; quantity: number; color: string; size: string }[] } }) => state.cart.items);
     const dispatch = useAppDispatch();
 
@@ -34,13 +80,13 @@ export default function CartPage() {
     return (
         <div className="flex flex-col px-5 sm:px-[50px] lg:px-[150px] py-[50px] gap-10">
             <div className="flex">
-                <p className="text-xl sm:text-2xl lg:text-3xl">Cart ({items.length})</p>
+                <p className="text-xl sm:text-2xl lg:text-3xl">Cart ({cart.length})</p>
             </div>
             <hr className="border-2" />
             <div className="flex flex-col lg:flex-row w-full gap-10">
                 {/* Product List Section */}
                 <div className="flex flex-col w-full lg:w-3/4 gap-10">
-                    {items.length === 0 ? (
+                    {cart.length === 0 ? (
                         <p className="text-xl text-center w-full">Your cart is empty!</p>
                     ) : (
                         items.map((item) => {

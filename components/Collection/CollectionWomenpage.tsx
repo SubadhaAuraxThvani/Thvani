@@ -1,3 +1,4 @@
+"use client"
 import img1 from "@/images/Home/img1.png";
 import img2 from "@/images/Home/img5.png";
 import img3 from "@/images/Home/img3.png";
@@ -9,6 +10,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Product } from "@/types";
 import CollectionProduct from "./CollectionProduct";
 import Product2 from "../Product/Product2";
 import {
@@ -20,9 +22,27 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useState,useEffect } from "react";
 import Link from "next/link";
-
+import { fetchProducts } from "@/apiRequest/product";
 export default function WomenCollectionPage() {
+
+     useEffect(() => {
+                const fetchData = async () => {
+                    try {
+                        const data = await fetchProducts();
+                        console.log(data);
+                        setLiveProducts(data)
+                    } catch (err) {
+                        console.error(err);
+                    }
+                };
+                console.log("called");
+                fetchData();
+            }, []);
+            const [liveProducts, setLiveProducts] = useState<Product[]>([]);
+
+    
     const products = [
         { img: img1, text: "Women's Sale", href: "/product" },
         { img: img2, text: "Women's New Arrival", href: "/product" },
@@ -99,18 +119,11 @@ export default function WomenCollectionPage() {
                     {/* Product Grid */}
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
-                            ))}
-                        </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
-                            ))}
-                        </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
+                            {liveProducts.filter(product => product.category_id.name === "women").map((product, index) => (
+                                <CollectionProduct  key={index} img={product.images[0].image_url} text={product.description}
+                                price={product.price}
+                                id={product._id}
+                                />
                             ))}
                         </div>
                     </div>

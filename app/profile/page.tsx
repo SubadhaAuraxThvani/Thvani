@@ -16,6 +16,7 @@ import { toast } from "@/hooks/use-toast"
 import { IoIosMail } from "react-icons/io"
 import Image from "next/image"
 import img from "@/images/Home/bg4.png"
+import { origin } from "../../apiRequest/config";
 
 interface UserData {
     full_name: string
@@ -27,7 +28,7 @@ interface UserData {
     timezone: string
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+    const API_BASE_URL = "http://localhost:5000";
 
 export default function ProfilePage() {
     const { data: session } = useSession()
@@ -54,12 +55,28 @@ export default function ProfilePage() {
             if (!session?.user?.email) return
 
             try {
+                console.log("came here");
+                const { email, name } = session.user;
+                console.log(email, name, 'google login')
+                // Call your server API to save the user in the database
+                const saveUserResponse = await fetch(`${origin}/api/v1/auth/google`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        full_name: name,
+                    }),
+                });
+
                 const response = await fetch(
-                    `${API_BASE_URL}/auth/user/${session.user.email}`
+                    `${API_BASE_URL}/api/v1/auth/user/${session.user.email}`
                 )
                 if (!response.ok) throw new Error("Failed to fetch user data")
 
                 const data = await response.json()
+                
                 setUserData(data.user)
                 setEditData(data.user)
             } catch (error) {
@@ -69,7 +86,7 @@ export default function ProfilePage() {
                     variant: "destructive",
                 })
                 console.log(error);
-                
+
             } finally {
                 setIsLoading(false)
             }
@@ -80,7 +97,7 @@ export default function ProfilePage() {
     const handleEdit = async () => {
         try {
             const response = await fetch(
-                `${API_BASE_URL}/auth/update-profile`,
+                `${API_BASE_URL}/api/v1auth/update-profile`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -107,7 +124,7 @@ export default function ProfilePage() {
                 variant: "destructive",
             })
             console.log(error);
-            
+
         }
     }
 

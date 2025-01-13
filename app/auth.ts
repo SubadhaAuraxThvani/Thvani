@@ -142,6 +142,7 @@ export const config = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET, 
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (user) {

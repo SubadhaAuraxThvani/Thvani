@@ -1,3 +1,4 @@
+"use client"
 import img1 from "@/images/Home/img1.png";
 import img2 from "@/images/Home/img5.png";
 import img3 from "@/images/Home/img3.png";
@@ -10,6 +11,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import CollectionProduct from "./CollectionProduct";
+import { Product } from "@/types";
 import Product2 from "../Product/Product2";
 import {
     Pagination,
@@ -21,8 +23,23 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import Link from "next/link";
+import { fetchProducts,fetchProductByCategoryId } from "@/apiRequest/product";
+import { useState,useEffect } from "react";
 
 export default function KidsCollectionPage() {
+     useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const data = await fetchProducts();
+                    console.log(data);
+                    setLiveProducts(data)
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+            console.log("called");
+            fetchData();
+        }, []);
     const products = [
         { img: img1, text: "Kid's Sale", href: "/product" },
         { img: img2, text: "Kid's New Arrival", href: "/product" },
@@ -44,6 +61,7 @@ export default function KidsCollectionPage() {
         { value: "item-5", trigger: "New Arrivals", content: "New Arrivals content here." },
         { value: "item-6", trigger: "Materials", content: "Materials content here." },
     ];
+    const [liveProducts, setLiveProducts] = useState<Product[]>([]);
 
     return (
         <div className="flex flex-col py-8 md:py-[50px]">
@@ -101,20 +119,13 @@ export default function KidsCollectionPage() {
                     {/* Product Grid */}
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index} img={product.img} text={product.text} />
+                            {liveProducts.filter(product => product.category_id.name === "Kids").map((product, index) => (
+                                <CollectionProduct key={index} img={product.images[0].image_url} text={product.description} price={product.price}
+                                id={product.product_id}
+                                />
                             ))}
                         </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index}  img={product.img} text={product.text} />
-                            ))}
-                        </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct key={index}  img={product.img} text={product.text} />
-                            ))}
-                        </div>
+                        
                     </div>
                 </div>
 

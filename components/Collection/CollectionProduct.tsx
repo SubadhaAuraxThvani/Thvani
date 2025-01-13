@@ -6,16 +6,25 @@ import { StaticImageData } from "next/image";
 interface CollectionProductProps {
     img: string | StaticImageData;
     text: string;
+    price: string;
+    id: string;
 }
 
-const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text }) => {
+const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text ,price,id}) => {
     return (
         <div className="w-full h-full bg-white border border-gray-200 shadow rounded-md">
-            <Link href="/product">
+            <Link href={{pathname:'/product',
+                query:{
+                    img:img.toString(),
+                    text,
+                    price,
+                    id
+                }
+            }}>
                 <div className="relative w-full sm:h-[60vh] h-[40vh] overflow-hidden">
                     <Image
                         className="object-cover w-full h-full"
-                        src={img}
+                        src={img?img:"https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
                         alt="Product Image"
                         layout="fill"
                     />
@@ -27,10 +36,10 @@ const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text }) => {
                     <span className="pl-2 text-gray-700">256</span>
                 </div>
                 <div>
-                    <span  className="text-xs md:text-sm lg:text-[1.1vw] text-gray-800 font-bold">{text}</span>
+                    <span className="text-xs md:text-sm lg:text-base text-gray-800 font-medium">{text}</span>
                 </div>
                 <div>
-                    <p className="text-sm md:text-base lg:text-lg font-semibold text-gray-900">$10</p>
+                    <p className="text-sm md:text-base lg:text-lg font-semibold text-gray-900">${price}</p>
                 </div>
                 <div className="flex gap-2">
                     <div className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 bg-color1 rounded-full"></div>
