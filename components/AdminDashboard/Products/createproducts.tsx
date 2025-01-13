@@ -164,7 +164,7 @@ const CreateProduct = () => {
 
       if (uploadMethod === "file") {
         const presignedUrlsResponse = await fetch(
-          "http://localhost:5000/api/v1/images/get-presigned-urls",
+          "https://api.thvaniearthcraft.com/api/v1/images/get-presigned-urls",
           {
             method: "POST",
             headers: {

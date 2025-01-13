@@ -40,7 +40,7 @@ export default function MenCollectionPage() {
         };
         console.log("called");
         fetchData();
-        console.log(liveProducts,"  this one");
+        console.log(liveProducts, "  this one");
 
     }, []);
     const products = [
@@ -122,19 +122,19 @@ export default function MenCollectionPage() {
                     {/* Product Grid */}
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                        {liveProducts.filter(product => product.category_id.name === "men").map((product) => (
-    <CollectionProduct
-    id={product.product_id}
-        key={product._id} 
-        img={product.images?.[0]?.image_url || "https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
-        text={product.description}
-        price={product.price}
-    />
-))}
+                            {liveProducts.filter(product => product.category_id.name === "men").map((product) => (
+                                <CollectionProduct
+                                    id={product._id}
+                                    key={product._id}
+                                    img={product.images?.[0]?.image_url || "https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
+                                    text={product.description}
+                                    price={product.price}
+                                />
+                            ))}
 
 
                         </div>
-                    
+
                     </div>
                 </div>
 

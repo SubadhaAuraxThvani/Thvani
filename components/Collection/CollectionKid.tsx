@@ -24,22 +24,22 @@ import {
 } from "@/components/ui/pagination";
 import Link from "next/link";
 import { fetchProducts } from "@/apiRequest/product";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function KidsCollectionPage() {
-     useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const data = await fetchProducts();
-                    console.log(data);
-                    setLiveProducts(data)
-                } catch (err) {
-                    console.error(err);
-                }
-            };
-            console.log("called");
-            fetchData();
-        }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchProducts();
+                console.log(data);
+                setLiveProducts(data)
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        console.log("called");
+        fetchData();
+    }, []);
     const products = [
         { img: img1, text: "Kid's Sale", href: "/product" },
         { img: img2, text: "Kid's New Arrival", href: "/product" },
@@ -48,9 +48,9 @@ export default function KidsCollectionPage() {
     ];
 
     // const collectionProducts = [
-    //     { img: img1,badge:["Best seller"], text: "Organic Cotton Hoodie" },
-    //     { img: img2,badge:["Trending","New arrived"], text: "Organic Fleece Joggers" },
-    //     { img: img3,badge:["Trending"], text: "Cotton Graphic Tee" },
+    //     { img: img1, badge: ["Best seller"], text: "Organic Cotton Hoodie" },
+    //     { img: img2, badge: ["Trending", "New arrived"], text: "Organic Fleece Joggers" },
+    //     { img: img3, badge: ["Trending"], text: "Cotton Graphic Tee" },
     // ];
 
     const accordionItems = [
@@ -121,11 +121,11 @@ export default function KidsCollectionPage() {
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6 px-5 lg:px-20 justify-items-center">
                             {liveProducts.filter(product => product.category_id.name === "Kids").map((product, index) => (
                                 <CollectionProduct key={index} img={product.images[0].image_url} text={product.description} price={product.price}
-                                id={product.product_id}
+                                    id={product._id}
                                 />
                             ))}
                         </div>
-                        
+
                     </div>
                 </div>
 

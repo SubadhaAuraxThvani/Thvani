@@ -1,4 +1,4 @@
-const env:any = "dev";
+const env:any = "dev1";
 
 export const origin = env == "dev" ? "http://localhost:5000": "https://api.thvaniearthcraft.com"
 

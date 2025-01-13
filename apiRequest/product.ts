@@ -60,7 +60,7 @@ export const fetchProductsPagination = async (page: number, limit: number, searc
 export const fetchProductById = async (productId: string) => {
     const token = Cookies.get(adminCookie);
     try {
-        const response = await axios.get(`${origin}/api/v1/product/products/${productId}`, {
+        const response = await axios.get(`${origin}/api/v1/product/productById/${productId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",

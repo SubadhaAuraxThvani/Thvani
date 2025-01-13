@@ -13,12 +13,13 @@ interface CollectionProductProps {
     id: string;
 }
 
-const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text ,price,id}) => {
+const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text, price, id }) => {
     return (
         <div className="w-full h-full bg-white border border-gray-200 shadow rounded-md">
-            <Link href={{pathname:'/product',
-                query:{
-                    img:img.toString(),
+            <Link href={{
+                pathname: '/product',
+                query: {
+                    img: img.toString(),
                     text,
                     price,
                     id
@@ -27,7 +28,7 @@ const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text ,price,
                 <div className="relative w-full sm:h-[60vh] h-[40vh] overflow-hidden">
                     <Image
                         className="object-cover w-full h-full"
-                        src={img?img:"https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
+                        src={img ? img : "https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
                         alt="Product Image"
                         layout="fill"
                     />

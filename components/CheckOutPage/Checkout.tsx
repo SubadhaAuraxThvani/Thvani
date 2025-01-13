@@ -11,7 +11,7 @@ import { useState,useEffect } from "react";
 interface CartProps {
     cartId:string;
 }
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://api.thvaniearthcraft.com";
 
 const CheckoutPage:React.FC<CartProps>=({cartId}) =>{
 
@@ -32,7 +32,10 @@ useEffect(() => {
         const data = await response.json();
         console.log(data,'this is me')
         setCart(data);
-      } catch (err: any) {
+      } 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      catch (err: any) {
+        console.log(err);
       } 
     };
 

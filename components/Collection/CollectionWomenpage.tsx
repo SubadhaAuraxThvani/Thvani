@@ -22,27 +22,27 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { fetchProducts } from "@/apiRequest/product";
 export default function WomenCollectionPage() {
 
-     useEffect(() => {
-                const fetchData = async () => {
-                    try {
-                        const data = await fetchProducts();
-                        console.log(data);
-                        setLiveProducts(data)
-                    } catch (err) {
-                        console.error(err);
-                    }
-                };
-                console.log("called");
-                fetchData();
-            }, []);
-            const [liveProducts, setLiveProducts] = useState<Product[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchProducts();
+                console.log(data);
+                setLiveProducts(data)
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        console.log("called");
+        fetchData();
+    }, []);
+    const [liveProducts, setLiveProducts] = useState<Product[]>([]);
 
-    
+
     const products = [
         { img: img1, text: "Women's Sale", href: "/product" },
         { img: img2, text: "Women's New Arrival", href: "/product" },
@@ -51,9 +51,9 @@ export default function WomenCollectionPage() {
     ];
 
     // const collectionProducts = [
-    //     { img: img1,badge:["Trending","New arrived"], text: "Organic Fleece Oversized Sweatshirt" },
-    //     { img: img2,badge:["Trending"], text: "Organic Fleece Relaxed Pocket" },
-    //     { img: img3,badge:["Best seller"], text: "Organic Cotton Classic Tee" },
+    //     { img: img1, badge: ["Trending", "New arrived"], text: "Organic Fleece Oversized Sweatshirt" },
+    //     { img: img2, badge: ["Trending"], text: "Organic Fleece Relaxed Pocket" },
+    //     { img: img3, badge: ["Best seller"], text: "Organic Cotton Classic Tee" },
     // ];
 
     const accordionItems = [
@@ -84,11 +84,11 @@ export default function WomenCollectionPage() {
                     {products.map((product, index) => (
                         <div key={index} className="flex flex-col gap-2 p-2 rounded-lg">
                             <div className="w-full rounded-xl  overflow-hidden h-[40vh] sm:h-[35vh] lg:h-[45vh]">
-                            <Image
-                                alt={product.text}
-                                src={product.img}
-                                className="rounded-xl w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
-                            />
+                                <Image
+                                    alt={product.text}
+                                    src={product.img}
+                                    className="rounded-xl w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
+                                />
                             </div>
                             <p className="font-bold text-lg lg:text-left lg:text-[1.3vw] text-center">{product.text}</p>
                             <div className="flex justify-center lg:justify-start">
@@ -120,9 +120,9 @@ export default function WomenCollectionPage() {
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
                             {liveProducts.filter(product => product.category_id.name === "women").map((product, index) => (
-                                <CollectionProduct  key={index} img={product.images[0].image_url} text={product.description}
-                                price={product.price}
-                                id={product._id}
+                                <CollectionProduct key={index} img={product.images[0].image_url} text={product.description}
+                                    price={product.price}
+                                    id={product._id}
                                 />
                             ))}
                         </div>

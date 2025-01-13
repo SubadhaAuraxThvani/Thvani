@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
-import { useSession } from "next-auth/react"
+import { useSession} from "next-auth/react"
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -39,7 +38,7 @@ import { addToCart } from "@/apiRequest/cart";
 interface CollectionProductProps {
     id: string;
 }
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = "https://api.thvaniearthcraft.com";
 const Product1: React.FC<CollectionProductProps> = ({ id }) => {
     const { data: session } = useSession()
     useEffect(() => {
@@ -78,10 +77,13 @@ const Product1: React.FC<CollectionProductProps> = ({ id }) => {
             if (!response.ok) throw new Error("Failed to fetch user data")
 
             const userData = await response.json()
-            console.log(userData.user,'the data')
-           const  data={ customer_id:userData.user.id, product_id: productId, variant:{size:selectedSize,
-            color:selectedColor
-           }, quantity:1, price:productData1?.price}
+            console.log(userData.user, 'the data')
+            const data = {
+                customer_id: userData.user.id, product_id: productId, variant: {
+                    size: selectedSize,
+                    color: selectedColor
+                }, quantity: 1, price: productData1?.price
+            }
             await addToCart(data)
             dispatch(addItem({ id: productId, color: selectedColor, size: selectedSize }));
         }
