@@ -23,6 +23,15 @@ export interface CartItem {
 export interface CartState {
   items: CartItem[];
 }
+
+export interface Cart {
+  _id:string;
+  product_id: Product;
+  variant:Variant;
+  customer_id:string;
+  quantity:number;
+  price: string;
+}
 export interface image{
   id: string;
   image_url: string
@@ -32,4 +41,8 @@ export interface Category{
   createdAt: string;
   is_deleted: boolean;
   name: string;
+}
+export interface Variant{
+  size: string;
+  color: string;
 }
