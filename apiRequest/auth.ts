@@ -4,7 +4,7 @@ import { origin } from "./config";
 
 // Google login function that triggers the OAuth flow
 export const googleLogin = () => {
-    window.location.href = `${origin}/auth/google`; // Redirects to Google OAuth endpoint
+    window.location.href = `${origin}/api/v1/auth/google`; // Redirects to Google OAuth endpoint
 };
 
 // Callback function that is called after Google login

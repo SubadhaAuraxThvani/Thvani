@@ -9,16 +9,25 @@ const lato = Lato({ subsets: ['latin'], weight: '400' });
 interface CollectionProductProps {
     img: string | StaticImageData;
     text: string;
+    price: string;
+    id: string;
 }
 
-const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text }) => {
+const CollectionProduct: React.FC<CollectionProductProps> = ({ img, text ,price,id}) => {
     return (
         <div className="w-full h-full bg-white border border-gray-200 shadow rounded-md">
-            <Link href="/product">
+            <Link href={{pathname:'/product',
+                query:{
+                    img:img.toString(),
+                    text,
+                    price,
+                    id
+                }
+            }}>
                 <div className="relative w-full sm:h-[60vh] h-[40vh] overflow-hidden">
                     <Image
                         className="object-cover w-full h-full"
-                        src={img}
+                        src={img?img:"https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
                         alt="Product Image"
                         layout="fill"
                     />

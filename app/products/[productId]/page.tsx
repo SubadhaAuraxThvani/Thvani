@@ -13,7 +13,7 @@ import Product3 from "@/components/Product/Product3";
 export default async function Page() {
     return (
         <>
-            <Product1 />
+            <Product1 id={''} />
             <Home2 props="" />
             <Product2 />
             <Product3 />

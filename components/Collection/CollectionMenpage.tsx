@@ -1,3 +1,4 @@
+"use client"
 import img1 from "@/images/Home/img1.png";
 import img2 from "@/images/Home/img5.png";
 import img3 from "@/images/Home/img3.png";
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import CollectionProduct from "./CollectionProduct";
 import Product2 from "../Product/Product2";
+import { useEffect, useState } from "react";
 import {
     Pagination,
     PaginationContent,
@@ -21,20 +23,39 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import Link from "next/link";
+import { fetchProducts } from "@/apiRequest/product";
+import { Product } from "@/types";
 
 export default function MenCollectionPage() {
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchProducts();
+                console.log(data);
+                setLiveProducts(data)
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        console.log("called");
+        fetchData();
+        console.log(liveProducts,"  this one");
+
+    }, []);
     const products = [
         { img: img1, text: "Men's Sale", href: "/product" },
         { img: img2, text: "Men's New Arrival", href: "/product" },
         { img: img3, text: "Men's Casual Wear", href: "/product" },
         { img: img4, text: "Men's Ethnic Wear", href: "/product" },
     ];
+    const [liveProducts, setLiveProducts] = useState<Product[]>([]);
 
-    const collectionProducts = [
-        { img: img1,badge:["Trending","New arrived"], text: "Organic Cotton Casual Shirt" },
-        { img: img2,badge:["Best seller"], text: "Organic Cotton Relaxed Pants" },
-        { img: img3,badge:["Trending"], text: "Organic Cotton T-Shirt" },
-    ];
+    // const collectionProducts = [
+    //     { img: img1, badge: ["Trending", "New arrived"], text: "Organic Cotton Casual Shirt" },
+    //     { img: img2, badge: ["Best seller"], text: "Organic Cotton Relaxed Pants" },
+    //     { img: img3, badge: ["Trending"], text: "Organic Cotton T-Shirt" },
+    // ];
 
     const accordionItems = [
         { value: "item-1", trigger: "Category", content: "Category content here." },
@@ -101,20 +122,19 @@ export default function MenCollectionPage() {
                     {/* Product Grid */}
                     <div className="flex flex-col w-full gap-10">
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
-                            ))}
+                        {liveProducts.filter(product => product.category_id.name === "men").map((product) => (
+    <CollectionProduct
+    id={product.product_id}
+        key={product._id} 
+        img={product.images?.[0]?.image_url || "https://thvanis3.s3.ap-south-1.amazonaws.com/products/48c4cbdd70500296b5f12c76f34676c0-z1renders.png"}
+        text={product.description}
+        price={product.price}
+    />
+))}
+
+
                         </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
-                            ))}
-                        </div>
-                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-5 lg:px-20 justify-items-center">
-                            {collectionProducts.map((product, index) => (
-                                <CollectionProduct  key={index} img={product.img} text={product.text} />
-                            ))}
-                        </div>
+                    
                     </div>
                 </div>
 

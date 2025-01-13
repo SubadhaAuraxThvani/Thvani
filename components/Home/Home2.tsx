@@ -43,8 +43,7 @@ export default function Home2({ props }: { props: string }) {
         <CollectionProduct
           key={index}
           img={product.img}
-          text={product.text}
-        />
+          text={product.text} price={""} id={""}        />
       ))}
     </>
   );
@@ -55,8 +54,7 @@ export default function Home2({ props }: { props: string }) {
         <CollectionProduct
           key={index}
           img={product.img}
-          text={product.text}
-        />
+          text={product.text} price={""} id={""}        />
       ))}
     </>
   );

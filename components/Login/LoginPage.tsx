@@ -9,7 +9,7 @@ import { LoginUser } from "@/apiRequest/login";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "@/hooks/use-toast";
-import { signIn, useSession } from "next-auth/react"
+import { getSession, signIn, useSession } from "next-auth/react"
 
 
 export default function LoginPage() {
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
   const router = useRouter();
-  const { status } = useSession();
+  const { status ,} = useSession();
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -29,17 +29,46 @@ export default function LoginPage() {
     }
   }, [status, router]);
 
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     await signIn("google", { callbackUrl: "/profile" });
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast({
+  //       variant: "newVariant",
+  //       title: "Failed to sign in with Google",
+  //     });
+  //   }
+  // };
+
+
+
   const handleGoogleLogin = async () => {
+    console.log('google login')
     try {
-      await signIn("google", { callbackUrl: "/profile" });
+      // Perform Google sign-in
+      const response = await signIn("google", { redirect: false }); // Prevent immediate redirection
+      console.log('google login 2')
+      if (response?.error) {
+        throw new Error(response.error);
+      }
+      const session = await getSession();
+      if (!session?.user) {
+        throw new Error("Failed to retrieve user session data");
+      }
+      const { email, name } = session.user;
+      console.log(email,name,'google login')
+      window.location.href = "/profile";
     } catch (error) {
       console.log(error);
       toast({
         variant: "newVariant",
         title: "Failed to sign in with Google",
+        description: '',
       });
     }
   };
+  
 
   const handleFacebookLogin = async () => {
     try {

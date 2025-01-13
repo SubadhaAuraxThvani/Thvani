@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { useSession } from "next-auth/react"
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { addItem } from "@/store/features/cart/cartSlice";
 import { useAppDispatch } from "@/store/hooks";
-import { productData } from "@/dummyData";
 import { addToWishlist } from "@/store/features/whislist/whislistSlice";
 import img5 from "@/images/other/image4.png"
 import img6 from "@/images/other/image5.png"
@@ -15,8 +16,9 @@ import { Button } from "../ui/button";
 import { toast } from "@/hooks/use-toast";
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ['latin'], weight: '400' });
-
-
+import { Product } from "@/types";
+import { fetchProductById } from "@/apiRequest/product";
+import { addToCart } from "@/apiRequest/cart";
 // const [productData1, setProductData1] = useState<any | null>(null);
 
 // useEffect(() => {
@@ -34,18 +36,53 @@ const lato = Lato({ subsets: ['latin'], weight: '400' });
 //     }
 //     fetchProduct();
 // }, [id]);
-
-export default function Product1() {
-    const productData1 = productData.product1;
-    const [selectedImage, setSelectedImage] = useState(productData1.images[0]);
+interface CollectionProductProps {
+    id: string;
+}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const Product1: React.FC<CollectionProductProps> = ({ id }) => {
+    const { data: session } = useSession()
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchProductById(id);
+                console.log(data, "vanthucha varalaya");
+                setProductData1(data)
+                setSelectedImage(productData1?.images[0].image_url)
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        console.log("called");
+        fetchData();
+    }, [id]);
+    const [productData1, setProductData1] = useState<Product>();
+    useEffect(() => {
+        if (productData1 && productData1.images.length > 0) {
+            setSelectedImage(productData1.images[0].image_url);
+        }
+    }, [productData1]);
+    const colors = ['blue-700', 'red-500', 'green-200', 'black'];
+    const [selectedImage, setSelectedImage] = useState<string | null>();
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
     const [activeItem, setActiveItem] = useState<string | null>(null);
-
+    const sizes = ['xs', 's', 'm', 'l', 'xl']
     const dispatch = useAppDispatch();
 
-    const handleAddtoCart = (productId: string) => {
+    const handleAddtoCart = async (productId: string) => {
         if (selectedColor && selectedSize) {
+            const response = await fetch(
+                `${API_BASE_URL}/api/v1/auth/user/${session?.user.email}`
+            )
+            if (!response.ok) throw new Error("Failed to fetch user data")
+
+            const userData = await response.json()
+            console.log(userData.user,'the data')
+           const  data={ customer_id:userData.user.id, product_id: productId, variant:{size:selectedSize,
+            color:selectedColor
+           }, quantity:1, price:productData1?.price}
+            await addToCart(data)
             dispatch(addItem({ id: productId, color: selectedColor, size: selectedSize }));
         }
     };
@@ -53,10 +90,10 @@ export default function Product1() {
     const handleAddToWishlist = (product: typeof productData1) => {
         dispatch(
             addToWishlist({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: typeof product.images[0] === "string" ? product.images[0] : product.images[0].src,
+                id: product?._id || '',
+                name: product?.name || '',
+                price: product?.price || '',
+                image: product?.images[0].image_url || '',
             })
         );
     };
@@ -67,25 +104,25 @@ export default function Product1() {
         <>
             <div className="flex flex-col lg:flex-row h-auto lg:h-full py-5 w-full px-5 md:px-8 lg:px-10 gap-5">
                 <div className="flex lg:flex-col gap-2 lg:gap-6 justify-center lg:justify-start">
-                    {productData1.images.map((img, index) => (
+                    {productData1?.images.map((img, index) => (
                         <div
                             key={index}
                             className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 cursor-pointer"
-                            onClick={() => setSelectedImage(img)}
+                            onClick={() => setSelectedImage(img.image_url)}
                         >
-                            <Image src={img} alt={`Thumbnail ${index + 1}`} className="object-cover w-full h-full" />
+                            <Image src={img.image_url} alt={`Thumbnail ${index + 1}`} className="object-cover w-full h-full" width={300} height={300} />
                         </div>
                     ))}
                 </div>
                 <div className="flex flex-col md:flex-row w-full gap-5">
                     <div className="w-full md:w-3/5 lg:w-2/4 h-[40vh] md:h-[60vh] lg:h-[75vh]">
-                        <Image width={600} height={700} src={selectedImage} alt="Main Product Image" className="object-cover w-full h-full" />
+                        <Image width={600} height={700} src={selectedImage || ''} alt="Main Product Image" className="object-cover w-full h-full" />
                     </div>
                     <div className="flex flex-col gap-5 w-full md:w-2/5 lg:w-2/4">
                         <div className="flex flex-col gap-5">
                             <p className="text-sm lg:text-base">Home/BestSeller&apos;s/Women&apos;s Selection</p>
-                            <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1.name}</p>
-                            <p className="font-lato text-md md:text-xl lg:text-2xl">{productData1.price}</p>
+                            <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1?.name}</p>
+                            <p className="text-md md:text-xl lg:text-2xl"> ₹{productData1?.price}</p>
                             <div className="flex items-center gap-1">
                                 {Array(4)
                                     .fill(0)
@@ -93,18 +130,18 @@ export default function Product1() {
                                         <FaStar key={i} />
                                     ))}
                                 <div className="flex gap-2">
-                                    <p className="font-lato text-sm md:text-base">{productData1.rating}</p>
+                                    <p className="font-lato text-sm md:text-base">{productData1?.rating}</p>
                                     <p>|</p>
-                                    <p className="font-lato text-sm md:text-base">{productData1.reviewsCount} Reviews</p>
+                                    <p className="text-sm md:text-base">{productData1?.reviewsCount} Reviews</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <p>Colors</p>
                                 <div className="flex space-x-2">
-                                    {productData1.colors.map((color, i) => (
+                                    {colors.map((color, i) => (
                                         <div
                                             key={i}
-                                            className={`rounded-full w-8 h-8 cursor-pointer ${selectedColor === color ? 'border-4 border-color1' : ''} bg-${color.toLowerCase()}`}
+                                            className={`rounded-full w-8 h-8 cursor-pointer ${selectedColor === color ? 'border-4 border-color1' : ''} bg-${color}`}
                                             onClick={() => setSelectedColor(color)}
                                         ></div>
                                     ))}
@@ -113,7 +150,7 @@ export default function Product1() {
                             <div className="flex flex-col gap-2">
                                 <p>Select Size:</p>
                                 <div className="flex space-x-2 font-bold">
-                                    {productData1.sizes.map((size) => (
+                                    {sizes.map((size) => (
                                         <div
                                             key={size}
                                             className={`w-12 h-12 border rounded-md flex items-center justify-center cursor-pointer ${selectedSize === size ? 'bg-gray-300' : ''}`}
@@ -135,7 +172,7 @@ export default function Product1() {
                                             variant: "newVariant",
                                             title: "Item added to Cart",
                                         });
-                                        handleAddtoCart(productData1.id);
+                                        handleAddtoCart(id);
                                     }}
                                     className={`bg-color1 text-white py-6 px-12 rounded-3xl w-full text-center hover:bg-opacity-90 transition ${!selectedColor || !selectedSize ? 'opacity-50 cursor-not-allowed' : ''
                                         }`}
@@ -203,3 +240,4 @@ export default function Product1() {
         </>
     );
 }
+export default Product1;
