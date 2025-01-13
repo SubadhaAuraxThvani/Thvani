@@ -85,7 +85,7 @@ export default function Product1() {
                         <div className="flex flex-col gap-5">
                             <p className="text-sm lg:text-base">Home/BestSeller&apos;s/Women&apos;s Selection</p>
                             <p className="text-lg md:text-2xl lg:text-3xl font-bold">{productData1.name}</p>
-                            <p className="text-md md:text-xl lg:text-2xl">{productData1.price}</p>
+                            <p className="font-lato text-md md:text-xl lg:text-2xl">{productData1.price}</p>
                             <div className="flex items-center gap-1">
                                 {Array(4)
                                     .fill(0)
