@@ -67,6 +67,7 @@ const config: Config = {
         lato: ["Lato", "sans-serif"], // Adding Lato font
         inter: ["Inter", "sans-serif"], // Adding Inter font
         poppins: ["Poppins", "sans-serif"],
+        arial: ["Arial", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
