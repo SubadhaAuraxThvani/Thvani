@@ -43,6 +43,7 @@ const [cart,setCart] = useState([]);
     }
 
     const cartItems = await cartresponse.json();
+    console.log(cartItems)
   setCart(cartItems)
                
             } catch (error) {
@@ -69,10 +70,10 @@ const [cart,setCart] = useState([]);
         dispatch(removeItem(itemId)); // Dispatch the removeItem action
     };
 
-    const totalPrice = items.reduce((acc, item) => {
-        const product = productData[item.id as keyof typeof productData];
+    const totalPrice = cart.reduce((acc, item) => {
+        const product = item.product_id;
         if (product) {
-            return acc + parseFloat(product.price.slice(1)) * item.quantity;
+            return acc + parseFloat(product.price) * item.quantity;
         }
         return acc;
     }, 0);
@@ -89,17 +90,20 @@ const [cart,setCart] = useState([]);
                     {cart.length === 0 ? (
                         <p className="text-xl text-center w-full">Your cart is empty!</p>
                     ) : (
-                        items.map((item) => {
-                            const product = productData[item.id as keyof typeof productData];
+                        cart.map((item) => {
+                            const product =item?.product_id;
                             if (product) {
                                 return (
-                                    <div key={item.id} className="flex flex-col lg:flex-row w-full gap-10">
+                                    <div key={item._id} className="flex flex-col lg:flex-row w-full gap-10">
                                         {/* Product Image Section */}
                                         <div className="flex w-full lg:w-1/4">
                                             <Image
-                                                src={product.images[0]}
+                                                src={product.images[0].image_url}
                                                 alt={product.name}
                                                 className="h-[30vh] w-full sm:h-[40vh] lg:h-[50vh] object-cover"
+                                                width={600}  // Aspect ratio width
+  height={400} // Aspect ratio height
+  layout="responsive"
                                             />
                                         </div>
                                         {/* Product Details Section */}
@@ -109,11 +113,11 @@ const [cart,setCart] = useState([]);
                                                 <div className="flex flex-col gap-5 sm:gap-10 w-1/2">
                                                     <div className="flex flex-col">
                                                         <p className="font-bold">Colour:</p>
-                                                        <p>{item.color}</p>
+                                                        <p>{item.variant.color}</p>
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <p className="font-bold">Size:</p>
-                                                        <p>{item.size}</p>
+                                                        <p>{item.variant.size}</p>
                                                     </div>
                                                     <div className="flex flex-col">
                                                         <p className="font-bold">Item Price:</p>
@@ -126,12 +130,12 @@ const [cart,setCart] = useState([]);
                                                     <div className="flex justify-center items-center gap-4 sm:gap-6">
                                                         <CiCirclePlus
                                                             size={28}
-                                                            onClick={() => handleIncrease(item.id, item.color, item.size)}
+                                                            onClick={() => handleIncrease(item._id, item.variant.color, item.variant.size)}
                                                         />
                                                         <p className="text-lg sm:text-xl">{item.quantity}</p>
                                                         <CiCircleMinus
                                                             size={28}
-                                                            onClick={() => handleDecrease(item.id, item.color, item.size)}
+                                                            onClick={() => handleDecrease(item._id, item.variant.color, item.variant.size)}
                                                         />
                                                     </div>
                                                 </div>
@@ -154,7 +158,7 @@ const [cart,setCart] = useState([]);
                     )}
                 </div>
                 {/* Subtotal and Checkout Section */}
-                {items.length > 0 && (
+                {cart.length > 0 && (
                     <div className="flex flex-col h-[20vh] w-full lg:w-1/4 gap-3 sm:gap-5 rounded-lg bg-color3 p-3 ml-auto mt-6 lg:mt-0">
                         <div className="flex justify-between">
                             <p className="font-bold text-xl">Subtotal</p>
@@ -162,7 +166,12 @@ const [cart,setCart] = useState([]);
                         </div>
                         <div className="flex justify-between mt-4">
                             <button className="bg-color1 text-white font-bold p-2 rounded-md w-full">
-                                <Link href="/checkout">Checkout</Link>
+                                <Link href={{pathname:'/checkout',
+                                    query:{
+                                            cartId:cart[0]._id,
+                                    },
+                                   
+                                }}>Checkout</Link>
                             </button>
                         </div>
                     </div>
